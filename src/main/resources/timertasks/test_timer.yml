@@ -1,0 +1,7 @@
+TestTimer:
+  time: 'QUARTZ:0 0 5 ? * MON'
+  # 模式 QUARTZ 或 FIXED
+  # 示例 QUARTZ:0 0 5 ? * MON
+  # 如果为 FIXED
+  run:
+    - ''

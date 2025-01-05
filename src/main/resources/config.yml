@@ -1,0 +1,30 @@
+#         Powered by TabooLib 114514.0         #
+
+modules:
+  taboo-component: true
+  # 是否在语言中开启 TabooLib Component 即 TabooLib 聊天组件解析
+  # 默认值 true，推荐值 true
+
+datastore:
+  use: YAML
+  # YAML,MYSQL
+
+  source:
+    SQL:
+      host: localhost
+      port: 3306
+      database: zaleplon
+      username: raincandy_U
+      password: angelkawaii2
+
+lang: zh_cn
+
+debug:
+  no-player-data: KICK
+  # 当进行任务相关操作时，如果没有玩家数据，Zaleplon 应该采取什么方法规避？
+  # IGNORE 忽略；SKIP 跳过并警告；KICK 踢出并警告
+  # 默认值 KICK，推荐值 KICK，参考值 Chemdah 处理行为为 KICK
+
+
+
+

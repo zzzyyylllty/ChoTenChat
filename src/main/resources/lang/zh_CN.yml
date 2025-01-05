@@ -1,0 +1,19 @@
+#         Powered by TabooLib 6.0         #
+
+# Debug日志
+DEBUG_NO_PLAYER_DATA_WARN: '未找到玩家 {0} 的任务数据'
+DEBUG_NO_PLAYER_DATA_KICK: '发生了一个意外错误! Zaleplon 无法找到你的任务数据,请联系服务器管理员.'
+DEBUG_META_COMPARE_ERROR: '在试图比对任务条件时发生错误，尝试比对的数值为 {0} {1}，任务为 {2} {3}.已返回 false.'
+DEBUG_NON_PLAYER_TARGET_SELECTOR: '目标选择器 {0} 其中有部分结果不是玩家，已跳过。'
+DEBUG_NO_OBJECTIVES: '任务 {0}.{1} 未找到任何有效的目标。'
+DEBUG_NO_META: '任务 {0}.{1} 中的目标 {2} 的 {3} meta 未找到有效的数值。'
+
+
+
+
+# 开始或重载
+LOG_START: '正在启动 Zaleplon/扎来普隆 ...'
+LOG_READ_QUEST_START: '开始读取任务 请稍后...'
+LOG_READ_START: '开始读取任务 请稍后...'
+
+COMMAND_NO_PARAMS: '命令缺少参数 {0}.'
