@@ -10,7 +10,7 @@ import taboolib.common.util.asList
 
 fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?, taskid: String?): Addon {
 
-    var gui: AddonGui? = null
+    var gui: AddonGui?
     val dependency: ArrayList<AddonDependencySingle>? = null
     var agent: Agent? = null
 
@@ -42,9 +42,9 @@ fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?, taskid: Stri
     if (task == null) {
         gui = AddonGui(
             questGuiItem,
-            config["$quest.addon.gui.display-name.standard"].toString(),
-            config["$quest.addon.gui.display-name.tracking"].toString(),
-            config["$quest.addon.gui.display-name.completed"].toString(),
+            resolvePlaceholdersString(config["$quest.addon.gui.display-name.standard"].toString()),
+            resolvePlaceholdersString(config["$quest.addon.gui.display-name.tracking"].toString()),
+            resolvePlaceholdersString(config["$quest.addon.gui.display-name.completed"].toString()),
             config["$quest.addon.gui.display-lore.standard"]?.asList(),
             config["$quest.addon.gui.display-lore.tracking"]?.asList(),
             config["$quest.addon.gui.display-lore.completed"]?.asList(),

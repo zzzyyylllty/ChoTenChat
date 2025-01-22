@@ -14,6 +14,11 @@ TestQuest:
       - Medicinal
   # addon系统，类似 Chemdah 的组件
   addon:
+    track:
+      scoreboard:
+        title: '任务系统' # 覆盖config的title
+        content:
+          - ''
     gui:
       # 任务在 GUI 中的材质
       # 允许使用来自其他插件的物品解析
@@ -53,8 +58,8 @@ TestQuest:
   tasks:
     1: # 自由定义
       display:
-        taskname: '破坏钻石块'
-        tasklore: auto # 为 auto 自动生成
+        taskname: '破坏钻石块' # 为 auto 自动生成
+        tasklore: auto  # 为 auto 自动生成
       objectives: # 可填写多个任务
         1:
           objective: BLOCK_BREAK

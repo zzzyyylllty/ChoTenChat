@@ -16,6 +16,7 @@ import taboolib.module.lang.asLangText
 import java.io.File
 
 fun loadQuests() {
+
     info(console.asLangText("LOG_READ_QUEST_START"))
 
     val files = File(getDataFolder(), "quests").listFiles() ?: run {
@@ -29,15 +30,15 @@ fun loadQuests() {
 
     for (file in files) {
         try {
-            info("正在处理任务文件 ${file.getName()} ...")
+            info(console.asLangText("LOG_READINGQUESTFILE", file.getName()))
             loadSingleQuestFile(file)
-            info("正在处理任务文件 ${file.getName()} ... 完成.")
+            info(console.asLangText("LOG_READEDQUESTFILE", file.getName()))
         } catch (exception: IllegalArgumentException) {
-            error("处理任务文件 ${file.getName()} 时发生意外错误 \n Stacktrace: $exception")
+            error(console.asLangText("DEBUG_READINGQUESTFILE_FAILED", file.getName(), exception, exception.stackTrace))
         }
     }
 
-    info("任务加载完成!")
+    info(console.asLangText("LOG_READEDALLQUESTFILE"))
 }
 
 
@@ -98,23 +99,34 @@ fun loadSingleQuestFile(file: File) {
                     i++
                 }
 
-                var taskaddon: Addon
-
-
-
-
-
+                // 传入一个没有Task的Quest和没有Addon的Task来加载Addon
+                var taskaddon: Addon = loadAddon(
+                    config, Quest(
+                        config["$quest.name"].toString(),
+                        config["$quest.description"]?.asList(),
+                        questDifficulty,
+                        questCategory,
+                        questMetas,
+                        questTasks,
+                        null
+                    ), Task(
+                        config["$quest.tasks.$taskid.display.taskname"].toString(),
+                        config["$quest.tasks.$taskid.display.tasklore"].toString(), // TODO TASKLORE: AUTO
+                        objectives,
+                        config["$quest.tasks.$taskid.display.amount"] as Number, null
+                    ), taskid)
 
                 questTasks[taskid] = Task(
                     config["$quest.tasks.$taskid.display.taskname"].toString(),
                     config["$quest.tasks.$taskid.display.tasklore"].toString(), // TODO TASKLORE: AUTO
                     objectives,
                     config["$quest.tasks.$taskid.display.amount"] as Number,
-                    config["$quest.tasks.$taskid.display.taskname"].toString()
+                    taskaddon
                 )
             }
         }
 
+        // 传入一个没有Addon的Quest来加载Addon
         val questaddon: Addon = loadAddon(
             config, Quest(
                 config["$quest.name"].toString(),

@@ -5,21 +5,29 @@ modules:
   # 是否在语言中开启 TabooLib Component 即 TabooLib 聊天组件解析
   # 默认值 true，推荐值 true
 
+  tolerance-kether: false
+  # Kether 宽容解析
+  # 默认值 false，推荐值 ?
+
 datastore:
-  use: YAML
-  # YAML,MYSQL
+  use: SQLITE
+  # SQLITE,MYSQL
 
   source:
     SQL:
-      host: localhost
-      port: 3306
+      host: needy.girl.overdose # localhost
+      port: 20220217            # 3306
       database: zaleplon
       username: raincandy_U
       password: angelkawaii2
 
-lang: zh_cn
+lang: zh_CN
 
 debug:
+  developer-mode: true
+  # 报告一些额外的行为
+  # 如果你不是要查查bug，关掉，关掉，一定要关掉。
+
   no-player-data: KICK
   # 当进行任务相关操作时，如果没有玩家数据，Zaleplon 应该采取什么方法规避？
   # IGNORE 忽略；SKIP 跳过并警告；KICK 踢出并警告

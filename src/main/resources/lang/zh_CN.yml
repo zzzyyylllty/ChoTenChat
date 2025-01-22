@@ -7,6 +7,7 @@ DEBUG_META_COMPARE_ERROR: '在试图比对任务条件时发生错误，尝试�
 DEBUG_NON_PLAYER_TARGET_SELECTOR: '目标选择器 {0} 其中有部分结果不是玩家，已跳过。'
 DEBUG_NO_OBJECTIVES: '任务 {0}.{1} 未找到任何有效的目标。'
 DEBUG_NO_META: '任务 {0}.{1} 中的目标 {2} 的 {3} meta 未找到有效的数值。'
+DEBUG_READINGQUESTFILE_FAILED: '处理任务文件 {0} ...失败. \nException:{1}\nStacktrace:{2}'
 
 
 
@@ -15,5 +16,8 @@ DEBUG_NO_META: '任务 {0}.{1} 中的目标 {2} 的 {3} meta 未找到有效的�
 LOG_START: '正在启动 Zaleplon/扎来普隆 ...'
 LOG_READ_QUEST_START: '开始读取任务 请稍后...'
 LOG_READ_START: '开始读取任务 请稍后...'
+LOG_READINGQUESTFILE: '处理任务文件 {0} ...'
+LOG_READEDQUESTFILE: '处理任务文件 {0} ...完成.'
+LOG_READEDALLQUESTFILE: '任务文件已经全部加载完成.'
 
 COMMAND_NO_PARAMS: '命令缺少参数 {0}.'
