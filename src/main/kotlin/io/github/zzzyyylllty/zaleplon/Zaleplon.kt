@@ -17,6 +17,7 @@ object Zaleplon : Plugin() {
     lateinit var registeredObjectives: ArrayList<String>
     lateinit var runningObjectives: ArrayList<String>
     lateinit var loadedQuests: LinkedHashMap<String, Quest>
+    var devMode = true
     var console = console()
 
     @Config("config.yml")

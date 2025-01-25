@@ -41,16 +41,26 @@ fun completeTasks(p: Player?, objective: String, amount: Number, metaList: Linke
                 // If it already completes
                 if (task.goal.toDouble() >= task.progress.toDouble()) break
 
-                val dependency = task.task.addon.dependency
-                for (depend in dependency) {
-                    var completedDepends = 0
-                    for (q in depend.quests) {
-                        if (questsMap[p] != null && questsMap[p]?.quests?.keys?.contains(q.key) == true) {
-                            if (q.value == 0) if (questsMap[p]?.quests?.get(q.key)?.questStat == QuestStat.COMPLETED) completedDepends++
-                            else {
-                                val progress = questsMap[p]?.quests?.get(q.key)?.questTasks?.get(q.key)?.progress ?: 0
-                                val goal = questsMap[p]?.quests?.get(q.key)?.questTasks?.get(q.key)?.goal ?: 0
-                                if (goal.toInt() <= progress.toInt()) completedDepends++
+                val dependency = task.task.addon?.dependency
+                if (dependency?.isNotEmpty() == true) {
+                    for (depend in dependency) {
+                        var completedDepends = 0
+                        if (depend.quests == null) continue
+
+                        for (q in depend.quests) {
+
+                            val sp = q.split(".")
+                            if (questsMap[p] != null && questsMap[p]?.quests?.keys?.contains(sp[0]) == true) {
+
+                                // xxx.all 代表整个任务，检测是否整个任务完成
+                                if (sp[1] == "all") if (questsMap[p]?.quests?.get(sp[0])?.questStat == QuestStat.COMPLETED) completedDepends++
+
+                                // 否则
+                                else {
+                                    val progress = questsMap[p]?.quests?.get(sp[0])?.questTasks?.get(sp[1])?.progress ?: 0
+                                    val goal = questsMap[p]?.quests?.get(sp[0])?.questTasks?.get(sp[1])?.goal ?: 0
+                                    if (goal.toInt() <= progress.toInt()) completedDepends++
+                                }
                             }
                         }
                     }
@@ -86,7 +96,7 @@ fun completeTasks(p: Player?, objective: String, amount: Number, metaList: Linke
                             )
                         )
                         if (!isTaskMetaTrue) {
-                            task.addon.agent.onProgressFail?.asList()?.let { runKether(it, p) }
+                            task.addon.agent?.onProgressFail?.asList()?.let { runKether(it, p) }
                             break
                         }
 
@@ -96,12 +106,12 @@ fun completeTasks(p: Player?, objective: String, amount: Number, metaList: Linke
                                 p
                             ).get() as Boolean? == false
                         ) {
-                            task.addon.agent.onProgressFail?.asList()?.let { runKether(it, p) }
+                            task.addon.agent?.onProgressFail?.asList()?.let { runKether(it, p) }
                             break
                         }
 
                         // Progress added
-                        task.addon.agent.onProgress?.asList()?.let { runKether(it, p) }
+                        task.addon.agent?.onProgress?.asList()?.let { runKether(it, p) }
 
                         // Kether run
                         if (rawObjective.run != null) runKether(listOf(rawObjective.run), p).get()

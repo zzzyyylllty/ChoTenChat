@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     id("io.izzel.taboolib") version "2.0.18"
-    kotlin("jvm")
+    id("org.jetbrains.kotlin.jvm") version "1.8.22"
 }
 
 taboolib {
@@ -64,7 +64,7 @@ repositories {
 dependencies {
     compileOnly("public:Citizens:1.0.0")
     implementation("me.clip:placeholderapi:2.11.5")
-    compileOnly("ink.ptms.adyeshach:api:2.0.19")
+    compileOnly("ink.ptms.adyeshach:api:2.0.24")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
     compileOnly("ink.ptms.core:v12004:12004:universal")
     compileOnly(kotlin("stdlib"))

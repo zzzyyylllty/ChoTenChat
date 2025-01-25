@@ -56,7 +56,7 @@ TestQuest:
       on-fail: null
       on-restart: null
   tasks:
-    1: # 自由定义
+    1: # 不可自由定义!以1起数
       display:
         taskname: '破坏钻石块' # 为 auto 自动生成
         tasklore: auto  # 为 auto 自动生成
@@ -92,8 +92,8 @@ TestQuest:
             conditions:
               - '>= 1'
             quests:
-              - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
-              - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成
+              - "AnotherQuest.1" # AnotherQuest 的 子任务1，使用 all 来代表整个任务
+              - "AnotherAnotherQuest.all" # AnotherAnotherQuest 整个完成
               - "META.Internet:Saiko" # Internet 为 自定义数据
               - "auto" # 完成本任务的所有前置子任务
           # 需要特定的任务满足条件
