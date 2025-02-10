@@ -5,6 +5,7 @@ import io.github.zzzyyylllty.zaleplon.data.QuestStat
 import io.github.zzzyyylllty.zaleplon.functions.runKether
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
+import taboolib.common.platform.function.severe
 import taboolib.common.util.asList
 
 fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommandSender?, slient: Boolean): Any {
@@ -62,8 +63,8 @@ fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommand
                 if (!slient) quest.addon.agent?.onRestart?.asList()?.let { runKether(it, p) }
             } else {
 
-                quest.questTasks.get(t)?.progress =
-                    quest.questTasks.get(t)?.goal ?: 0
+                quest.questTasks[t]?.progress =
+                    quest.questTasks[t]?.goal ?: 0
                 if (!slient) quest.questTasks[t]?.addon?.agent?.onRestart?.asList()?.let { runKether(it, p) }
             }
             return true
@@ -75,5 +76,6 @@ fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommand
     }
 
     // 理论上不会出现这个问题
-    return "fail,Unexpected error"
+    severe("")
+    return "ERROR"
 }

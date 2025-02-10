@@ -9,10 +9,6 @@ DEBUG_NO_OBJECTIVES: '任务 {0}.{1} 未找到任何有效的目标。'
 DEBUG_NO_META: '任务 {0}.{1} 中的目标 {2} 的 {3} meta 未找到有效的数值。'
 DEBUG_READINGQUESTFILE_FAILED: '处理任务文件 {0} ...失败. \nException:{1}\nStacktrace:{2}'
 
-# 开发者模式输出
-#DEV
-
-
 # 开始或重载
 LOG_START: '正在启动 Zaleplon/扎来普隆 ...'
 LOG_READ_QUEST_START: '开始读取任务 请稍后...'

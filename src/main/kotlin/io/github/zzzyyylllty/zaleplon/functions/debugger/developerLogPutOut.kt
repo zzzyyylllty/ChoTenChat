@@ -6,3 +6,7 @@ import taboolib.common.platform.function.info
 fun devLog(s: String) {
     if (Zaleplon.devMode) info("[DEVMODE] $s")
 }
+
+fun devMode(b: Boolean) {
+    Zaleplon.devMode = b
+}
