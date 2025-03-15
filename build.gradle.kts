@@ -81,6 +81,7 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") { isTransitive = false }
+    implementation("net.kyori:adventure-text-minimessage:4.19.0")
 
 }
 

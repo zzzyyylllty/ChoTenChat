@@ -1,17 +1,16 @@
 # ChoTenChat / MelsydChat
 
 ## TODO
-[ ] 聊天格式
- [ ] TEXT
- [ ] IMAGE
- [ ] REDPACKET
- [ ] SHARE
- [ ] ANNOUNCEMENT
- [ ] SYSTEM
- [ ] LINK
- [ ] SHOUT
- [ ] STACKED
-[ ] 跨服聊天
+- [ ] TEXT
+- [ ] IMAGE
+- [ ] REDPACKET
+- [ ] SHARE
+- [ ] ANNOUNCEMENT
+- [ ] SYSTEM
+- [ ] LINK
+- [ ] SHOUT
+- [ ] STACKED
+- [ ] 跨服聊天
 
 ## 构建
 

@@ -2,15 +2,23 @@
 
 chat:
   format:
-    chat: |
+    chat-group: |
       {sender}:
-      <dark_gray>{reply}<white>{message}
+      <dark_gray>{reply}
+      <white>{format-message}
+
+    chat-friend: |
+      <senderplayername>:
+      <dark_gray>{reply}
+      <white>{format-message}
 
     reply: |
-      <- {reply_sender}: {reply_message}
-
+      <reply_sender>: <reply_message>
     sender: |
-      [{group}<gray>][<yellow>LV{Level} {Title}<gray>] %luckperms_primary_group% {senderplayername}
+      [<group><gray>][<yellow>LV<level> <title><gray>] %luckperms_primary_group% <senderplayername>
+    format-message: |
+      <message>
+    # 自定义 TODO
 
   tolerance-kether: false
   # Kether 宽容解析
