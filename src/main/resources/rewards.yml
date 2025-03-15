@@ -1,0 +1,12 @@
+MMOItems:
+  head: 'mi'
+  kether: 'command papi "mi give [1] [2] %player_name% [3]"'
+  internal-param-random: true
+  show-in-lore: true
+  # 示例
+  # 使用 [参数] 来替换 要输入的数值
+  # 使用 head 来替换头部
+  # 'mi|ARMOR|STEEL_HELMET|1-5'
+  # mi 为头部，ARMOR为[1]，STEEL_HELMET为[2]...
+  # 如有需要随机数，设置internal-param-random = true。
+  # 如需要在任务介绍内显示，则设置show-in-lore = true

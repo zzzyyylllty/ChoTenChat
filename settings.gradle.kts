@@ -3,4 +3,4 @@ pluginManagement {
         kotlin("jvm") version "1.9.23"
     }
 }
-rootProject.name = "Zaleplon"
+rootProject.name = "MelsydChat"

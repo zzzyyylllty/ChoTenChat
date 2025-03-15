@@ -1,4 +1,5 @@
 import io.izzel.taboolib.gradle.*
+import io.izzel.taboolib.gradle.DatabaseAlkaidRedis
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -31,6 +32,7 @@ taboolib {
         install(DatabasePtc)
         install(DatabasePtcObject)
         install(Kether)
+        install(DatabaseAlkaidRedis)
 
     }
     version { taboolib = "6.2.0" }
@@ -56,21 +58,29 @@ repositories {
     }
 
     maven {
+        url = uri("https://mvnrepository.com/")
+    }
+
+    maven {
         name = "citizens-repo"
         url = uri("https://maven.citizensnpcs.co/repo")
     }
     mavenCentral()
+    maven("https://mvnrepository.com/artifact/")
+    maven("https://mvnrepository.com/artifact/net.byteflux/libby-bukkit")
+    maven(url = "https://mvn.lumine.io/repository/maven-public/")
 }
 dependencies {
-    compileOnly("public:Citizens:1.0.0")
     implementation("me.clip:placeholderapi:2.11.5")
+    compileOnly("io.lumine:Mythic-Dist:5.6.1")
+    implementation("net.kyori:adventure-api:4.19.0")
+
     compileOnly("ink.ptms.adyeshach:api:2.0.24")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
     compileOnly("ink.ptms.core:v12004:12004:universal")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
-    compileOnly("io.lumine:Mythic-Dist:5.6.1")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") { isTransitive = false }
 
 }
 
