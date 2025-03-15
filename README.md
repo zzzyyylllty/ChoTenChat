@@ -1,7 +1,17 @@
-# Zaleplon (扎来普隆) 任务
+# ChoTenChat / MelsydChat
 
-Zaleplon (扎来普隆，原名 KAngelQuests) 是一个简单的任务插件，它是免费的，但请自行下载构建。请注意当前版本该插件尚未完成，如果你愿意对这座石山做出贡献，欢迎
-PR。
+## TODO
+[ ] 聊天格式
+ [ ] TEXT
+ [ ] IMAGE
+ [ ] REDPACKET
+ [ ] SHARE
+ [ ] ANNOUNCEMENT
+ [ ] SYSTEM
+ [ ] LINK
+ [ ] SHOUT
+ [ ] STACKED
+[ ] 跨服聊天
 
 ## 构建
 
