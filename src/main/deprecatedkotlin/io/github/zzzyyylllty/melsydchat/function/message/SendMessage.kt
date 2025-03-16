@@ -1,11 +1,12 @@
 package io.github.zzzyyylllty.melsydchat.function.message
 
-import io.github.zzzyyylllty.melsydchat.data.Contact
+import io.github.zzzyyylllty.melsydchat.data.ContactType
 import io.github.zzzyyylllty.melsydchat.data.Group
 import io.github.zzzyyylllty.melsydchat.data.Message
 import io.github.zzzyyylllty.melsydchat.data.MessageType
 import io.github.zzzyyylllty.melsydchat.data.NullableSectionsMessage
 import io.github.zzzyyylllty.melsydchat.data.UserData
+import io.github.zzzyyylllty.melsydchat.data.selectableContact
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.config
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.console
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userDataMap
@@ -15,7 +16,6 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.entity.Player
-import org.jetbrains.annotations.Nullable
 import taboolib.common.platform.function.severe
 import taboolib.module.lang.asLangText
 import java.util.*
@@ -28,7 +28,7 @@ import java.util.*
                 .append(message);
 * */
 
-fun buildMessage(source: Player, sourceDisplayName: Component, message: Component, viewer: Audience, overrideUserData: UserData? = null, subscribedContact: Contact, overrideMessage: NullableSectionsMessage? = null): Message {
+fun buildMessage(source: Player, sourceDisplayName: Component, message: Component, viewer: Audience, overrideUserData: UserData? = null, subscribedContact: selectableContact, overrideMessage: NullableSectionsMessage? = null): Message {
 
     val formatChat = config["chat.format.chat"] as String
     val formatReply = config["chat.format.reply"] as String
@@ -73,7 +73,7 @@ fun buildMessage(source: Player, sourceDisplayName: Component, message: Componen
 
     var content : Component
 
-    if (subscribedContact is Group) {
+    if (subscribedContact.type == ContactType.GROUP) {
         val member = subscribedContact.groupMember[sourceAsUser]
         content = mm.deserialize(input,
             Placeholder.unparsed("reply_sender", reply?.sender?.getRemarkOrNick(viewerAsUser).toString()),
@@ -92,48 +92,8 @@ fun buildMessage(source: Player, sourceDisplayName: Component, message: Componen
     content.replaceText("<message>", message)
 
 
-
-/*
-*       <reply_sender>: <reply_message>
-    sender: |
-      [<group><gray>][<yellow>LV<level> <title><gray>] %luckperms_primary_group% <senderplayername>
-    format-message: |
-      <message>
-* */
-
-/*
-    val internalPlaceholdered = formatChat
-        .replace("{sender}",formatSender)
-    val replyInternalPlaceholdered =
-        if (overrideMessage?.reply != null) {
-            formatChat
-                .replace("{reply}",formatReply)
-                .replace("{reply_sender}", reply.sender.getRemarkOrNick(viewerAsUser))
-                .replace("{reply_message}", reply.content)
-        } else {
-            formatChat
-                .replace("{reply}","")
-        }
-    val groupInternalPlaceholdered =
-        if (overrideMessage?.reply != null) {
-            val topGroup = sourceData.subscribeContact[0]
-            formatChat
-                .replace("{group}",topGroup.id.toString())
-                .replace("{level}", "TODO")
-                .replace("{title}", "TODO")
-                .replace("{senderplayername}", topGroup.getRemarkOrNick(viewerAsUser))
-        } else {
-            formatChat
-                .replace("{message}", )
-        }
-
-    message.replaceText("{message}", message)
-
-    message.
-
-*/
-
-    return Message(uuid = overrideMessage?.uuid ?: uuid,
+    return Message(
+        uuid = overrideMessage?.uuid ?: uuid,
             sender = overrideMessage?.sender ?: sourceAsUser,
             type = overrideMessage?.type ?: MessageType.TEXT,
             meta = overrideMessage?.meta ?: LinkedHashMap(),
