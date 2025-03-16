@@ -1,0 +1,6 @@
+normal:
+  owner: <gradient:#ffff00:#ff0000>
+  admin: <gradient:#ffff00:#ff0000>
+  trusted: <gradient:#ffff00:#ff0000>
+  special: <gradient:#ffff00:#ff0000>
+  normal: <gray>

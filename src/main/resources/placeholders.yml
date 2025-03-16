@@ -1,1 +1,44 @@
-group:
+# <gray>[<yellow><hover:show_text:'
+#<white><b>| </b><gray>名称 <aqua>主频道
+#<white><b>| </b><gray>号码 <gradient:red:yellow:aqua>ID 1000000</gradient>
+#<white><b>| </b><yellow>点击查看详情...
+#'>主频道</hover></yellow>] [<gradient:#ffff00:#ff0000><hover:show_text:'
+#<white><b>| </b><gray>活跃分数 <aqua>99999999 (99%)
+#<reset><b>| </b><gray>活跃等级 <rainbow>Level 999 Rainbow+</rainbow>
+#<reset><b>| </b><gray>专属称号 <gradient:white:light_purple>超てんちゃん</gradient>
+#<reset><b>| </b><gray>群内权限 <gold><bold>群主
+#<reset><b>| </b><yellow>点击查看详情...
+#'><font:uniform>Lv999 超てんちゃん</hover><reset>] <rainbow><gradient:#ffff00:#ff0000><hover:show_text:'
+#<white><b>| </b><gray>昵称 <#66ccff>Li2CO3ngel
+#<white><b>| </b><gray>号码 <gradient:red:yellow:aqua>[ID 000000001]<reset>
+#<white><b>| </b><gray>权限 <#aa00cc>OMNI ADMIN <red>(管理员) <gray>(Omni)
+#<white><b>| </b><yellow>点击查看详情...
+#'>AkaCandyKAngel</hover></rainbow><yellow>:
+#<gray><italic>[ 回复 raincandy_U: 这是一条你要回复的消... ]
+#<white>> 这是一条我发送的消息! <hover:show_text:'<gray>2025-03-17 01:51
+#<yellow>点击管理本条消息...'><#886688><b>≡</hover>
+group: >
+  <gray>[
+  <yellow><hover:show_text:'
+  <reset><b>| </b><gray>群组名称 <aqua>{group.name}<br>
+  <reset><b>| </b><gray>群组号码 {group.colorednumber}<br>
+  <reset><b>| </b><yellow>点击查看详情...
+  '>{group.shortname}<gray>]
+title: >
+  <gray>[
+  <yellow><hover:show_text:'
+  <b>| </b><gray>活跃分数 <aqua>{title.name}
+  <reset><br><b>| </b><gray>活跃等级 {title.coloredlevel}
+  <reset><br><b>| </b><gray>专属称号 <gradient:white:light_purple>{title.special}
+  <reset><br><b>| </b><gray>群身份组 {title.permission}
+  <reset><br><b>| </b><yellow>点击查看详情...
+  '><font:uniform>Lv{title.level} {title.title}<reset><gray>]
+nick: >
+  <gray>[
+  <yellow><hover:show_text:'
+  <b>| </b><gray>活跃分数 <aqua>{title.name}
+  <reset><br><b>| </b><gray>用户昵称 {title.coloredlevel}
+  <reset><br><b>| </b><gray>用户等级 {title.level}
+  <reset><br><b>| </b><gray>玩家昵称 <gradient:white:light_purple>{nick.playername}
+  <reset><br><b>| </b><yellow>点击打开资料卡...
+  '><font:uniform>Lv{title.level} {title.title}<reset><gray>]

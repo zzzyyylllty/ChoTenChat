@@ -1,23 +1,25 @@
 package io.github.zzzyyylllty.melsydchat.data
 
+import io.github.zzzyyylllty.melsydchat.data.ContactType.GROUP
+import io.github.zzzyyylllty.melsydchat.data.ContactType.USER
+import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.loadedGroupMap
+import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userMap
 import java.util.Calendar
 import java.util.UUID
 import kotlin.math.floor
 
 interface Contact {
-    val id: Long
-    val uuid: UUID
+    val idData: ContactIDContainer
     val name: String
     val avatar: String?
     fun sendMessage(message: Message)
 }
 
 class Group(
-    override val id: Long,
-    override val uuid: UUID,
+    override val idData: ContactIDContainer,
     override val name: String,
-    override val avatar: String,
-    val groupMember: LinkedHashMap<User, MemberData>,
+    override val avatar: String?,
+    val groupMember: LinkedHashMap<Long, MemberData>,
 
     ) : Contact {
     override fun sendMessage(message: Message) {
@@ -27,8 +29,7 @@ class Group(
 }
 
 open class User(
-    override val id: Long,
-    override val uuid: UUID,
+    override val idData: ContactIDContainer,
     override val name: String,
     override val avatar: String?,
     val playerUUID: UUID,
@@ -45,20 +46,19 @@ open class User(
 
 class Friend(
     val friendUser: User,
-    id: Long,
-    uuid: UUID,
+    idData: ContactIDContainer,
     name: String,
     avatar: String,
     playerUUID: UUID,
     nickName: String?,
-): User(id, uuid, name, avatar, playerUUID, nickName)
+): User(idData, name, avatar, playerUUID, nickName)
 
 
 data class MemberData(
     val titleSelection: TitleType,
     val temperature: Long,
     val isMuted: Boolean,
-    val muteTimeEnd: Calendar,
+    val muteTimeEnd: Calendar?,
     val groupName: String?
 ) {
 
@@ -68,12 +68,30 @@ data class MemberData(
 }
 
 data class UserData(
-    val subscribeContact: Contact,
-    val contactorSetting: LinkedHashMap<UUID, ContactorSetting>
+    val subscribeContact: ContactIDContainer,
+    val contactorSetting: LinkedHashMap<ContactIDContainer, ContactorSetting>
 )
 
 enum class TitleType {
     TEMPERATURE,
     SPECIAL,
     PERMISSION,
+}
+
+data class ContactIDContainer(
+    val id: Long,
+    val type: ContactType,
+) {
+    fun asContact(type: ContactType): Contact? {
+        val contactID = id
+        return when (type) {
+            USER -> userMap[contactID]
+            GROUP -> loadedGroupMap[contactID]
+        }
+    }
+}
+
+enum class ContactType {
+    GROUP,
+    USER
 }

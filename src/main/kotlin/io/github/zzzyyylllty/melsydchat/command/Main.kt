@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.melsydchat.command
 
-import io.github.zzzyyylllty.melsydchat.command.subCommands.apiSubCommand
+import io.github.zzzyyylllty.melsydchat.command.subCommands.ChoTenChatApiCommand
+import io.github.zzzyyylllty.melsydchat.command.subCommands.ChoTenChatDebugCommand
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
@@ -12,6 +13,10 @@ import taboolib.common.platform.command.subCommand
  *          ├── api
  *          │   ├── minimessage <content>
  *          │   └── TODO
+ *          ├── debug
+ *          │   ├── getUser <player>
+ *          │   ├── getUserDataByPlayer <player>
+ *          │   └── getUserData <userUUID>
  *          ├── group [groupID|RANDOM]
  *          │      ├── operation
  *          │      │      ├── create <owner>
@@ -53,7 +58,9 @@ import taboolib.common.platform.command.subCommand
 )
 object ChoTenChatMainCommand {
 
-    // 子节点
     @CommandBody
-    val api = apiSubCommand
+    val api = ChoTenChatApiCommand
+
+    @CommandBody
+    val debug = ChoTenChatDebugCommand
 }
