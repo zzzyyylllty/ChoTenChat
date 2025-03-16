@@ -9,9 +9,19 @@ import kotlin.math.floor
 
 data class Message (
     val uuid: UUID,
+    val goal: Contact,
+    val type: MessageType,
     val sender: User,
     val content: String, // 原内容
     val formatted: Component, // 处理后内容
     val sendedTime: Calendar,
     val meta: LinkedHashMap<String, String>,
 )
+
+enum class MessageType {
+    SYSTEM,
+    TEXT,
+    IMAGE,
+    LINK,
+    ANNOUNCEMENT
+}

@@ -3,7 +3,7 @@
 # Internal
 INTERNAL_USER_NOT_FOUND: "无法找到玩家 {0} (UUID {1}) 的 用户实例.请注意我们储存用户使用的是 UUID 而非玩家实例/名称。"
 INTERNAL_USERDATA_NOT_FOUND: "无法找到用户的用户数据。{0}"
-
+INTERNAL_SUBSCRIBE_CONTACT_NOT_FOUND: "未找到玩家 {0} 当前关注的联系人"
 
 
 COMMAND_NO_PARAMS: '命令缺少参数 {0}.'
