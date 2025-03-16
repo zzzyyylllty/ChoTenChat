@@ -9,10 +9,12 @@ import io.github.zzzyyylllty.melsydchat.data.UserData
 import taboolib.common.util.random
 import java.util.UUID
 
-fun createGroup(id: Long = random(100,999999).toLong(), owner: User, groupName: String,groupMember): Group {
+fun createGroup(id: Long = random(100,999999).toLong(), owner: User, groupName: String,groupMember: LinkedHashMap<Long, MemberData>): Group {
 
     var members = LinkedHashMap<Long, MemberData>()
-    members.put()
+    members.put(
+        owner.idData.id, emptyMemberData()
+    )
     val group = Group(
         idData = ContactIDContainer(
             id = id,

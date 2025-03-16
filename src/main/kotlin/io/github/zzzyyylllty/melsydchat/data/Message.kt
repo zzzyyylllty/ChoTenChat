@@ -25,7 +25,7 @@ enum class MessageType {
     ANNOUNCEMENT
 }
 
-data class PatchedMessage(
+data class buildedMessage(
     val original: Message,
-    val patched: Component,
+    val builded: Component,
 )

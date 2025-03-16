@@ -23,13 +23,15 @@ object DelsymChat : Plugin() {
     lateinit var plugin: DelsymChat
     lateinit var userDataMap: LinkedHashMap<Long, UserData>
     lateinit var userMap: LinkedHashMap<Long, User>
-    lateinit var playerAsUserMap: LinkedHashMap<UUID, ContactIDContainer>
+    lateinit var playerAsUserMap: LinkedHashMap<UUID, Long>
     lateinit var loadedGroupMap: LinkedHashMap<Long, Group>
     var devMode = true
     var console = console()
 
     @Config("config.yml")
     lateinit var config: ConfigFile
+    @Config("placeholders.yml")
+    lateinit var placeholderconfig: ConfigFile
 
     override fun onEnable() {
         info("Successfully running ExamplePlugin!")

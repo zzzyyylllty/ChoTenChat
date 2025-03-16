@@ -36,9 +36,14 @@ title: >
 nick: >
   <gray>[
   <yellow><hover:show_text:'
-  <b>| </b><gray>活跃分数 <aqua>{title.name}
-  <reset><br><b>| </b><gray>用户昵称 {title.coloredlevel}
-  <reset><br><b>| </b><gray>用户等级 {title.level}
-  <reset><br><b>| </b><gray>玩家昵称 <gradient:white:light_purple>{nick.playername}
+  <reset><br><b>| </b><gray>用户名称 {nick.nick} <gray>({nick.playername})
+  <reset><br><b>| </b><gray>用户等级 {nick.coloredlevel} <gray>({nick.level})
+  <reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)
   <reset><br><b>| </b><yellow>点击打开资料卡...
-  '><font:uniform>Lv{title.level} {title.title}<reset><gray>]
+  '><font:uniform>{nick.nick}<reset><gray>]
+message-mentioned: >
+  [!]* <yellow>{message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-standard: >
+  * {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+reply: >
+  <dark_gray>[ {reply.sender}: {reply.message} ]<br>
