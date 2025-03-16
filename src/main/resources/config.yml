@@ -2,22 +2,14 @@
 
 chat:
   format:
-    chat-group: |
-      {sender}:
-      <dark_gray>{reply}
-      <white>{format-message}
-
-    chat-friend: |
-      <senderplayername>:
-      <dark_gray>{reply}
-      <white>{format-message}
-
-    reply: |
-      <reply_sender>: <reply_message>
-    sender: |
-      [<group><gray>][<yellow>LV<level> <title><gray>] %luckperms_primary_group% <senderplayername>
-    format-message: |
-      <message>
+    group: |
+      %sender_friend%:
+      <dark_gray>%reply%
+      <white>%format-message%
+    friend: |
+      %sender_friend%:
+      <dark_gray>%reply%
+      <white>%format-message%
     # 自定义 TODO
 
   tolerance-kether: false

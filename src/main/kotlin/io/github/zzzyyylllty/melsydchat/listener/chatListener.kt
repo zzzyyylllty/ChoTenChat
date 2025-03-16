@@ -38,7 +38,6 @@ fun onChat(e: AsyncPlayerChatEvent) {
             type = MessageType.TEXT,
             sender = user,
             content = e.message,
-            formatted = TODO(),
             sendedTime = Calendar.getInstance(),
             meta = LinkedHashMap<String, String>()
         )

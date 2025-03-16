@@ -1,7 +1,5 @@
 package io.github.zzzyyylllty.melsydchat.data
 
-import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userDataMap
-import org.bukkit.event.Event
 import java.util.Calendar
 import java.util.UUID
 import kotlin.math.floor
@@ -10,7 +8,8 @@ interface Contact {
     val id: Long
     val uuid: UUID
     val name: String
-    val avatar: String
+    val avatar: String?
+    fun sendMessage(message: Message)
 }
 
 class Group(
@@ -20,20 +19,39 @@ class Group(
     override val avatar: String,
     val groupMember: LinkedHashMap<User, MemberData>,
 
-) : Contact {
+    ) : Contact {
+    override fun sendMessage(message: Message) {
+        TODO("Not yet implemented")
+    }
 
 }
 
-class User(
+open class User(
     override val id: Long,
     override val uuid: UUID,
     override val name: String,
-    override val avatar: String,
-    var nickName: String?
+    override val avatar: String?,
+    val playerUUID: UUID,
+    open var nickName: String?,
 ): Contact {
-
+    override fun sendMessage(message: Message) {
+        //Bukkit.getPlayer(playerUUID).sendMessage(PatchedMessage(
+        //    message,
+        //)
+        //)
+    }
 
 }
+
+class Friend(
+    val friendUser: User,
+    id: Long,
+    uuid: UUID,
+    name: String,
+    avatar: String,
+    playerUUID: UUID,
+    nickName: String?,
+): User(id, uuid, name, avatar, playerUUID, nickName)
 
 
 data class MemberData(
@@ -51,11 +69,8 @@ data class MemberData(
 
 data class UserData(
     val subscribeContact: Contact,
-    val contactorSetting: ContactorSetting)
-
-{
-
-}
+    val contactorSetting: LinkedHashMap<UUID, ContactorSetting>
+)
 
 enum class TitleType {
     TEMPERATURE,
