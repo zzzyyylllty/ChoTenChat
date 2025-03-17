@@ -48,7 +48,7 @@ data class User(
         return Bukkit.getPlayer(uuid)
     }
     fun asUserData() : UserData? {
-        return userDataMap[fullId.getKID()]
+        return userDataMap[fullId.getKID()] // 接收者的设置
     }
 
     fun sendMelsydMessage(message: String) {

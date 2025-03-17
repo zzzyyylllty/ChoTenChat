@@ -54,10 +54,12 @@ data class ContactSetting(
  * [ALWAYS] 总是提醒，在其它联系人处也可收到(默认)
  * [NOTE] 提醒，在其它联系人处仅提及时收到
  * [HIDDEN] 隐藏，在其它联系人处不可接收
+ * [SELF] 这是一条自己的消息
  * */
 enum class ReceiveMode {
     SUBSCRIBE,
     ALWAYS,
     NOTE,
     HIDDEN,
+    SELF,
 }

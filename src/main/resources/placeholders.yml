@@ -41,7 +41,7 @@ nick: >
   <reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)
   <reset><br><b>| </b><yellow>点击打开资料卡...
   '><font:uniform>{nick.nick}<reset><gray>]
-message-MENTION: >
+message-SUBSCRIBE: >
   <yellow>*** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-ALWAYS: >
   <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
