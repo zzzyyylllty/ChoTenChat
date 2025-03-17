@@ -9,14 +9,14 @@ import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.placeholderconfig
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 
-fun buildMessageComponent(patchedMessage: patchedMessage, receiver: User): Component {
+fun patchedMessage.buildComponent(): Component {
     val mm = MiniMessage.miniMessage()
-    var message = patchedMessage.format.replace("{message}",
-        (placeholderconfig["message-${patchedMessage.receiveMode.name}"]
+    var message = this.format.replace("{message}",
+        (placeholderconfig["message-${this.receiveMode.name}"]
             ?: "<white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>"
     ).toString()
     )
-    message = message.replace("{message.message}", "<yellow>${patchedMessage.message.content}")
+    message = message.replace("{message.message}", "<yellow>${this.message.content}")
 
 
     return mm.deserialize(message)
