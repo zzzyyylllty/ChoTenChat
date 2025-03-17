@@ -1,8 +1,8 @@
 package io.github.zzzyyylllty.melsydchat.logger
 
-import ink.ptms.adyeshach.taboolib.common.platform.function.severe
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.console
 import taboolib.common.platform.function.info
+import taboolib.common.platform.function.severe
 import taboolib.common.platform.function.warning
 import taboolib.module.lang.asLangText
 

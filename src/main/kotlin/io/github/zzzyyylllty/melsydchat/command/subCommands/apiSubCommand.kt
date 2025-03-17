@@ -1,6 +1,6 @@
 package io.github.zzzyyylllty.melsydchat.command.subCommands
 
-import io.github.zzzyyylllty.melsydchat.function.contact.message.sendInternalMessages
+import io.github.zzzyyylllty.melsydchat.function.internalMessage.sendInternalMessages
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.command.CommandBody

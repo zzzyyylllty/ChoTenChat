@@ -12,7 +12,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage
 fun patchedMessage.buildComponent(): Component {
     val mm = MiniMessage.miniMessage()
     var message = this.format.replace("{message}",
-        (placeholderconfig["message-${this.receiveMode.name}"]
+        (placeholderconfig?.get("message-${this.receiveMode.name}")
             ?: "<white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>"
     ).toString()
     )

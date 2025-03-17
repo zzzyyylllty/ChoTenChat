@@ -1,13 +1,14 @@
 package main.kotlin.io.github.zzzyyylllty.zaleplon
 
-import ink.ptms.adyeshach.taboolib.module.nms.Exchanges.ExchangePlugin.getServer
 import io.github.zzzyyylllty.melsydchat.data.Group
 import io.github.zzzyyylllty.melsydchat.data.User
 import io.github.zzzyyylllty.melsydchat.data.UserData
+import io.github.zzzyyylllty.melsydchat.function.boot.initializeData
 import org.bukkit.Bukkit
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.ProxyPlayer
 import taboolib.common.platform.function.console
+import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.info
 import taboolib.common.platform.function.submitAsync
 import taboolib.module.configuration.Config
@@ -19,19 +20,22 @@ import java.util.*
 object DelsymChat : Plugin() {
 
     lateinit var plugin: DelsymChat
-    lateinit var userDataMap: LinkedHashMap<String, UserData> // KID, UserData...
-    lateinit var userMap: LinkedHashMap<String, User> // KID, UserData...
-    lateinit var playerAsUserMap: LinkedHashMap<UUID, String> // PlayerUUID, KID
-    lateinit var loadedGroupMap: LinkedHashMap<String, Group>
+    var dataFolder = nativeDataFolder()
+    var userDataMap = LinkedHashMap<String, UserData>() // KID, UserData...
+    var userMap = LinkedHashMap<String, User>() // KID, UserData...
+    var playerAsUserMap = LinkedHashMap<UUID, String>() // PlayerUUID, KID
+    var loadedGroupMap = LinkedHashMap<String, Group>()
     var devMode = true
     var console = console()
 
     @Config("config.yml")
-    lateinit var config: ConfigFile
+    var config: ConfigFile? = null
+
     @Config("placeholders.yml")
-    lateinit var placeholderconfig: ConfigFile
+    var placeholderconfig: ConfigFile? = null
 
     override fun onEnable() {
+        reloadCustomConfig()
         info("Successfully running ExamplePlugin!")
         initializeData()
     }
@@ -40,4 +44,9 @@ object DelsymChat : Plugin() {
         info("Successfully running ExamplePlugin!")
     }
 
+    fun reloadCustomConfig() {
+        config?.reload()
+        placeholderconfig?.reload()
+        dataFolder = getDataFolder()
+    }
 }

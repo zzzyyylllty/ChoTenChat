@@ -16,7 +16,7 @@ import kotlin.getValue
 
 
 class MysqlDatabase {
-    val host = config.getHost("database")
+    val host = config!!.getHost("database")
     val dataSource by lazy { host.createDataSource() }
     val table = Table("user", host) {
         add { id() }

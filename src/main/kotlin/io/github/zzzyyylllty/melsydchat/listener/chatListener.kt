@@ -7,23 +7,24 @@ import io.github.zzzyyylllty.melsydchat.function.contact.createGroup
 import io.github.zzzyyylllty.melsydchat.function.contact.createOrWipeUser
 import io.github.zzzyyylllty.melsydchat.function.message.buildComponent
 import io.github.zzzyyylllty.melsydchat.function.message.patch
+import io.github.zzzyyylllty.melsydchat.logger.infoL
 import io.github.zzzyyylllty.melsydchat.logger.warningL
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.command.ConsoleCommandSender
+import org.bukkit.craftbukkit.v1_20_R3.util.TerminalConsoleWriterThread
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
 import taboolib.common.platform.event.EventPriority
 import taboolib.common.platform.event.SubscribeEvent
-import taboolib.common.platform.function.submitAsync
 import java.util.Calendar
 import java.util.UUID
 
 
 @SubscribeEvent(EventPriority.LOWEST)
 fun onChat(e: AsyncChatEvent) {
-    submitAsync {
         val sender = e.player.asUser()
         val mm = MiniMessage.miniMessage()
         val mentionedUser = e.message() // TODO
@@ -47,14 +48,17 @@ fun onChat(e: AsyncChatEvent) {
             type = MessageType.TEXT
         )
         e.renderer { source: Player?, sourceDisplayName: Component?, message: Component?, viewer: Audience? ->
-            val receiver = (viewer as Player).asUser()
-            if (receiver != null) {
-                melsydMessage.patch(receiver).buildComponent()
+            if (viewer !is ConsoleCommandSender) {
+                val receiver = (viewer as Player).asUser()
+                if (receiver != null) {
+                    melsydMessage.patch(receiver).buildComponent()
+                } else {
+                    throw NullPointerException("receiver is null!")
+                }
             } else {
-                throw NullPointerException("receiver is null!")
+                mm.deserialize("<light_purple>[ChoTenChat] <white>${source?.displayName}</white> <gray>${mm.serialize(message!!)} <dark_gray>($message)")
             }
         }
-    }
 }
 
 @SubscribeEvent(EventPriority.MONITOR)

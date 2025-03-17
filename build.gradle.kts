@@ -1,4 +1,5 @@
 import io.izzel.taboolib.gradle.*
+import io.izzel.taboolib.gradle.Basic
 import io.izzel.taboolib.gradle.DatabaseAlkaidRedis
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -12,6 +13,7 @@ taboolib {
     env {
         // 安装模块
         install(Basic)
+        install(CONFIGURATION)
         install(Bukkit)
         install(BukkitUtil)
         install(BukkitUI)

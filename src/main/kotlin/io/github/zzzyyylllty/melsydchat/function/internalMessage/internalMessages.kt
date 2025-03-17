@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.melsydchat.function.contact.message
+package io.github.zzzyyylllty.melsydchat.function.internalMessage
 
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.minimessage.MiniMessage

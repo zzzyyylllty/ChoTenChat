@@ -8,6 +8,7 @@ import io.github.zzzyyylllty.melsydchat.data.Group
 import io.github.zzzyyylllty.melsydchat.data.UIDData
 import io.github.zzzyyylllty.melsydchat.data.User
 import io.github.zzzyyylllty.melsydchat.data.UserData
+import io.github.zzzyyylllty.melsydchat.logger.infoL
 import io.github.zzzyyylllty.melsydchat.logger.warningL
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.playerAsUserMap
@@ -17,6 +18,7 @@ import org.bukkit.entity.Player
 
 
 fun Player.createOrWipeUser() {
+
     val user = User(
         registryName = this.name,
         nickName = this.displayName,
@@ -31,6 +33,8 @@ fun Player.createOrWipeUser() {
         uuid = this.uniqueId,
     )
     userMap[user.fullId.getKID()] = user
+    playerAsUserMap[this.uniqueId] = user.fullId.getKID()
+    infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
     user.createOrWipeData()
 }
 

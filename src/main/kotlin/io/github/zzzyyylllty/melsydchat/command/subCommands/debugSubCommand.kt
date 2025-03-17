@@ -1,9 +1,8 @@
 package io.github.zzzyyylllty.melsydchat.command.subCommands
 
 import io.github.zzzyyylllty.melsydchat.data.asUser
-import io.github.zzzyyylllty.melsydchat.function.asUser
-import io.github.zzzyyylllty.melsydchat.function.asUserData
-import io.github.zzzyyylllty.melsydchat.function.contact.message.sendInternalMessages
+import io.github.zzzyyylllty.melsydchat.function.internalMessage.sendInternalMessages
+import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userMap
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
@@ -48,9 +47,19 @@ object ChoTenChatDebugCommand {
                     sender.sendInternalMessages(sender.asLangText("INTERNAL_USERDATA_NOT_FOUND", user))
                     return@execute
                 }
-
                 sender.sendInternalMessages(sender.asLangText("INTERNAL_DEBUG_USER", user, data))
             }
+        }
+    }
+
+    @CommandBody
+    val getUserMap = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            var message = "<yellow><b>UserMap Entries</b> (${userMap.size}):<br>"
+            for (entry in userMap.entries) {
+                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+            }
+            sender.sendInternalMessages(message)
         }
     }
 

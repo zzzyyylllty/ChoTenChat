@@ -9,13 +9,16 @@ import taboolib.common.platform.command.PermissionDefault
 import taboolib.common.platform.command.subCommand
 
 /**
- * Usage: /dylsemchat
+ * Usage: /dylsemchat,chotenchat
+ *          ├── about
  *          ├── api
  *          │   ├── minimessage <content>
  *          │   └── TODO
  *          ├── debug
  *          │   ├── getUser <player>
  *          │   ├── getUserDataByPlayer <player>
+ *          │   ├── getUserMap
+ *          │   ├── getUserDataMap
  *          │   └── getUserData <userUUID>
  *          ├── group [groupID|RANDOM]
  *          │      ├── operation

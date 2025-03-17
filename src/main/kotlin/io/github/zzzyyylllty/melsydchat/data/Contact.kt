@@ -58,7 +58,7 @@ data class User(
 
 fun Player.asUser(): User? {
     return userMap[playerAsUserMap[this.uniqueId]] ?: run {
-        warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", this.name, this.uniqueId)
+        warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", this.player?.name ?:"(null)", this.uniqueId)
         return null
     }
 }
