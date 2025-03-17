@@ -1,11 +1,9 @@
 package main.kotlin.io.github.zzzyyylllty.zaleplon
 
 import ink.ptms.adyeshach.taboolib.module.nms.Exchanges.ExchangePlugin.getServer
-import io.github.zzzyyylllty.melsydchat.data.ContactIDContainer
 import io.github.zzzyyylllty.melsydchat.data.Group
 import io.github.zzzyyylllty.melsydchat.data.User
 import io.github.zzzyyylllty.melsydchat.data.UserData
-import io.github.zzzyyylllty.melsydchat.function.boot.initializeData
 import org.bukkit.Bukkit
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.ProxyPlayer
@@ -21,10 +19,10 @@ import java.util.*
 object DelsymChat : Plugin() {
 
     lateinit var plugin: DelsymChat
-    lateinit var userDataMap: LinkedHashMap<Long, UserData>
-    lateinit var userMap: LinkedHashMap<Long, User>
-    lateinit var playerAsUserMap: LinkedHashMap<UUID, Long>
-    lateinit var loadedGroupMap: LinkedHashMap<Long, Group>
+    lateinit var userDataMap: LinkedHashMap<String, UserData> // KID, UserData...
+    lateinit var userMap: LinkedHashMap<String, User> // KID, UserData...
+    lateinit var playerAsUserMap: LinkedHashMap<UUID, String> // PlayerUUID, KID
+    lateinit var loadedGroupMap: LinkedHashMap<String, Group>
     var devMode = true
     var console = console()
 

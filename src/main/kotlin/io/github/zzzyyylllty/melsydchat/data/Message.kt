@@ -1,31 +1,32 @@
 package io.github.zzzyyylllty.melsydchat.data
 
-import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userDataMap
-import net.kyori.adventure.text.Component
-import org.bukkit.event.Event
-import java.util.Calendar
+import java.util.Date
 import java.util.UUID
-import kotlin.math.floor
 
-data class Message (
+/**
+ * 消息
+ *
+ * message含有：uuid，内容，sender，发送时间，提及的人，关注的联系人，发送到的联系人，类型。
+ * */
+data class Message(
     val uuid: UUID,
-    val goal: Contact?,
-    val type: MessageType,
+    val content: String, // 原聊天内容
     val sender: User,
-    val content: String, // 原内容
-    val sendedTime: Calendar,
-    val meta: LinkedHashMap<String, String>,
-)
+    val sendTime: Date?,
+    val mentionUser: List<String>, // KID
+    val subscribedContact: String, // KID
+    val sendGoalContact: String,
+    val type: MessageType
 
+    )
+
+data class patchedMessage(
+    val format: String, // 格式化聊天内容，只剩下{message}没有替换
+    val message: Message,
+    val receiveMode: ReceiveMode, // 根据接受模式生成消息
+)
 enum class MessageType {
-    SYSTEM,
     TEXT,
-    IMAGE,
-    LINK,
-    ANNOUNCEMENT
+    PICTURE,
+    SYSTEM
 }
-
-data class buildedMessage(
-    val original: Message,
-    val builded: Component,
-)

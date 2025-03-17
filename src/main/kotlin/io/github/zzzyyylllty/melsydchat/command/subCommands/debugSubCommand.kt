@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.melsydchat.command.subCommands
 
+import io.github.zzzyyylllty.melsydchat.data.asUser
 import io.github.zzzyyylllty.melsydchat.function.asUser
 import io.github.zzzyyylllty.melsydchat.function.asUserData
 import io.github.zzzyyylllty.melsydchat.function.contact.message.sendInternalMessages
@@ -39,7 +40,7 @@ object ChoTenChatDebugCommand {
                 }
                 val user = bukkitPlayer.asUser()
                 if (user == null) {
-                    sender.sendInternalMessages(sender.asLangText("INTERNAL_USER_NOT_FOUND", bukkitPlayer.name, bukkitPlayer.uniqueId))
+                    sender.sendInternalMessages(sender.asLangText("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", bukkitPlayer.name, bukkitPlayer.uniqueId))
                     return@execute
                 }
                 val data = user.asUserData()

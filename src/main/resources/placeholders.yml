@@ -41,9 +41,13 @@ nick: >
   <reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)
   <reset><br><b>| </b><yellow>点击打开资料卡...
   '><font:uniform>{nick.nick}<reset><gray>]
-message-mentioned: >
-  [!]* <yellow>{message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-message-standard: >
-  * {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-MENTION: >
+  <yellow>*** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-ALWAYS: >
+  <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-NOTE: >
+  <gray>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-SELF: >
+  <dark_aqua>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 reply: >
   <dark_gray>[ {reply.sender}: {reply.message} ]<br>

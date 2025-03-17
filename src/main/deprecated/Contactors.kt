@@ -2,8 +2,11 @@ package io.github.zzzyyylllty.melsydchat.data
 
 import io.github.zzzyyylllty.melsydchat.data.ContactType.GROUP
 import io.github.zzzyyylllty.melsydchat.data.ContactType.USER
+import io.github.zzzyyylllty.melsydchat.function.asUserData
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.zaleplon.DelsymChat.userMap
+import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import java.util.Calendar
 import java.util.UUID
 import kotlin.math.floor
@@ -36,10 +39,16 @@ open class User(
     open var nickName: String?,
 ): Contact {
     override fun sendMessage(message: Message) {
-        //Bukkit.getPlayer(playerUUID).sendMessage(PatchedMessage(
-        //    message,
-        //)
-        //)
+    }
+
+    fun getMessageReceiveMode(contact: Contact): MessageReceiveMode {
+        return this.asUserData()?.contactorSetting?.get(contact.idData)?.receiveMode ?: MessageReceiveMode.ALWAYS
+    }
+    fun asPlayer(): Player? {
+        return Bukkit.getPlayer(playerUUID)
+    }
+    fun getNickOrName(): Player? {
+        return Bukkit.getPlayer(playerUUID)
     }
 
 }

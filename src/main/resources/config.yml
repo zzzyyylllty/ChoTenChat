@@ -3,13 +3,11 @@
 chat:
   format:
     group: |
-      %sender_friend%:
-      <dark_gray>%reply%
-      <white>%format-message%
+      {group} {title} {nick}
+      {reply}{message}
     friend: |
-      %sender_friend%:
-      <dark_gray>%reply%
-      <white>%format-message%
+      {nick}
+      {reply}{message}
     # 自定义 TODO
 
   tolerance-kether: false

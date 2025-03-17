@@ -1,12 +1,6 @@
 #         Powered by TabooLib 6.0         #
 
 # Internal
-INTERNAL_USER_NOT_FOUND: "<red>无法找到玩家 <yellow>{0} (UUID {1}) <red>的 用户实例.请注意我们储存用户使用的是 UUID 而非玩家实例/名称。"
-INTERNAL_USER_NOT_FOUND_BY_ID: "<red>无法找到ID为 <yellow>{0} <red>的 用户实例."
-INTERNAL_USERDATA_NOT_FOUND: "<red>无法找到用户 <yellow>{0} <red>的用户数据。"
-INTERNAL_SUBSCRIBE_CONTACT_NOT_FOUND: "<red>未找到玩家 <yellow>{0} <red>当前关注的联系人"
-INTERNAL_PLAYER_NOT_FOUND: "<red>未根据用户  <yellow>{0} <red>的玩家UUID  <yellow>{1} <red>找到玩家."
-INTERNAL_DIRECT_PLAYER_NOT_FOUND: "<red>未找到玩家 <yellow>{0}"
-INTERNAL_DEBUG_USER: "<green>已找到用户 <aqua>{0} <green>用户数据为 <dark_aqua>{1}"
-
-COMMAND_NO_PARAMS: '命令缺少参数 {0}.'
+INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER: "无法找到玩家 {0} (UUID: {1}) 的用户实例."
+INTERNAL_WARNING_UNABLE_TO_FIND_USER_SUBSCRIBE: "无法找到用户 {0} 关注的联系人."
+INTERNAL_WARNING_UNABLE_TO_FIND_USER: "无法找到用户 {0} 的玩家实例."
