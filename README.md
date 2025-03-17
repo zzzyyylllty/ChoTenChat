@@ -1,4 +1,4 @@
-# ChoTenChat / MelsydChat
+# ChoTenChat / chotenchat
 
 ## TODO
 - [ ] TEXT

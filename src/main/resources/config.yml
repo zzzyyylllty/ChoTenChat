@@ -2,12 +2,12 @@
 
 chat:
   format:
-    group: |
+    GROUP: |
       {group} {title} {nick}
-      {reply}{message}
-    friend: |
+      {reply}{format-message}
+    USER: |
       {nick}
-      {reply}{message}
+      {reply}{format-message}
     # 自定义 TODO
 
   tolerance-kether: false
@@ -30,7 +30,7 @@ datastore:
     SQL:
       host: localhost
       port: 3306
-      database: melsydchat
+      database: chotenchat
       username: root
       password: 123456
 

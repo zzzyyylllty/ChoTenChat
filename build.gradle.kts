@@ -8,22 +8,29 @@ plugins {
     id("io.izzel.taboolib") version "2.0.18"
     id("org.jetbrains.kotlin.jvm") version "1.8.22"
 }
-
 taboolib {
     env {
+        // 调试模式
+        debug = false
+        // 是否在开发模式下强制下载依赖
+        forceDownloadInDev = false
+        // 中央仓库地址
+        repoCentral = "https://maven.aliyun.com/repository/central"
+        // 依赖下载目录
+        fileLibs = "libraries"
+        // 资源下载目录
+        fileAssets = "assets"
+        // 是否启用隔离加载器（即完全隔离模式）
+        enableIsolatedClassloader = false
         // 安装模块
+
+        // install(BUKKIT_ALL, UNIVERSAL)
         install(Basic)
-        install(CONFIGURATION)
         install(Bukkit)
         install(BukkitUtil)
         install(BukkitUI)
         install(BukkitHook)
         install(BukkitFakeOp)
-        install(BukkitNMSEntityAI)
-        install(BukkitNMSDataSerializer)
-        install(BukkitNMSItemTag)
-        install(BukkitNMSUtil)
-        install(BukkitNMS)
         install(MinecraftChat)
         install(MinecraftEffect)
         install(CommandHelper)
@@ -34,10 +41,19 @@ taboolib {
         install(DatabasePtc)
         install(DatabasePtcObject)
         install(Kether)
-        install(DatabaseAlkaidRedis)
 
     }
-    version { taboolib = "6.2.0" }
+    version {
+        taboolib = "6.2.0-beta33"
+        // Kotlinx Coroutines 版本（设为 null 表示禁用）
+        coroutines = "1.7.3"
+        // 跳过 Kotlin 加载
+        skipKotlin = false
+        // 跳过 Kotlin 重定向
+        skipKotlinRelocate = false
+        // 跳过 TabooLib 重定向
+        skipTabooLibRelocate = false
+    }
 }
 
 repositories {
