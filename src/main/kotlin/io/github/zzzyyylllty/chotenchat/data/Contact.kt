@@ -8,6 +8,7 @@ import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.UUID
+import kotlin.math.min
 
 /**
  * 联系人接口
@@ -23,6 +24,10 @@ interface Contact {
 
     fun getName(): String {
         return nickName ?: registryName
+    }
+    fun getShortName(): String {
+        val name = (nickName ?: registryName)
+        return if (name.length >= 5) name.substring(0, 5) else name
     }
     fun getId(): String {
         return fullId.UIDData.numberUID

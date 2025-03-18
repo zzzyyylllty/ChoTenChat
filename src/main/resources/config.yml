@@ -14,7 +14,6 @@ chat:
 redis:
   host: localhost
   port: 6379
-  # 不设置用户密码则直接注释该选项
   auth: root
   pass: root
   connect: 32

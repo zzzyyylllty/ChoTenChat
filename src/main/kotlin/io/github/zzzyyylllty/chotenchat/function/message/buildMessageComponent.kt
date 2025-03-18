@@ -1,5 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.function.message
 
+import io.github.zzzyyylllty.chotenchat.data.Contact
+import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.Message
 import io.github.zzzyyylllty.chotenchat.data.ReceiveMode.*
 import io.github.zzzyyylllty.chotenchat.data.User
@@ -24,8 +26,19 @@ fun PatchedMessage.buildComponent(): Component {
 fun Message.patch(receiver: User): PatchedMessage {
     var comp = config["chat.format.${this.sendGoalContact.asContact()?.fullId?.type?.name}"].toString()
     val configParts = placeHolderConfig.getValues(false).keys
+    /*
+    * # {group.name} {group.number} {group.colorednumber} {group.shortname}
+    * # {title.name} {title.coloredlevel} {title.special} {title.permission} {title.level} {title.title}
+    * # {nick.nick} {nick.playername} {nick.coloredlevel} {nick.level} {nick.permission}
+    * # {message.message} {message.time} {reply.sender} {reply.message}
+    * */
     for (part in configParts) {
         comp = comp.replace("{format-$part}", placeHolderConfig[part].toString())
+    }
+
+    val contactAsGroup = this.sendGoalContact.asContact()
+    if (contactAsGroup is Group) {
+        comp.replace("{group.name}", contactAsGroup.getName())
     }
 
     warning(comp)
