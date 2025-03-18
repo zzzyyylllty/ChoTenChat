@@ -44,7 +44,7 @@ taboolib {
 
     }
     version {
-        taboolib = "6.2.0-beta33"
+        taboolib = "6.2.3"
         // Kotlinx Coroutines 版本（设为 null 表示禁用）
         coroutines = "1.7.3"
         // 跳过 Kotlin 加载

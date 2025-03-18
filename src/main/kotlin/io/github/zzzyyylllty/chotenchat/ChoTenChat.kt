@@ -6,11 +6,14 @@ import io.github.zzzyyylllty.chotenchat.data.UserData
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.severeL
 import org.bukkit.configuration.file.YamlConfiguration
+import taboolib.common.LifeCycle
 import taboolib.common.io.newFile
+import taboolib.common.platform.Awake
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.console
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.info
+import taboolib.common.platform.function.warning
 import taboolib.common.platform.function.severe
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
@@ -31,13 +34,14 @@ object ChoTenChat : Plugin() {
     var console = console()
 
     @Config("config.yml")
-    lateinit var config: ConfigFile
+    lateinit var config: Configuration
 
     @Config("placeholders.yml")
-    lateinit var placeHolderConfig: ConfigFile
+    lateinit var placeHolderConfig: Configuration
 
     override fun onEnable() {
-        severe("ChoTenChat now starting.")
+        warning("ChoTenChat now starting.")
+        setupInstance()
     }
 
     override fun onDisable() {
@@ -46,10 +50,6 @@ object ChoTenChat : Plugin() {
 
     fun reloadCustomConfig() {
         saveCustomConfig()
-        val file = newFile(getDataFolder(), "config.yml", create = true)
-        config = Configuration.loadFromFile(file, Type.YAML) as ConfigFile
-        val file2 = newFile(getDataFolder(), "placeholders.yml", create = true)
-        placeHolderConfig = Configuration.loadFromFile(file2, Type.YAML) as ConfigFile
         plugin.config.reload()
         plugin.placeHolderConfig.reload()
     }

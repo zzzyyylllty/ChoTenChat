@@ -14,7 +14,7 @@ import kotlin.getValue
     lateinit var loadedGroupMap: LinkedHashMap<String, Group>
 * */
 
-
+/*
 class MysqlDatabase {
     val host = config!!.getHost("database")
     val dataSource by lazy { host.createDataSource() }
@@ -38,4 +38,4 @@ class MysqlDatabase {
     init {
         table.createTable(dataSource)
     }
-}
+}*/
