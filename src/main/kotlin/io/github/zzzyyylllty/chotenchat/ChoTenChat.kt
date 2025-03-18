@@ -39,6 +39,7 @@ object ChoTenChat : Plugin() {
     @Config("placeholders.yml")
     lateinit var placeHolderConfig: Configuration
 
+    @Awake(LifeCycle.ENABLE)
     override fun onEnable() {
         warning("ChoTenChat now starting.")
         setupInstance()
@@ -49,17 +50,17 @@ object ChoTenChat : Plugin() {
     }
 
     fun reloadCustomConfig() {
-        saveCustomConfig()
+        createCustomConfig()
         plugin.config.reload()
         plugin.placeHolderConfig.reload()
     }
 
 
-    fun saveCustomConfig() {
+    fun createCustomConfig() {
         infoL("INTERNAL_INFO_CREATING_CONFIG")
         try {
-            YamlConfiguration.loadConfiguration((File(dataFolder, "config.yml"))).save(File(dataFolder, "config.yml"))
-            YamlConfiguration.loadConfiguration((File(dataFolder, "placeholders.yml"))).save(File(dataFolder, "placeholders.yml"))
+            placeHolderConfig = Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML)
+            config = Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML)
             infoL("INTERNAL_INFO_CREATED_CONFIG")
         } catch (e: Exception) {
             severeL("INTERNAL_SEVERE_CREATE_CONFIG_ERROR")

@@ -20,7 +20,7 @@ data class Message(
 
     )
 
-data class patchedMessage(
+data class PatchedMessage(
     val format: String, // 格式化聊天内容，只剩下{message}没有替换
     val message: Message,
     val receiveMode: ReceiveMode, // 根据接受模式生成消息
