@@ -4,6 +4,8 @@ import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatApiCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatDebugCommand
 import io.github.zzzyyylllty.chotenchat.data.asUser
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
+import io.github.zzzyyylllty.chotenchat.logger.infoL
+import io.github.zzzyyylllty.chotenchat.logger.severeL
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -76,7 +78,17 @@ object ChoTenChatMainCommand {
     @CommandBody
     val reload = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            ChoTenChat.reloadCustomConfig()
+            infoL("INTERNAL_INFO_RELOADING")
+            sender.sendInternalMessages(sender.asLangText("INTERNAL_INFO_RELOADING"))
+            try {
+                ChoTenChat.reloadCustomConfig()
+                sender.sendInternalMessages(sender.asLangText("INTERNAL_INFO_RELOADED"))
+                infoL("INTERNAL_INFO_RELOADED")
+            } catch (e: Throwable) {
+                severeL("INTERNAL_SEVERE_RELOAD_ERROR")
+                sender.sendInternalMessages(sender.asLangText("INTERNAL_SEVERE_RELOAD_ERROR"))
+                e.printStackTrace()
+            }
         }
     }
 }
