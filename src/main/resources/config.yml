@@ -3,13 +3,11 @@
 chat:
   format:
     GROUP: |
-      {group} {title} {nick}
-      {reply}{format-message}
+      {format-group} {format-title} {format-nick}
+      {format-reply}{format-message}
     USER: |
-      {nick}
-      {reply}{format-message}
-    # 自定义 TODO
-
+      {format-nick}
+      {format-reply}{format-message}
   tolerance-kether: false
   # Kether 宽容解析
   # 默认值 false

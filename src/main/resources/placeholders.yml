@@ -17,37 +17,11 @@
 #<gray><italic>[ 回复 raincandy_U: 这是一条你要回复的消... ]
 #<white>> 这是一条我发送的消息! <hover:show_text:'<gray>2025-03-17 01:51
 #<yellow>点击管理本条消息...'><#886688><b>≡</hover>
-group: >
-  <gray>[
-  <yellow><hover:show_text:'
-  <reset><b>| </b><gray>群组名称 <aqua>{group.name}<br>
-  <reset><b>| </b><gray>群组号码 {group.colorednumber}<br>
-  <reset><b>| </b><yellow>点击查看详情...
-  '>{group.shortname}<gray>]
-title: >
-  <gray>[
-  <yellow><hover:show_text:'
-  <b>| </b><gray>活跃分数 <aqua>{title.name}
-  <reset><br><b>| </b><gray>活跃等级 {title.coloredlevel}
-  <reset><br><b>| </b><gray>专属称号 <gradient:white:light_purple>{title.special}
-  <reset><br><b>| </b><gray>群身份组 {title.permission}
-  <reset><br><b>| </b><yellow>点击查看详情...
-  '><font:uniform>Lv{title.level} {title.title}<reset><gray>]
-nick: >
-  <gray>[
-  <yellow><hover:show_text:'
-  <reset><br><b>| </b><gray>用户名称 {nick.nick} <gray>({nick.playername})
-  <reset><br><b>| </b><gray>用户等级 {nick.coloredlevel} <gray>({nick.level})
-  <reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)
-  <reset><br><b>| </b><yellow>点击打开资料卡...
-  '><font:uniform>{nick.nick}<reset><gray>]
-message-SUBSCRIBE: >
-  <yellow>*** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-message-ALWAYS: >
-  <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-message-NOTE: >
-  <gray>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-message-SELF: >
-  <dark_aqua>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-reply: >
-  <dark_gray>[ {reply.sender}: {reply.message} ]<br>
+group: <gray>[<yellow><hover:show_text:'<reset><b>| </b><gray>群组名称 <aqua>{group.name}<br><reset><b>| </b><gray>群组号码 {group.colorednumber}<br><reset><b>| </b><yellow>点击查看详情...'>{group.shortname}<gray>]
+title: <gray>[<yellow><hover:show_text:'<b>| </b><gray>活跃分数 <aqua>{title.name}<reset><br><b>| </b><gray>活跃等级 {title.coloredlevel}<reset><br><b>| </b><gray>专属称号 <gradient:white:light_purple>{title.special}<reset><br><b>| </b><gray>群身份组 {title.permission}<reset><br><b>| </b><yellow>点击查看详情...'><font:uniform>Lv{title.level} {title.title}</font><reset><gray>]
+nick: <gray>[<yellow><hover:show_text:'<reset><br><b>| </b><gray>用户名称 {nick.nick} <gray>({nick.playername})<reset><br><b>| </b><gray>用户等级 {nick.coloredlevel} <gray>({nick.level})<reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)<reset><br><b>| </b><yellow>点击打开资料卡...'><font:uniform>{nick.nick}<reset><gray>]
+message-SUBSCRIBE: <yellow>*** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-ALWAYS: <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-NOTE: <gray>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-SELF: <dark_aqua>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+reply: '<dark_gray>[ {reply.sender}: {reply.message} ]<br>'
