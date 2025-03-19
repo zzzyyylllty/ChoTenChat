@@ -10,7 +10,7 @@ package io.github.zzzyyylllty.chotenchat.data
 */
 
 data class UIDData(
-    val numberUID: String,
+    val numberUID: Long,
     val fancyAccountType: FancyAccountType,
     val fancyAccountValue: Int,
 )

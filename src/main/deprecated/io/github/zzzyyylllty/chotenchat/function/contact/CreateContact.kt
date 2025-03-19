@@ -4,7 +4,9 @@ import io.github.zzzyyylllty.chotenchat.data.ContactType
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
 import io.github.zzzyyylllty.chotenchat.data.FullID
 import io.github.zzzyyylllty.chotenchat.data.Group
+import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.Member
+import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.UIDData
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
@@ -24,7 +26,7 @@ fun Player.createOrWipeUser() {
         fullId = FullID(
             type = ContactType.USER,
             UIDData = UIDData(
-                numberUID = "1",
+                numberUID = 1,
                 fancyAccountType = FancyAccountType.ADMINISTRATOR,
                 fancyAccountValue = 114514
             )
@@ -43,7 +45,7 @@ fun User.createOrWipeData() {
         subscribedContact = "GROUP-1000000"
     )
 }
-fun createGroup(id :String, nickName :String, registryName: String,members: LinkedHashMap<Long, Member>) {
+fun createGroup(id : Long, nickName :String, registryName: String, members: LinkedHashMap<Long, Member>) {
     val group = Group(
         registryName = registryName,
         nickName = nickName,
@@ -61,4 +63,13 @@ fun createGroup(id :String, nickName :String, registryName: String,members: Link
         )
     )
     loadedGroupMap[group.fullId.getKID()] = group
+}
+fun User.cleanMember(permission: GroupPermission): Member {
+    return Member(
+        nickName = this.getName(),
+        temperature = 0,
+        specialTitle = null,
+        groupPermission = permission,
+        titleSelection = TitleSelection.TEMPERATURE
+    )
 }

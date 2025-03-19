@@ -39,9 +39,9 @@ fun Message.patch(receiver: User): PatchedMessage {
 
     val contactAsGroup = this.sendGoalContact.asContact()
     if (contactAsGroup is Group) {
-        val member: Member? = contactAsGroup.members.get(sender.fullId.UIDData.numberUID.toLong())
+        val member: Member? = contactAsGroup.members.get(sender.fullId.UIDData.numberUID)
         comp.replace("{group.name}", contactAsGroup.getName())
-        comp.replace("{group.number}", contactAsGroup.fullId.UIDData.numberUID)
+        comp.replace("{group.number}", contactAsGroup.fullId.UIDData.numberUID.toString())
         comp.replace("{group.shortname}", contactAsGroup.getShortName())
         comp.replace("{group.color}", contactAsGroup.getIdColor())
         comp.replace("{title.score}", member?.temperature.toString())
@@ -52,7 +52,7 @@ fun Message.patch(receiver: User): PatchedMessage {
         comp.replace("{title.title}", member?.getTitle(contactAsGroup) ?: "UNKNOWN")
     }
 
-    warning(comp)
+    warning(this)
     return PatchedMessage(
         format = comp,
         message = this,

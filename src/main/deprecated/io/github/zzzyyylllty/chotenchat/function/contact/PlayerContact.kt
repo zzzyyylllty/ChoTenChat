@@ -18,16 +18,16 @@ fun Player.asUserOrFail(): User? {
 }
 
 fun String.asContact(): Contact? {
-    if (this.startsWith("USER")) {
-        return userMap[this]
+    return if (this.startsWith("USER")) {
+        userMap[this]
     } else if (this.startsWith("GROUP")) {
-        return this.getGroup()
+        this.getGroup()
     } else {
         throw IllegalStateException("Contact must be USER or GROUP")
     }
 }
 fun String.getGroup(): Group? {
-    return if (loadedGroupMap.containsKey(this)) {
+    return if (loadedGroupMap.containsKey(this.split("-")[1])) {
         loadedGroupMap[this]
     } else {
         loadedGroupMap[this] // TODO DATABASE LOAD
