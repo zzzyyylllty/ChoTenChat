@@ -3,6 +3,9 @@ package io.github.zzzyyylllty.chotenchat.command.subCommands
 import io.github.zzzyyylllty.chotenchat.data.asUser
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userDataMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
@@ -57,6 +60,41 @@ object ChoTenChatDebugCommand {
         execute<CommandSender> { sender, context, argument ->
             var message = "<yellow><b>UserMap Entries</b> (${userMap.size}):<br>"
             for (entry in userMap.entries) {
+                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+            }
+            sender.sendInternalMessages(message)
+        }
+    }
+
+    @CommandBody
+    val getUserDataMap = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            var message = "<yellow><b>UserDataMap Entries</b> (${userDataMap.size}):<br>"
+            for (entry in userDataMap.entries) {
+                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+            }
+            sender.sendInternalMessages(message)
+        }
+    }
+
+
+    @CommandBody
+    val GroupMap = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            var message = "<yellow><b>UserDataMap Entries</b> (${loadedGroupMap.size}):<br>"
+            for (entry in loadedGroupMap.entries) {
+                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+            }
+            sender.sendInternalMessages(message)
+        }
+    }
+
+
+    @CommandBody
+    val playerAsUserMap = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            var message = "<yellow><b>UserDataMap Entries</b> (${playerAsUser.size}):<br>"
+            for (entry in playerAsUser.entries) {
                 message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
             }
             sender.sendInternalMessages(message)

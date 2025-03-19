@@ -31,6 +31,7 @@ taboolib {
         install(BukkitUI)
         install(BukkitHook)
         install(BukkitFakeOp)
+        install(BungeeCord)
         install(MinecraftChat)
         install(MinecraftEffect)
         install(CommandHelper)
