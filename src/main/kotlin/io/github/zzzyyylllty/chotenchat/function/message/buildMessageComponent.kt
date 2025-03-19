@@ -2,6 +2,7 @@ package io.github.zzzyyylllty.chotenchat.function.message
 
 import io.github.zzzyyylllty.chotenchat.data.Contact
 import io.github.zzzyyylllty.chotenchat.data.Group
+import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.Message
 import io.github.zzzyyylllty.chotenchat.data.ReceiveMode.*
 import io.github.zzzyyylllty.chotenchat.data.User
@@ -28,7 +29,7 @@ fun Message.patch(receiver: User): PatchedMessage {
     val configParts = placeHolderConfig.getValues(false).keys
     /*
     * # {group.name} {group.number} {group.color} {group.shortname}
-    * # {title.name} {title.color} {title.level} {title.special} {title.permission} {title.level} {title.title}
+    * # {title.score} {title.color} {title.level} {title.special} {title.permission} {title.title}
     * # {nick.nick} {nick.playername} {nick.coloredlevel} {nick.level} {nick.permission}
     * # {message.message} {message.time} {reply.sender} {reply.message}
     * */
@@ -38,14 +39,17 @@ fun Message.patch(receiver: User): PatchedMessage {
 
     val contactAsGroup = this.sendGoalContact.asContact()
     if (contactAsGroup is Group) {
+        val member: Member? = contactAsGroup.members.get(sender.fullId.UIDData.numberUID.toLong())
         comp.replace("{group.name}", contactAsGroup.getName())
         comp.replace("{group.number}", contactAsGroup.fullId.UIDData.numberUID)
         comp.replace("{group.shortname}", contactAsGroup.getShortName())
         comp.replace("{group.color}", contactAsGroup.getIdColor())
-        comp.replace("{title.name}", contactAsGroup.getName())
-        comp.replace("{title.color}", contactAsGroup.fullId.UIDData.numberUID)
-        comp.replace("{group.shortname}", contactAsGroup.getShortName())
-        comp.replace("{group.color}", contactAsGroup.getIdColor())
+        comp.replace("{title.score}", member?.temperature.toString())
+        comp.replace("{title.color}", "<white>") // TODO
+        comp.replace("{title.level}", contactAsGroup.getTemperatureTitle(member?.getTempLevel() ?: 1))
+        comp.replace("{title.special}", member?.specialTitle ?: "无")
+        comp.replace("{title.permission}", member?.groupPermission?.name ?: "UNKNOWN")
+        comp.replace("{title.title}", member?.getTitle(contactAsGroup) ?: "UNKNOWN")
     }
 
     warning(comp)

@@ -4,6 +4,7 @@ import io.github.zzzyyylllty.chotenchat.data.ContactType
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
 import io.github.zzzyyylllty.chotenchat.data.FullID
 import io.github.zzzyyylllty.chotenchat.data.Group
+import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.UIDData
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
@@ -42,7 +43,7 @@ fun User.createOrWipeData() {
         subscribedContact = "GROUP-1000000"
     )
 }
-fun createGroup(id :String, nickName :String,registryName: String) {
+fun createGroup(id :String, nickName :String, registryName: String,members: LinkedHashMap<Long, Member>) {
     val group = Group(
         registryName = registryName,
         nickName = nickName,
@@ -53,6 +54,10 @@ fun createGroup(id :String, nickName :String,registryName: String) {
                 fancyAccountType = FancyAccountType.ADMINISTRATOR,
                 fancyAccountValue = 114514
             )
+        ),
+        members = members,
+        temperatureTitleLevel = LinkedHashMap(
+            mapOf(0 to "Unknow", 11 to "Candy",21 to "Rain",41 to "Ame", 61 to "P", 81 to "KAngel", 101 to "ChoTen")
         )
     )
     loadedGroupMap[group.fullId.getKID()] = group

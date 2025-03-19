@@ -11,6 +11,10 @@ chat:
   tolerance-kether: false
   # Kether 宽容解析
   # 默认值 false
+
+title:
+
+
 redis:
   host: localhost
   port: 6379

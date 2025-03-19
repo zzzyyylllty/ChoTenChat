@@ -2,13 +2,18 @@ package io.github.zzzyyylllty.chotenchat.data
 
 import com.beust.klaxon.Json
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.*
+import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
 import io.github.zzzyyylllty.chotenchat.logger.warningL
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userDataMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import taboolib.common.io.groupId
+import taboolib.common.platform.function.warning
 import java.util.UUID
+import kotlin.collections.iterator
+import kotlin.math.floor
 import kotlin.math.min
 
 /**
@@ -84,8 +89,65 @@ data class Group(
     override val nickName: String?,
     @Json(name = "fullid")
     override val fullId: FullID,
+    val members: LinkedHashMap<Long, Member>,
+    val temperatureTitleLevel: LinkedHashMap<Int, String>,
 
     ) : Contact {
+    fun getTitle(m: Member): String {
+        return when (m.titleSelection) {
+            TEMPERATURE -> TODO()
+            PERMISSION -> TODO()
+            UNIQUE -> TODO()
+        }
+    }
+
+    fun getTemperatureTitle(tempLevel: Int): String {
+        if (temperatureTitleLevel.get(0) == null) {
+            warning("The First Temperature Level Not Set.Returning null.")
+        }
+        val lastTitle: String = temperatureTitleLevel[0].toString() // 上一个头衔
+        for (level in temperatureTitleLevel) {
+            val requiredLevel = level.key
+            if (requiredLevel > tempLevel) { // 如果这个头衔的要求超过了当前等级，即应用头衔
+                return lastTitle
+            }
+        }
+        return lastTitle
+    }
+}
+
+data class Member(
+    val nickName: String,
+    val temperature: Long,
+    val specialTitle: String,
+    val groupPermission: GroupPermission,
+    val titleSelection: TitleSelection
+) {
+    fun isTrusted(): Boolean {
+        return (groupPermission == GroupPermission.TRUSTED || groupPermission == GroupPermission.ADMINISTRATOR || groupPermission == GroupPermission.BUREAUCRAT || groupPermission == GroupPermission.OWNER)
+    }
+    fun isAdmin(): Boolean {
+        return (groupPermission == GroupPermission.ADMINISTRATOR || groupPermission == GroupPermission.BUREAUCRAT || groupPermission == GroupPermission.OWNER)
+    }
+    fun isBureaucrat(): Boolean {
+        return (groupPermission == GroupPermission.BUREAUCRAT || groupPermission == GroupPermission.OWNER)
+    }
+    fun isOwner(): Boolean {
+        return (groupPermission == GroupPermission.OWNER)
+    }
+    fun getTempLevel(): Int {
+        return floor(temperature/((temperature/1000)+10.0)).toInt()
+    }
+    fun getTempValue(): Long {
+        return temperature
+    }
+    fun getTitle(g: Group): String {
+        return when (titleSelection) {
+            TEMPERATURE -> g.getTemperatureTitle(getTempLevel())
+            PERMISSION -> groupPermission.name
+            UNIQUE -> specialTitle
+        }
+    }
 }
 
 data class FullID(
@@ -103,4 +165,18 @@ data class FullID(
 enum class ContactType{
     USER,
     GROUP,
+}
+
+enum class GroupPermission {
+    MEMBER,
+    TRUSTED,
+    ADMINISTRATOR,
+    BUREAUCRAT,
+    OWNER
+}
+
+enum class TitleSelection {
+    TEMPERATURE,
+    PERMISSION,
+    UNIQUE
 }

@@ -89,6 +89,7 @@ repositories {
     maven(url = "https://mvn.lumine.io/repository/maven-public/")
 }
 dependencies {
+    compileOnly("net.luckperms:api:5.4")
     implementation("me.clip:placeholderapi:2.11.5")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
     implementation("net.kyori:adventure-api:4.19.0")
