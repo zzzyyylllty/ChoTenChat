@@ -77,6 +77,7 @@ fun Player.asUser(): User? {
     }
 }
 
+
 data class Group(
     @Json(name = "regname")
     override var registryName: String,

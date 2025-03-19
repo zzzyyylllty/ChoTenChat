@@ -36,7 +36,7 @@ enum class FancyAccountType {
 
 @kotlinx.serialization.Serializable
 data class UserData(
-    val subscribeContact: Contact,
+    val subscribeContact: Contact?,
     val contactSettings: LinkedHashMap<Contact, ContactSetting>,
 )
 

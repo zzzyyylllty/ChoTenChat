@@ -40,17 +40,16 @@ public open class SQLDataBase {
             type(ColumnTypeSQL.JSON, 128)
         }
     }
-    open public fun User.saveInDatabase() {
-        val user = this
+    open public fun saveInDatabase(user: User) {
         val json = Json.encodeToString(user)
         userTable.insert(dataSource, "uuid", "id", "value") {
-            value(playerUUID, longId, "1")
+            value(user.playerUUID, user.longId, "1")
         }
     }
 
-    public fun Player?.getUserInDatabase(): User? {
-        if (this == null) return null
-        val uuid = this.uniqueId
+    public fun getUserInDatabase(player: Player?): User? {
+        if (player == null) return null
+        val uuid = player.uniqueId
         val string = userTable.select(dataSource) {
             rows("value")
             where("uuid" eq uuid)

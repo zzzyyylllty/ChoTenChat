@@ -1,18 +1,22 @@
 package io.github.zzzyyylllty.chotenchat.data
 
 
+import io.github.zzzyyylllty.chotenchat.logger.infoL
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.Serializable
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
+import org.bukkit.entity.Player
 import java.util.UUID
+import kotlin.collections.set
 
 
 public interface Contact {
     val registryName: String
     val nickName: String?
-    val longId: String
+    val longId: Long
     val idData: IdData
-    var internalId: Long
 
     fun getNickOrReg(): String {
         return nickName ?: registryName
@@ -23,9 +27,8 @@ public interface Contact {
 public data class User(
     override val registryName: String,
     override val nickName: String?,
-    override val longId: String,
+    override val longId: Long,
     override val idData: IdData,
-    override var internalId: Long,
     val playerUUID: String,
     val data: UserData,
 ) : Contact {
@@ -43,10 +46,10 @@ public data class User(
 public data class Group(
     override val registryName: String,
     override val nickName: String?,
-    override val longId: String,
+    override val longId: Long,
     override val idData: IdData,
-    override var internalId: Long,
 ) : Contact {
 
 }
+
 

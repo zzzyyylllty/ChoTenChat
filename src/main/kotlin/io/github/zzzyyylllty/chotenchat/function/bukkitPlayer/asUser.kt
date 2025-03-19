@@ -8,11 +8,11 @@ import org.bukkit.entity.Player
 import taboolib.expansion.getDataContainer
 
 fun Player.asUser(): User? {
-    return userMap[playerAsUserMap[this.uniqueId]] ?: null
+    return userMap[playerAsUserMap[this.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)
 
 
 }
 
-fun Player.asUserOrFail(): User? {
+fun Player.asUserOrFail(): User {
     return this.asUser() ?: throw NullPointerException("Could not found user for Player ${this.name}")
 }

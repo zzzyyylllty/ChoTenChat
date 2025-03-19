@@ -12,3 +12,6 @@ INTERNAL_SEVERE_RELOAD_ERROR: "尝试重载 ... 出现错误."
 INTERNAL_INFO_CREATING_CONFIG: "尝试创建配置文件 ..."
 INTERNAL_INFO_CREATED_CONFIG: "尝试创建配置文件 ... 完成."
 INTERNAL_SEVERE_CREATE_CONFIG_ERROR: "尝试创建配置文件 ... 出现错误."
+
+
+CHAT_SEVERE_NO_SUBSCRIBE_FOUND: "您尚未关注任何联系人. 请关注一个联系人后开始聊天."
