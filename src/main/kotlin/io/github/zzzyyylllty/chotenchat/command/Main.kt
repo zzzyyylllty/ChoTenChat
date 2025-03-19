@@ -2,7 +2,6 @@ package io.github.zzzyyylllty.chotenchat.command
 
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatApiCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatDebugCommand
-import io.github.zzzyyylllty.chotenchat.data.asUser
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.severeL
@@ -24,10 +23,8 @@ import taboolib.platform.util.asLangText
  *          │   └── TODO
  *          ├── debug
  *          │   ├── getUser <player>
- *          │   ├── getUserDataByPlayer <player>
  *          │   ├── getUserMap
- *          │   ├── getUserDataMap
- *          │   └── getUserData <userUUID>
+ *          │   └── getUserData <userLongID>
  *          ├── group [groupID|RANDOM]
  *          │      ├── operation
  *          │      │      ├── create <owner>

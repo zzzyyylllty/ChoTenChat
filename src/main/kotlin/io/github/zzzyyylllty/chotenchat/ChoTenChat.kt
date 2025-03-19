@@ -19,12 +19,15 @@ import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
 import taboolib.module.configuration.Configuration
 import taboolib.module.configuration.Type
+import taboolib.module.database.getHost
 import java.io.File
 import java.util.*
 
 object ChoTenChat : Plugin() {
 
     lateinit var plugin: ChoTenChat
+    val host = config.getHost("database")
+    val dataSource by lazy { host.createDataSource() }
     var dataFolder = nativeDataFolder()
     var userMap = LinkedHashMap<Long, User>() // KID, User...
     var playerAsUserMap = LinkedHashMap<UUID, Long>() // PlayerUUID, KID

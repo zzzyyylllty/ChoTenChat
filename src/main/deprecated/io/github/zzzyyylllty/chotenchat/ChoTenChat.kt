@@ -25,6 +25,8 @@ import java.util.*
 object ChoTenChat : Plugin() {
 
     lateinit var plugin: ChoTenChat
+    val host = config.getHost("database")
+    val dataSource by lazy { host.createDataSource() }
     var dataFolder = nativeDataFolder()
     var userDataMap = LinkedHashMap<Long, UserData>() // KID, UserData...
     var userMap = LinkedHashMap<Long, User>() // KID, UserData...

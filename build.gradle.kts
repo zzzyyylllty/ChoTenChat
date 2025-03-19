@@ -7,6 +7,7 @@ plugins {
     java
     id("io.izzel.taboolib") version "2.0.18"
     id("org.jetbrains.kotlin.jvm") version "1.8.22"
+    kotlin("plugin.serialization") version "1.8.22"
 }
 taboolib {
     env {
@@ -103,6 +104,7 @@ dependencies {
     compileOnly(fileTree("libs"))
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") { isTransitive = false }
     implementation("net.kyori:adventure-text-minimessage:4.19.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
 }
 

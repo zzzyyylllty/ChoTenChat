@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.chotenchat.data
 
-import sun.util.calendar.BaseCalendar
 import java.util.Calendar
 import java.util.UUID
 

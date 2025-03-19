@@ -1,10 +1,9 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
-import io.github.zzzyyylllty.chotenchat.data.asUser
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
-import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userDataMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import org.bukkit.command.CommandSender
@@ -46,11 +45,7 @@ object ChoTenChatDebugCommand {
                     sender.sendInternalMessages(sender.asLangText("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", bukkitPlayer.name, bukkitPlayer.uniqueId))
                     return@execute
                 }
-                val data = user.asUserData()
-                if (data == null) {
-                    sender.sendInternalMessages(sender.asLangText("INTERNAL_USERDATA_NOT_FOUND", user))
-                    return@execute
-                }
+                val data = user.data
                 sender.sendInternalMessages(sender.asLangText("INTERNAL_DEBUG_USER", user, data))
             }
         }
@@ -70,11 +65,19 @@ object ChoTenChatDebugCommand {
     @CommandBody
     val getUserDataMap = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            var message = "<yellow><b>UserDataMap Entries</b> (${userDataMap.size}):<br>"
-            for (entry in userDataMap.entries) {
-                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+            sender.sendInternalMessages("<yellow>Command deprecated.From v0.3 user & userdata is merged.")
+        }
+    }
+
+
+    @CommandBody
+    val getGroup = subCommand {
+        dynamic("id") {
+            execute<CommandSender> { sender, context, argument ->
+                val id = context.get("id").toLong()
+                var message = "<yellow><b>Group:</b> (${loadedGroupMap[id]}):<br>"
+                sender.sendInternalMessages(message)
             }
-            sender.sendInternalMessages(message)
         }
     }
 
@@ -82,7 +85,7 @@ object ChoTenChatDebugCommand {
     @CommandBody
     val getGroupMap = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            var message = "<yellow><b>UserDataMap Entries</b> (${loadedGroupMap.size}):<br>"
+            var message = "<yellow><b>GroupMap Entries</b> (${loadedGroupMap.size}):<br>"
             for (entry in loadedGroupMap.entries) {
                 message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
             }
