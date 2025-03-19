@@ -37,22 +37,23 @@ object ChoTenChatApiCommand {
 
     /** Kether */
     @CommandBody
-    val evalKether = subCommand {
+    val eval = subCommand {
         dynamic("script") {
             execute<CommandSender> { sender, context, argument ->
                 val mm = MiniMessage.miniMessage()
                 // 获取参数的值
                 val content = context["script"]
-                val ret = content.evalKether(sender as Player)
+                sender.sendInternalMessages("<gray>Trying to eval...")
+                val ret = content.evalKether(sender)
                 sender.sendInternalMessages("Kether: $content", false)
-                sender.sendInternalMessages("Return: ${ret.toString()}")
+                sender.sendInternalMessages("<gradient:light_purple:yellow>Return: <reset>${ret.get()}")
             }
         }
     }
 
     /** Kether */
     @CommandBody
-    val evalKetherByPlayer = subCommand {
+    val evalByPlayer = subCommand {
         player("player") {
             dynamic("script") {
                 execute<CommandSender> { sender, context, argument ->
@@ -61,9 +62,10 @@ object ChoTenChatApiCommand {
                     val mm = MiniMessage.miniMessage()
                     // 获取参数的值
                     val content = context["script"]
-                    val ret = content.evalKether(bukkitPlayer as CommandSender)
+                    sender.sendInternalMessages("<gray>Trying to eval...")
+                    val ret = content.evalKether(sender)
                     sender.sendInternalMessages("Kether: $content", false)
-                    sender.sendInternalMessages("Return: ${ret.toString()}")
+                    sender.sendInternalMessages("<gradient:light_purple:yellow>Return: <reset>${ret.get()}")
                 }
             }
         }
