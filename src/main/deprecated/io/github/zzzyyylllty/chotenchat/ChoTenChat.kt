@@ -26,7 +26,8 @@ object ChoTenChat : Plugin() {
 
     lateinit var plugin: ChoTenChat
     var dataFolder = nativeDataFolder()
-    var userMap = LinkedHashMap<Long, User>() // KID, User...
+    var userDataMap = LinkedHashMap<Long, UserData>() // KID, UserData...
+    var userMap = LinkedHashMap<Long, User>() // KID, UserData...
     var playerAsUserMap = LinkedHashMap<UUID, Long>() // PlayerUUID, KID
     var loadedGroupMap = LinkedHashMap<Long, Group>()
     var devMode = true

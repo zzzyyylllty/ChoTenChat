@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.function.contact
 
 import io.github.zzzyyylllty.chotenchat.data.Contact
+import io.github.zzzyyylllty.chotenchat.data.ContactType
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.logger.warningL
@@ -17,19 +18,12 @@ fun Player.asUserOrFail(): User? {
     }
 }
 
-fun String.asContact(): Contact? {
-    return if (this.startsWith("USER")) {
-        userMap[this]
-    } else if (this.startsWith("GROUP")) {
-        this.getGroup()
+fun String.asContact(type: ContactType): Contact? {
+    return if (type == ContactType.GROUP) {
+        loadedGroupMap[this.toLong()]
+    } else if (type == ContactType.USER) {
+        userMap[this.toLong()]
     } else {
         throw IllegalStateException("Contact must be USER or GROUP")
-    }
-}
-fun String.getGroup(): Group? {
-    return if (loadedGroupMap.containsKey(this.split("-")[1])) {
-        loadedGroupMap[this]
-    } else {
-        loadedGroupMap[this] // TODO DATABASE LOAD
     }
 }

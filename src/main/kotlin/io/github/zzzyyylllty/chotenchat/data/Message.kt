@@ -1,32 +1,16 @@
 package io.github.zzzyyylllty.chotenchat.data
 
-import java.util.Date
+import sun.util.calendar.BaseCalendar
+import java.util.Calendar
 import java.util.UUID
 
-/**
- * 消息
- *
- * message含有：uuid，内容，sender，发送时间，提及的人，关注的联系人，发送到的联系人，类型。
- * */
-data class Message(
-    val uuid: UUID,
-    val content: String, // 原聊天内容
+
+public data class Message(
+    val content: String,
     val sender: User,
-    val sendTime: Date?,
-    val mentionUser: List<String>, // KID
-    val subscribedContact: String, // KID
-    val sendGoalContact: String,
-    val type: MessageType
-
-    )
-
-data class PatchedMessage(
-    val format: String, // 格式化聊天内容，只剩下{message}没有替换
-    val message: Message,
-    val receiveMode: ReceiveMode, // 根据接受模式生成消息
+    val subscribeContact: Contact,
+    val receiveContacts: List<Contact>,
+    val uuid: UUID,
+    val mentionedUsers: List<User>,
+    val sendTime: Calendar
 )
-enum class MessageType {
-    TEXT,
-    PICTURE,
-    SYSTEM
-}

@@ -10,6 +10,7 @@ import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.UIDData
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
+import io.github.zzzyyylllty.chotenchat.data.asUser
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
@@ -33,19 +34,20 @@ fun Player.createOrWipeUser() {
         ),
         uuid = this.uniqueId,
     )
-    userMap[user.fullId.getKID()] = user
-    playerAsUserMap[this.uniqueId] = user.fullId.getKID()
+    val id = user.fullId.UIDData.numberUID
+    userMap[id] = user
+    playerAsUserMap[this.uniqueId] = id
     infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
     user.createOrWipeData()
 }
 
 fun User.createOrWipeData() {
-    userDataMap[this.fullId.getKID()] = UserData(
+    userDataMap[this.fullId.UIDData.numberUID] = UserData(
         contactSettings = linkedMapOf(),
         subscribedContact = "GROUP-1000000"
     )
 }
-fun createGroup(id : Long, nickName :String, registryName: String, members: LinkedHashMap<Long, Member>) {
+fun createGroup(id : Long, nickName :String, registryName: String, owner: User) {
     val group = Group(
         registryName = registryName,
         nickName = nickName,
@@ -57,19 +59,24 @@ fun createGroup(id : Long, nickName :String, registryName: String, members: Link
                 fancyAccountValue = 114514
             )
         ),
-        members = members,
+        members = linkedMapOf(),
         temperatureTitleLevel = LinkedHashMap(
             mapOf(0 to "Unknow", 11 to "Candy",21 to "Rain",41 to "Ame", 61 to "P", 81 to "KAngel", 101 to "ChoTen")
         )
     )
-    loadedGroupMap[group.fullId.getKID()] = group
+    group.members = (linkedMapOf(owner.fullId?.UIDData?.numberUID!! to owner.cleanMember(
+        GroupPermission.OWNER,
+        group = group
+    )))
+    loadedGroupMap[group.fullId.UIDData.numberUID] = group
 }
-fun User.cleanMember(permission: GroupPermission): Member {
+fun User.cleanMember(permission: GroupPermission,group: Group): Member {
     return Member(
         nickName = this.getName(),
         temperature = 0,
         specialTitle = null,
         groupPermission = permission,
-        titleSelection = TitleSelection.TEMPERATURE
+        titleSelection = TitleSelection.TEMPERATURE,
+        group = group
     )
 }

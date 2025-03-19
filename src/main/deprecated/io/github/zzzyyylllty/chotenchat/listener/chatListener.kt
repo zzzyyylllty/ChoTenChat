@@ -1,9 +1,11 @@
 package io.github.zzzyyylllty.chotenchat.listener
 
+import io.github.zzzyyylllty.chotenchat.data.ContactType
 import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.Message
 import io.github.zzzyyylllty.chotenchat.data.MessageType
 import io.github.zzzyyylllty.chotenchat.data.asUser
+import io.github.zzzyyylllty.chotenchat.function.contact.asContact
 import io.github.zzzyyylllty.chotenchat.function.contact.cleanMember
 import io.github.zzzyyylllty.chotenchat.function.contact.createGroup
 import io.github.zzzyyylllty.chotenchat.function.contact.createOrWipeUser
@@ -67,9 +69,5 @@ fun onChat(e: AsyncChatEvent) {
 fun onJoin(e: PlayerJoinEvent) {
     // create
     e.player.createOrWipeUser()
-    createGroup(
-        1000000, "ChoTenGroup", "ChoTenGroup",
-        members = (linkedMapOf(e.player.asUser()?.fullId?.UIDData?.numberUID!! to e.player.asUser()?.cleanMember(
-            GroupPermission.OWNER)!!) ),
-    )
+    createGroup(1000000, "ChoTenGroup", "ChoTenGroup")
 }

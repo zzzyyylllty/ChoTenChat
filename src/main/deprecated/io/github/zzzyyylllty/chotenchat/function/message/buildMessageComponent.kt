@@ -49,7 +49,7 @@ fun Message.patch(receiver: User): PatchedMessage {
         comp.replace("{title.level}", contactAsGroup.getTemperatureTitle(member?.getTempLevel() ?: 1))
         comp.replace("{title.special}", member?.specialTitle ?: "无")
         comp.replace("{title.permission}", member?.groupPermission?.name ?: "UNKNOWN")
-        comp.replace("{title.title}", member?.getTitle(contactAsGroup) ?: "UNKNOWN")
+        comp.replace("{title.title}", member?.getTitle() ?: "UNKNOWN")
     }
 
     warning(this)
