@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.data
 
 import com.beust.klaxon.Json
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.*
 import io.github.zzzyyylllty.chotenchat.logger.warningL
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userDataMap
@@ -34,6 +35,15 @@ interface Contact {
     }
     fun getUId(): UIDData {
         return fullId.UIDData
+    }
+    fun getIdColor(): String {
+        return when (fullId.UIDData.fancyAccountType) {
+            NORMAL -> "<#ff0000>"
+            FANCY -> "<gradient:#ffaa99:#ff5500>"
+            GOLD -> "<gradient:#eeee99:#ffcc00>"
+            BLACK_GOLD -> "<gradient:#ffff66:#ffcc00:#888877:#555566>"
+            ADMINISTRATOR -> "/chotenchat api minimessage <gradient:#ff9999:#ff3333:#cc0000>"
+        }
     }
 }
 

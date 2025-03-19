@@ -27,8 +27,8 @@ fun Message.patch(receiver: User): PatchedMessage {
     var comp = config["chat.format.${this.sendGoalContact.asContact()?.fullId?.type?.name}"].toString()
     val configParts = placeHolderConfig.getValues(false).keys
     /*
-    * # {group.name} {group.number} {group.colorednumber} {group.shortname}
-    * # {title.name} {title.coloredlevel} {title.special} {title.permission} {title.level} {title.title}
+    * # {group.name} {group.number} {group.color} {group.shortname}
+    * # {title.name} {title.color} {title.level} {title.special} {title.permission} {title.level} {title.title}
     * # {nick.nick} {nick.playername} {nick.coloredlevel} {nick.level} {nick.permission}
     * # {message.message} {message.time} {reply.sender} {reply.message}
     * */
@@ -39,6 +39,13 @@ fun Message.patch(receiver: User): PatchedMessage {
     val contactAsGroup = this.sendGoalContact.asContact()
     if (contactAsGroup is Group) {
         comp.replace("{group.name}", contactAsGroup.getName())
+        comp.replace("{group.number}", contactAsGroup.fullId.UIDData.numberUID)
+        comp.replace("{group.shortname}", contactAsGroup.getShortName())
+        comp.replace("{group.color}", contactAsGroup.getIdColor())
+        comp.replace("{title.name}", contactAsGroup.getName())
+        comp.replace("{title.color}", contactAsGroup.fullId.UIDData.numberUID)
+        comp.replace("{group.shortname}", contactAsGroup.getShortName())
+        comp.replace("{group.color}", contactAsGroup.getIdColor())
     }
 
     warning(comp)
