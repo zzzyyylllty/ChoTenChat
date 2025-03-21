@@ -13,6 +13,36 @@ chat:
   # 默认值 false
 
 title:
+  TEMPERATURE:
+    content: '{title.temperature}'
+    color:
+      default: <gray>
+      premium: <gradient:#eeeeee:#aaaaaa>
+  SPECIAL:
+    content: '{title.special}'
+    color:
+      default: <#ff66cc>
+      premium: <gradient:#ff66cc:#cc66ff>
+  PERMISSION-ADMINISTRATOR:
+    content: 管理员
+    color:
+      default: <#66ff66>
+      premium: <gradient:#66ffcc:#66ff66>
+  PERMISSION-BUREAUCRAT:
+    content: 行政员
+    color:
+      default: <gray>
+      premium: <gradient:#eeeeee:#aaaaaa>
+  PERMISSION-OWNER:
+    content: 群主
+    color:
+      default: <gray>
+      premium: <gradient:#ffff00:#ff0000>
+  PERMISSION-TRUSTED:
+    content: 群主
+    color:
+      default: <gray>
+      premium: <gradient:#ffff00:#ff0000>
 
 
 redis:

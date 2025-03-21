@@ -82,6 +82,22 @@ public open class SQLDataBase {
             // Expansion fun import kotlinx.serialization.encodeToString required.
         }
     }
+
+    public fun getUserInDatabase(id: Long?): User? {
+        if (id == null) return null
+        val string = userTable.select(dataSource) {
+            rows("value")
+            where("id" eq id)
+            limit(1)
+        }.firstOrNull {
+            getString("value")
+        }
+        if (string == null) return null else {
+            return Json.decodeFromString<User>(string)
+        }
+    }
+
+
     init {
         userTable.createTable(dataSource)
     }

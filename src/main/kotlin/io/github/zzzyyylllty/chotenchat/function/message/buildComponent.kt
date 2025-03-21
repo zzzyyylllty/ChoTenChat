@@ -29,6 +29,11 @@ fun Message.buildGroupCompString() : String {
     }
 
     val member: Member? = contactAsGroup.members.get(sender.longId)
+
+    if (member == null) {
+
+    }
+
     comp = comp.replace("{group.name}", contactAsGroup.getNickOrReg())
     .replace("{group.number}", contactAsGroup.longId.toString())
     .replace("{group.shortname}", contactAsGroup.getShortName())
@@ -37,8 +42,8 @@ fun Message.buildGroupCompString() : String {
     .replace("{title.color}", "<white>") // TODO
     .replace("{title.level}", contactAsGroup.getTemperatureTitle(member?.getTempLevel() ?: 1))
     .replace("{title.special}", member?.specialTitle ?: "无")
-    .replace("{title.permission}", member?.groupPermission?.name ?: "UNKNOWN")
-    .replace("{title.title}", member?.getTitle() ?: "UNKNOWN")
+    .replace("{title.permission}", member?.groupPermission?.name ?: "Unknown")
+    .replace("{title.title}", member?.getTitle(contactAsGroup) ?:"Unknown")
 
     return comp
 

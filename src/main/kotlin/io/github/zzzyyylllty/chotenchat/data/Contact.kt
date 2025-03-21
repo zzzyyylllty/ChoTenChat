@@ -97,7 +97,8 @@ public data class Member(
     val temperature: Long,
     val specialTitle: String,
     var groupPermission: GroupPermission,
-    var titleSelection: TitleSelection
+    var titleSelection: TitleSelection,
+    var titleTheme: String,
 ) {
     fun isTrusted(): Boolean {
         return (groupPermission == GroupPermission.TRUSTED || groupPermission == GroupPermission.ADMINISTRATOR || groupPermission == GroupPermission.BUREAUCRAT || groupPermission == GroupPermission.OWNER)
@@ -114,14 +115,14 @@ public data class Member(
     fun getTempLevel(): Int {
         return floor(temperature/((temperature/1000)+10.0)).toInt()
     }
-    fun getTempvarue(): Long {
+    fun getTempvalue(): Long {
         return temperature
     }
     fun getTitle(g: Group): String {
         return when (titleSelection) {
             TEMPERATURE -> g.getTemperatureTitle(getTempLevel())
             PERMISSION -> groupPermission.name
-            UNIQUE -> specialTitle
+            SPECIAL -> specialTitle
         }.toString()
     }
 }
@@ -137,7 +138,7 @@ enum class GroupPermission {
 enum class TitleSelection {
     TEMPERATURE,
     PERMISSION,
-    UNIQUE
+    SPECIAL
 }
 
 enum class ReceiveMode {

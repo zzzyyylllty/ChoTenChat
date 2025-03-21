@@ -9,10 +9,17 @@ import taboolib.expansion.getDataContainer
 
 fun Player.asUser(): User? {
     return userMap[playerAsUserMap[this.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)
-
-
 }
 
 fun Player.asUserOrFail(): User {
+    return this.asUser() ?: throw NullPointerException("Could not found user for Player ${this.name}")
+}
+
+
+fun Long.asUser(): User? {
+    return userMap[this] ?: SQLDataBase().getUserInDatabase(this)
+}
+
+fun Long.asUserOrFail(): User {
     return this.asUser() ?: throw NullPointerException("Could not found user for Player ${this.name}")
 }
