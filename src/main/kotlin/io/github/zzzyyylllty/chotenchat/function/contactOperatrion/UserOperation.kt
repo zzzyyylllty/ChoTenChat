@@ -33,3 +33,7 @@ fun Player.createOrWipeUser() {
     playerAsUserMap[this.uniqueId] = id
     infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
 }
+
+fun Long.getGroup() {
+
+}

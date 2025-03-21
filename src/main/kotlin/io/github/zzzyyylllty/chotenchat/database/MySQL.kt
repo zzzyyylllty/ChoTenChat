@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.chotenchat.database
 
+import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import kotlinx.serialization.encodeToString
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dataSource
@@ -40,10 +41,29 @@ public open class SQLDataBase {
             type(ColumnTypeSQL.JSON, 128)
         }
     }
-    open public fun saveInDatabase(user: User) {
+    val groupTable = Table("group_table", host) {
+        add { id() }
+        add("id") { // LongID
+            type(ColumnTypeSQL.VARCHAR, 64) {
+                // 创建索引
+                options(ColumnOptionSQL.UNIQUE_KEY)
+            }
+        }
+        add("value") {
+            type(ColumnTypeSQL.JSON, 128)
+        }
+    }
+    public fun saveInDatabase(user: User) {
         val json = Json.encodeToString(user)
         userTable.insert(dataSource, "uuid", "id", "value") {
-            value(user.playerUUID, user.longId, "1")
+            value(user.playerUUID, user.longId, json)
+        }
+    }
+
+    public fun saveInDatabase(group: Group) {
+        val json = Json.encodeToString(group)
+        userTable.insert(dataSource, "id", "value") {
+            value(group.longId, json)
         }
     }
 
