@@ -1,6 +1,9 @@
 #         Powered by TabooLib 6.0         #
 
 chat:
+  default:
+    default-chatcolor: "#cccccc"
+    default-namecolor: "#aaaaaa"
   format:
     GROUP: |
       {format-group} {format-title} {format-nick}
@@ -43,7 +46,6 @@ title:
     color:
       default: <gray>
       premium: <gradient:#ffff00:#ff0000>
-
 
 redis:
   host: localhost

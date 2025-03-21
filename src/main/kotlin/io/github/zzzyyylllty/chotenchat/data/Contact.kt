@@ -7,17 +7,11 @@ import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.FANCY
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
-import io.github.zzzyyylllty.chotenchat.logger.infoL
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.Serializable
-import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
-import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
-import net.kyori.adventure.text.Component
-import org.bukkit.entity.Player
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
 import taboolib.common.platform.function.warning
+import taboolib.module.lang.asLangText
 import java.util.UUID
-import kotlin.collections.set
 import kotlin.math.floor
 
 
@@ -29,6 +23,9 @@ public interface Contact {
 
     fun getNickOrReg(): String {
         return nickName ?: registryName
+    }
+    fun getGroupOrNickOrReg(member: Member?): String {
+        return member?.groupName ?: nickName ?: registryName
     }
     fun getShortName(): String {
         var name = (nickName ?: registryName)
@@ -52,6 +49,7 @@ public data class User(
     override val longId: Long,
     override val idData: IdData,
     val playerUUID: String,
+    val playerName: String,
     val data: UserData,
 ) : Contact {
     @Deprecated("direct use User.data instead. From v0.3 user & userdata is merged.")
@@ -75,7 +73,7 @@ public data class Group(
 ) : Contact {
     fun getTemperatureTitle(tempLevel: Int): String {
         if (temperatureTitleLevel.get(0) == null) {
-            warning("The First Temperature Level Not Set.Returning null.")
+            return console.asLangText("STRING_NONE")
         }
         var lastTitle: String = temperatureTitleLevel[0].toString() // 上一个头衔
         for (level in temperatureTitleLevel) {
@@ -90,10 +88,11 @@ public data class Group(
 
 @Serializable
 public data class Member(
-    val groupName: String,
+    val groupName: String?,
     val longId: Long,
     val group: Long,
     val playerUUID: String,
+    val playerName: String,
     val temperature: Long,
     val specialTitle: String,
     var groupPermission: GroupPermission,
