@@ -25,10 +25,8 @@ import java.util.UUID
 
 @SubscribeEvent(EventPriority.LOWEST)
 fun onChat(e: AsyncChatEvent) {
+    e.player.send(
     /*
-        val sender = e.player.asUser()
-        val mm = MiniMessage.miniMessage()
-        val mentionedUser = e.message() // TODO
         if (sender == null) {
             warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", e.player.name, e.player.uniqueId)
             throw NullPointerException()

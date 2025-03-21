@@ -1,6 +1,11 @@
 package io.github.zzzyyylllty.chotenchat.data
 
 
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.ADMINISTRATOR
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.BLACK_GOLD
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.FANCY
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -24,6 +29,19 @@ public interface Contact {
 
     fun getNickOrReg(): String {
         return nickName ?: registryName
+    }
+    fun getShortName(): String {
+        var name = (nickName ?: registryName)
+        return if (name.length >= 5) name.substring(0, 5) else name
+    }
+    fun getIdColor(): String {
+        return when (idData.fancyAccountType) {
+            NORMAL -> "<#ff0000>"
+            FANCY -> "<gradient:#ffaa99:#ff5500>"
+            GOLD -> "<gradient:#eeee99:#ffcc00>"
+            BLACK_GOLD -> "<gradient:#ffff66:#ffcc00:#888877:#555566>"
+            ADMINISTRATOR -> "<gradient:#ff9999:#ff3333:#cc0000>"
+        }
     }
 }
 
@@ -52,6 +70,7 @@ public data class Group(
     override val nickName: String?,
     override val longId: Long,
     override val idData: IdData,
+    var members: LinkedHashMap<Long, Member>,
     var temperatureTitleLevel: LinkedHashMap<Int, String>
 ) : Contact {
     fun getTemperatureTitle(tempLevel: Int): String {
