@@ -21,7 +21,7 @@ import java.util.Date
 /**
  * 本动作适用且只适用于玩家当前所在的后端服务器。
  * */
-fun Message.buildGroupCompString() : String {
+fun Message.buildCompString() : String {
 
     val mm = MiniMessage.miniMessage()
     val mentionedUser = null // TODO

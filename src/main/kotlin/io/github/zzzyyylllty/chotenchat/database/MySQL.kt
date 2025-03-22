@@ -41,6 +41,7 @@ public open class SQLDataBase {
             type(ColumnTypeSQL.JSON, 128)
         }
     }
+
     val groupTable = Table("group_table", host) {
         add { id() }
         add("id") { // LongID
@@ -53,6 +54,7 @@ public open class SQLDataBase {
             type(ColumnTypeSQL.JSON, 128)
         }
     }
+
     public fun saveInDatabase(user: User) {
         val json = Json.encodeToString(user)
         userTable.insert(dataSource, "uuid", "id", "value") {
