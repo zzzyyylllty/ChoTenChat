@@ -20,10 +20,12 @@ import taboolib.platform.util.asLangText
  *          ├── about
  *          ├── api
  *          │   ├── minimessage <content>
- *          │   └── TODO
+ *          │   ├── eval <script>
+ *          │   ├── evalByPlayer <player> <script>
  *          ├── debug
  *          │   ├── getUser <player>
  *          │   ├── getUserMap
+ *          │   ├── diagnose
  *          │   └── getUserData <userLongID>
  *          ├── group [groupID|RANDOM]
  *          │      ├── operation
@@ -34,6 +36,9 @@ import taboolib.platform.util.asLangText
  *          │              ├── permission <permissionGroup>
  *          │              ├── kick
  *          │              ├── mute <time>
+ *          │              ├── title
+ *          │              │   ├── special <Title>
+ *          │              │   └── special (clear)
  *          │              └── blacklist
  *          ├── message <group>
  *          │      ├── send <message>
@@ -46,12 +51,12 @@ import taboolib.platform.util.asLangText
  *          │      │   └── remove <UUID>
  *          │      ├── recall <UUID>
  *          │      └── copy <UUID>
- *          ├── announcement
- *          │      ├── send <group> <settings> <announcement>
- *          │      └── delete <group> <announcementUUID>
- *          ├── profilecard <user>
+ *          ├── announcement <group>
+ *          │      ├── send <settings> <announcement>
+ *          │      └── delete <announcementUUID>
+ *          ├── profile <user|(self)>
  *          │      ├── open
- *          │      └──
+ *          │      └── modify
  *
  * */
 

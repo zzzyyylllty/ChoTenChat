@@ -20,12 +20,15 @@ ChoTenChat 是一个在 Minecraft Bukkit 平台下运行的聊天插件。
 - [ ] 群聊活跃头衔
 - [ ] 群聊特殊头衔
 - [ ] 创建群聊
+- [ ] 群聊升级
+- [x] API 命令
+- [x] Debug 命令
 - [ ] 加入群聊
 - [ ] 添加好友
-- [ ] 群聊权限管理
+- [ ] 权限管理
 - [ ] ChatImage 消息
 - [ ] AllMusic/ZMusic 音乐卡片分享
-- [ ] MySQL
+- [ ] MySQL 数据存储
 - [ ] 举报功能
 - [x] Kether:执行
 - [x] Kether:发送Mini Message

@@ -139,11 +139,3 @@ enum class TitleSelection {
     PERMISSION,
     SPECIAL
 }
-
-enum class ReceiveMode {
-    SUBSCRIBE,
-    ALWAYS,
-    NOTE,
-    HIDDEN,
-    SELF,
-}

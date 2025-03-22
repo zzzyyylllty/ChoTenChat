@@ -5,6 +5,7 @@ import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.Message
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.config
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dateTimeFormatter
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.placeHolderConfig
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.luckperms.api.LuckPerms
@@ -12,6 +13,10 @@ import net.luckperms.api.LuckPermsProvider
 import net.luckperms.api.model.user.User
 import org.bukkit.entity.Player
 import taboolib.module.lang.asLangText
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
 
 /**
  * 本动作适用且只适用于玩家当前所在的后端服务器。
@@ -46,8 +51,10 @@ fun Message.buildGroupCompString() : String {
     val nameColor: String? = user?.getCachedData()?.getMetaData()?.getMetaValue("namecolor") ?: config["chat.default.default-namecolor"].toString()
     val primaryGroup: String? = user?.primaryGroup
     val chatColor: String? = user?.getCachedData()?.getMetaData()?.getMetaValue("chatcolor") ?: config["chat.default.default-chatcolor"].toString()
-    
-    val replace = mapOf<String,String>("{group.name}" to contactAsGroup.getNickOrReg(),
+
+    val replySender = this.reply?.sender
+
+    val replaces = mapOf<String,String>("{group.name}" to contactAsGroup.getNickOrReg(),
         "{group.number}" to contactAsGroup.longId.toString(),
         "{group.shortname}" to contactAsGroup.getShortName(),
         "{group.color}" to contactAsGroup.getIdColor(),
@@ -62,8 +69,14 @@ fun Message.buildGroupCompString() : String {
         "{nick.playeruuid}" to sender.playerUUID,
         "{nick.namecolor}" to "<$nameColor>",
         "{nick.permission}" to primaryGroup.toString(),
-        "{message.message}"
-    )
+        "{message.time}" to this.sendTime.format(dateTimeFormatter),
+        "{reply.sender}" to (replySender?.getGroupOrNickOrReg(this.subscribeContact.members[replySender.longId]) ?: console.asLangText("STRING_UNKNOWN")),
+        "{reply.message}" to (this.reply?.content ?: console.asLangText("STRING_UNKNOWN")))
+
+    // 无需正则表达式优化，因为是反向优化
+    for (replace in replaces) {
+        comp = comp.replace(replace.key, replace.value)
+    }
 
     return comp
 

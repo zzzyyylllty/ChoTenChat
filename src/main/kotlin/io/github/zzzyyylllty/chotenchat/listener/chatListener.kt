@@ -24,9 +24,7 @@ import java.util.UUID
 
 
 @SubscribeEvent(EventPriority.LOWEST)
-fun onChat(e: AsyncChatEvent) {
-    e.player.send(
-    /*
+fun onChat(e: AsyncChatEvent) {/*
         if (sender == null) {
             warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", e.player.name, e.player.uniqueId)
             throw NullPointerException()
@@ -44,7 +42,8 @@ fun onChat(e: AsyncChatEvent) {
             receiveContacts = listOf(subscribe),
             uuid = e.player.uniqueId,
             mentionedUsers = emptyList(), // TODO
-            sendTime = Calendar.getInstance()
+            sendTime = Calendar.getInstance(),
+            reply = null
         )
         e.renderer { source: Player?, sourceDisplayName: Component?, message: Component?, viewer: Audience? ->
             if (viewer !is ConsoleCommandSender) {

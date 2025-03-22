@@ -21,5 +21,5 @@ fun Long.asUser(): User? {
 }
 
 fun Long.asUserOrFail(): User {
-    return this.asUser() ?: throw NullPointerException("Could not found user for Player ${this.name}")
+    return this.asUser() ?: throw NullPointerException("Could not found user for ID ${this}")
 }

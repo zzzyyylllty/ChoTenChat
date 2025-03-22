@@ -21,6 +21,7 @@ import taboolib.module.configuration.Configuration
 import taboolib.module.configuration.Type
 import taboolib.module.database.getHost
 import java.io.File
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 object ChoTenChat : Plugin() {
@@ -34,6 +35,7 @@ object ChoTenChat : Plugin() {
     var loadedGroupMap = LinkedHashMap<Long, Group>()
     var devMode = true
     var console = console()
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
     @Config("config.yml")
     lateinit var config: Configuration
@@ -44,6 +46,7 @@ object ChoTenChat : Plugin() {
     @Awake(LifeCycle.ENABLE)
     override fun onEnable() {
         warning("ChoTenChat now starting.")
+
         setupInstance()
     }
 

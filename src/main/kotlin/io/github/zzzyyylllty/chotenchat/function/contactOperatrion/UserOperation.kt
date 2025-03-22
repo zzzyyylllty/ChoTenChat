@@ -23,6 +23,7 @@ fun Player.createOrWipeUser() {
             fancyAccountValue = 0
         ),
         playerUUID = player.uniqueId.toString(),
+        playerName = player.name,
         data = UserData(
             subscribeContact = null,
             contactSettings = LinkedHashMap()
