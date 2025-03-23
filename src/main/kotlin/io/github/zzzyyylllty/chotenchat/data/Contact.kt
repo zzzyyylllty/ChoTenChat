@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.data
 
 
+import com.beust.klaxon.Klaxon
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.ADMINISTRATOR
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.BLACK_GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.FANCY
@@ -38,6 +39,9 @@ public interface Contact {
             BLACK_GOLD -> "<gradient:#ffff66:#ffcc00:#888877:#555566>"
             ADMINISTRATOR -> "<gradient:#ff9999:#ff3333:#cc0000>"
         }
+    }
+    fun getJson(): String {
+        return Klaxon().toJsonString(this)
     }
 }
 

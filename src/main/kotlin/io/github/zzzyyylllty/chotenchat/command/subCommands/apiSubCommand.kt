@@ -43,10 +43,9 @@ object ChoTenChatApiCommand {
                 val mm = MiniMessage.miniMessage()
                 // 获取参数的值
                 val content = context["script"]
-                sender.sendInternalMessages("<gray>Trying to eval...")
                 val ret = content.evalKether(sender)
-                sender.sendInternalMessages("Kether: $content", false)
-                sender.sendInternalMessages("<gradient:light_purple:yellow>Return: <reset>${ret.get()}")
+                sender.sendInternalMessages("§5Kether: §7$content", false)
+                sender.sendInternalMessages("§5Return: §7${ret.get()}", false)
             }
         }
     }
@@ -62,10 +61,38 @@ object ChoTenChatApiCommand {
                     val mm = MiniMessage.miniMessage()
                     // 获取参数的值
                     val content = context["script"]
-                    sender.sendInternalMessages("<gray>Trying to eval...")
                     val ret = content.evalKether(sender)
-                    sender.sendInternalMessages("Kether: $content", false)
-                    sender.sendInternalMessages("<gradient:light_purple:yellow>Return: <reset>${ret.get()}")
+                    sender.sendInternalMessages("§5Kether: §7$content", false)
+                    sender.sendInternalMessages("§5Return: §7${ret.get()}", false)
+                }
+            }
+        }
+    }
+    /** Kether */
+    @CommandBody
+    val evalSilent = subCommand {
+        dynamic("script") {
+            execute<CommandSender> { sender, context, argument ->
+                val mm = MiniMessage.miniMessage()
+                // 获取参数的值
+                val content = context["script"]
+                content.evalKether(sender)
+            }
+        }
+    }
+
+    /** Kether */
+    @CommandBody
+    val evalByPlayerSilent = subCommand {
+        player("player") {
+            dynamic("script") {
+                execute<CommandSender> { sender, context, argument ->
+                    val tabooPlayer = context.player("player")
+                    val bukkitPlayer = tabooPlayer.castSafely<Player>()
+                    val mm = MiniMessage.miniMessage()
+                    // 获取参数的值
+                    val content = context["script"]
+                    content.evalKether(sender)
                 }
             }
         }

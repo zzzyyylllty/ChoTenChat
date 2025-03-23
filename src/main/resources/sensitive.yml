@@ -1,0 +1,5 @@
+test_sensitive_group:
+  mode: PLACEHOLDER
+  # PLACEHOLDER - 替换为特定字符
+  # DENY - 取消发送
+  placeholder: "***"

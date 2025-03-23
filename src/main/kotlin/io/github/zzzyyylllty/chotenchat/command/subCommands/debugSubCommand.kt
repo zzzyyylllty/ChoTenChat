@@ -75,7 +75,7 @@ object ChoTenChatDebugCommand {
         dynamic("id") {
             execute<CommandSender> { sender, context, argument ->
                 val id = context.get("id").toLong()
-                var message = "<yellow><b>Group:</b> (${loadedGroupMap[id]}):<br>"
+                var message = "<yellow><b>Group:</b> <br>${loadedGroupMap[id]}"
                 sender.sendInternalMessages(message)
             }
         }

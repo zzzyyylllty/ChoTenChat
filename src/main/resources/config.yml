@@ -11,9 +11,7 @@ chat:
     USER: |
       {format-nick}
       {format-reply}{format-message}
-  tolerance-kether: false
-  # Kether 宽容解析
-  # 默认值 false
+  
 
 title:
   TEMPERATURE:
@@ -66,3 +64,7 @@ lang: zh_CN
 
 debug:
   developer-mode: false
+
+  tolerance-kether: true
+  # Kether 宽容解析
+  # 默认值 true 不推荐关闭
