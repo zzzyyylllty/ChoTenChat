@@ -1,8 +1,9 @@
 package io.github.zzzyyylllty.chotenchat.database
 
+import com.beust.klaxon.Json
+import com.beust.klaxon.Klaxon
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
-import kotlinx.serialization.encodeToString
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dataSource
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.host
 import org.bukkit.entity.Player
@@ -12,8 +13,6 @@ import taboolib.module.database.Database
 import taboolib.module.database.Table
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.submitAsync
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import taboolib.common.util.unsafeLazy
 import taboolib.common5.Coerce
 import taboolib.module.database.getHost
@@ -56,14 +55,14 @@ public open class SQLDataBase {
     }
 
     public fun saveInDatabase(user: User) {
-        val json = Json.encodeToString(user)
+        val json = Klaxon().toJsonString(user)
         userTable.insert(dataSource, "uuid", "id", "value") {
             value(user.playerUUID, user.longId, json)
         }
     }
 
     public fun saveInDatabase(group: Group) {
-        val json = Json.encodeToString(group)
+        val json = Klaxon().toJsonString(group)
         userTable.insert(dataSource, "id", "value") {
             value(group.longId, json)
         }
@@ -80,7 +79,7 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            return Json.decodeFromString<User>(string)
+            return Klaxon().parse<User>(string)
             // Expansion fun import kotlinx.serialization.encodeToString required.
         }
     }
@@ -95,7 +94,7 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            return Json.decodeFromString<User>(string)
+            return Klaxon().parse<User>(string)
         }
     }
 

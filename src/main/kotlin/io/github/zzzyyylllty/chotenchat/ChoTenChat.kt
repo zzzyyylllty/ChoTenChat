@@ -26,8 +26,8 @@ import java.util.*
 
 object ChoTenChat : Plugin() {
 
-    lateinit var plugin: ChoTenChat
-    val host = config.getHost("database")
+    val plugin by lazy { this }
+    val host by lazy { config.getHost("database") }
     val dataSource by lazy { host.createDataSource() }
     var dataFolder = nativeDataFolder()
     var userMap = LinkedHashMap<Long, User>() // KID, User...
@@ -37,17 +37,13 @@ object ChoTenChat : Plugin() {
     var console = console()
     val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
-    @Config("config.yml")
-    lateinit var config: Configuration
+    val config by lazy { Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML) }
 
-    @Config("placeholders.yml")
-    lateinit var placeHolderConfig: Configuration
+    val placeHolderConfig by lazy { Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML) }
 
     @Awake(LifeCycle.ENABLE)
     override fun onEnable() {
         warning("ChoTenChat now starting.")
-
-        setupInstance()
     }
 
     override fun onDisable() {
@@ -55,7 +51,13 @@ object ChoTenChat : Plugin() {
     }
 
     fun reloadCustomConfig() {
-        createCustomConfig()
+        infoL("INTERNAL_INFO_CREATING_CONFIG")
+        try {
+            infoL("INTERNAL_INFO_CREATED_CONFIG")
+        } catch (e: Exception) {
+            severeL("INTERNAL_SEVERE_CREATE_CONFIG_ERROR")
+            e.printStackTrace()
+        }
         plugin.config.reload()
         plugin.placeHolderConfig.reload()
     }
@@ -64,15 +66,12 @@ object ChoTenChat : Plugin() {
     fun createCustomConfig() {
         infoL("INTERNAL_INFO_CREATING_CONFIG")
         try {
-            placeHolderConfig = Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML)
-            config = Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML)
+            Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML)
+            Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML)
             infoL("INTERNAL_INFO_CREATED_CONFIG")
         } catch (e: Exception) {
             severeL("INTERNAL_SEVERE_CREATE_CONFIG_ERROR")
             e.printStackTrace()
         }
-    }
-    fun setupInstance() {
-        plugin = this
     }
 }

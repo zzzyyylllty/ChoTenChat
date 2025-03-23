@@ -11,7 +11,6 @@ package io.github.zzzyyylllty.chotenchat.data
  *
  */
 
-@kotlinx.serialization.Serializable
 data class IdData(
     val fancyAccountType: FancyAccountType,
     val fancyAccountValue: Int,
@@ -25,7 +24,6 @@ data class IdData(
 [ADMINISTRATOR] 管理员号
  */
 
-@kotlinx.serialization.Serializable
 enum class FancyAccountType {
     NORMAL,
     FANCY,
@@ -34,18 +32,15 @@ enum class FancyAccountType {
     ADMINISTRATOR,
 }
 
-@kotlinx.serialization.Serializable
 data class UserData(
     val subscribeContact: Contact?,
     val contactSettings: LinkedHashMap<Contact, ContactSetting>,
 )
 
-@kotlinx.serialization.Serializable
 data class ContactSetting(
     val receiveMode: ReceiveMode = ReceiveMode.ALWAYS,
 )
 
-@kotlinx.serialization.Serializable
 enum class ReceiveMode {
     SUBSCRIBE,
     ALWAYS,

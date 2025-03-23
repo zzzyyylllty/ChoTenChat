@@ -15,6 +15,10 @@ ChoTenChat 是一个在 Minecraft Bukkit 平台下运行的聊天插件。
 <div style="text-align: center;">游戏 <a href = "https://needy-streamer-overload.fandom.com/wiki/">主播女孩重度依赖</a> 中的角色 超天酱(ChoTen Chan)。</div>
 </div>
 
+## 服务
+
+ChoTenChat 是免费的，但我们不提供开发版本的构建文件。
+
 ## TODO
 - [ ] 发送消息
 - [ ] 群聊活跃头衔

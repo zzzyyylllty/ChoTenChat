@@ -63,6 +63,7 @@ fun Message.buildCompString() : String {
         "{title.level}" to contactAsGroup.getTemperatureTitle(member?.getTempLevel() ?: 1),
         "{title.special}" to (member?.specialTitle ?: console.asLangText("STRING_NONE")),
         "{title.permission}" to (member?.groupPermission?.name ?: console.asLangText("STRING_UNKNOWN")),
+        "{title.color}" to "<yellow>", // TODO
         "{title.title}" to (member?.getTitle(contactAsGroup) ?: console.asLangText("STRING_UNKNOWN")),
         "{nick.nick}" to sender.getGroupOrNickOrReg(member),
         "{nick.playername}" to sender.playerName,

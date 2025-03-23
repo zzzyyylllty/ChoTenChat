@@ -2,19 +2,20 @@ import io.izzel.taboolib.gradle.*
 import io.izzel.taboolib.gradle.Basic
 import io.izzel.taboolib.gradle.DatabaseAlkaidRedis
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotlinx.*
 
 plugins {
     java
     id("io.izzel.taboolib") version "2.0.18"
     id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    kotlin("plugin.serialization") version "1.8.22"
+    //id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
 }
 taboolib {
     env {
         // 调试模式
         debug = false
         // 是否在开发模式下强制下载依赖
-        forceDownloadInDev = false
+        forceDownloadInDev = true
         // 中央仓库地址
         repoCentral = "https://maven.aliyun.com/repository/central"
         // 依赖下载目录
@@ -94,9 +95,8 @@ dependencies {
     compileOnly("net.luckperms:api:5.4")
     implementation("me.clip:placeholderapi:2.11.5")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
-    implementation("net.kyori:adventure-api:4.19.0")
     implementation("com.beust:klaxon:5.5")
-
+    implementation("net.kyori:adventure-api:4.19.0")
     compileOnly("ink.ptms.adyeshach:api:2.0.24")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
     compileOnly("ink.ptms.core:v12004:12004:universal")
@@ -104,7 +104,6 @@ dependencies {
     compileOnly(fileTree("libs"))
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") { isTransitive = false }
     implementation("net.kyori:adventure-text-minimessage:4.19.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     testImplementation(kotlin("test"))
 }
 

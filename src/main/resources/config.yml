@@ -34,17 +34,12 @@ title:
   PERMISSION-BUREAUCRAT:
     content: 行政员
     color:
-      default: <gray>
-      premium: <gradient:#eeeeee:#aaaaaa>
+      default: <#ffcc88>
+      premium: <gradient:#ffcc00:#cc6600>
   PERMISSION-OWNER:
     content: 群主
     color:
-      default: <gray>
-      premium: <gradient:#ffff00:#ff0000>
-  PERMISSION-TRUSTED:
-    content: 群主
-    color:
-      default: <gray>
+      default: <#ffff00>
       premium: <gradient:#ffff00:#ff0000>
 
 redis:

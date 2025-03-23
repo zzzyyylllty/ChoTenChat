@@ -9,8 +9,8 @@ import taboolib.common.platform.function.severe
 
 @Awake(LifeCycle.ENABLE)
 fun initializeData() {
-    ChoTenChat.setupInstance()
     reloadCustomConfig()
+
     info("ChoTenChat now running.")
 
 }
