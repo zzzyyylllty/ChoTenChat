@@ -14,7 +14,7 @@ ChoTenChat 是一个在 Minecraft Bukkit 平台下运行的聊天插件。
 目前我们仅支持 Bukkit，但在本体插件完工后 Bungee 和 Velocity 的支持在计划。
 
 这个项目的名字来源于：
-<div style="text-align: center;">游戏 <a href = "https://needy-streamer-overload.fandom.com/wiki/">主播女孩重度依赖</a> 中的角色 超天酱(ChoTen Chan)。</div>
+<div style="text-align: center;">游戏 <a href = "https://needystreameroverload.wiki.gg/wiki/">主播女孩重度依赖</a> 中的角色 超天酱(ChoTen Chan)。</div>
 </div>
 
 ## 服务
@@ -44,7 +44,7 @@ ChoTenChat 是免费的，但我们不提供开发版本的构建文件。
 ## 友情链接
 - [TabooLib 非官方文档](https://taboolib.feishu.cn/)
 - [Adyeshach](https://github.com/TabooLib/adyeshach)
-- [精神支柱](https://needy-streamer-overload.fandom.com/wiki/Ame-Chan)
+- [精神支柱](https://needystreameroverload.wiki.gg/wiki/Ame-chan)
 
 ## 构建
 
