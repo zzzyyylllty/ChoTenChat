@@ -7,6 +7,8 @@
 
 ChoTenChat 是一个在 Minecraft Bukkit 平台下运行的聊天插件。
 
+强大的 Minecraft 聊天插件，可在 Taboolib 的架构下的多服务器中创建群和好友。
+
 基于 <a href = "https://tabooproject.org">Taboolib 6.x</a> 和 Kotlin.
 
 目前我们仅支持 Bukkit，但在本体插件完工后 Bungee 和 Velocity 的支持在计划。
@@ -34,13 +36,15 @@ ChoTenChat 是免费的，但我们不提供开发版本的构建文件。
 - [ ] 权限管理
 - [ ] ChatImage 消息
 - [ ] AllMusic/ZMusic 音乐卡片分享
-- [ ] MySQL 数据存储
+- [x] MySQL 数据存储
 - [ ] 举报功能
 - [x] Kether:执行
 - [x] Kether:发送Mini Message
 
 ## 友情链接
-- (暂无)
+- [TabooLib 非官方文档](https://taboolib.feishu.cn/)
+- [Adyeshach](https://github.com/TabooLib/adyeshach)
+- [精神支柱](https://needy-streamer-overload.fandom.com/wiki/Ame_Chan)
 
 ## 构建
 
