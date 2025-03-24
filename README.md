@@ -44,7 +44,7 @@ ChoTenChat 是免费的，但我们不提供开发版本的构建文件。
 ## 友情链接
 - [TabooLib 非官方文档](https://taboolib.feishu.cn/)
 - [Adyeshach](https://github.com/TabooLib/adyeshach)
-- [精神支柱](https://needy-streamer-overload.fandom.com/wiki/Ame_Chan)
+- [精神支柱](https://needy-streamer-overload.fandom.com/wiki/Ame-Chan)
 
 ## 构建
 
