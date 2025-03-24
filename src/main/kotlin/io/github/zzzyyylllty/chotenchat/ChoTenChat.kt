@@ -34,14 +34,13 @@ object ChoTenChat : Plugin() {
     var playerAsUserMap = LinkedHashMap<UUID, Long>() // PlayerUUID, KID
     var loadedGroupMap = LinkedHashMap<Long, Group>()
     var devMode = true
-    var console = console()
+    val console by lazy { console() }
     val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
     val config by lazy { Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML) }
 
     val placeHolderConfig by lazy { Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML) }
 
-    @Awake(LifeCycle.ENABLE)
     override fun onEnable() {
         warning("ChoTenChat now starting.")
     }
