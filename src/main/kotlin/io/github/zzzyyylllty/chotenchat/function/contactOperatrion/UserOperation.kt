@@ -1,7 +1,10 @@
 package io.github.zzzyyylllty.chotenchat.function.contactOperatrion
 
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
+import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.IdData
+import io.github.zzzyyylllty.chotenchat.data.Member
+import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
 import io.github.zzzyyylllty.chotenchat.logger.infoL
@@ -35,6 +38,17 @@ fun Player.createOrWipeUser() {
     infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
 }
 
-fun Long.getGroup() {
-
+fun User.asMember(g: Long, permission: GroupPermission) : Member {
+    return Member(
+        groupName = this.getNickOrReg(),
+        longId = longId,
+        group = g,
+        playerUUID = playerUUID,
+        playerName = playerName,
+        temperature = 0,
+        specialTitle = null,
+        groupPermission = permission,
+        titleSelection = TitleSelection.PERMISSION,
+        titleTheme = "default"
+    )
 }

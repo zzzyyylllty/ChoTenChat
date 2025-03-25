@@ -6,6 +6,9 @@ import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dataSource
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.host
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import org.bukkit.entity.Player
 import taboolib.module.database.ColumnOptionSQL
 import taboolib.module.database.ColumnTypeSQL
@@ -94,7 +97,26 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            return Klaxon().parse<User>(string)
+            val parsed = Klaxon().parse<User>(string)
+            val uuid = UUID.fromString(parsed?.playerUUID)
+            if (userMap[id] == null && parsed != null) userMap[id] = parsed
+            if (parsed != null && playerAsUserMap[uuid] == null) playerAsUserMap[uuid] = id
+            return parsed
+        }
+    }
+    public fun getGroupInDatabase(id: Long?): Group? {
+        if (id == null) return null
+        val string = groupTable.select(dataSource) {
+            rows("value")
+            where("id" eq id)
+            limit(1)
+        }.firstOrNull {
+            getString("value")
+        }
+        if (string == null) return null else {
+            val parsed = Klaxon().parse<Group>(string)
+            if (loadedGroupMap[id] == null && parsed != null) loadedGroupMap[id] = parsed
+            return Klaxon().parse<Group>(string)
         }
     }
 

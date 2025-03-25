@@ -9,7 +9,6 @@ import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
-import taboolib.common.platform.function.warning
 import taboolib.module.lang.asLangText
 import java.util.UUID
 import kotlin.math.floor
@@ -94,7 +93,7 @@ public data class Member(
     val playerUUID: String,
     val playerName: String,
     val temperature: Long,
-    val specialTitle: String,
+    val specialTitle: String?,
     var groupPermission: GroupPermission,
     var titleSelection: TitleSelection,
     var titleTheme: String,
