@@ -35,5 +35,5 @@ fun Long.asGroup(): Group? {
 }
 
 fun Long.asUserOrFail(): Group {
-    return this.asGroup() ?: throw NullPointerException("Could not found user for Group ${this}")
+    return this.asGroup() ?: throw NullPointerException("Could not found user for Group $this")
 }

@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.chotenchat.command
 
+import ink.ptms.adyeshach.core.entity.type.minecraftVersion
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatApiCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatDebugCommand
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
@@ -11,8 +12,12 @@ import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.PermissionDefault
+import taboolib.common.platform.command.mainCommand
 import taboolib.common.platform.command.player
 import taboolib.common.platform.command.subCommand
+import taboolib.common.platform.function.pluginVersion
+import taboolib.common.platform.function.runningPlatform
+import taboolib.expansion.createHelper
 import taboolib.platform.util.asLangText
 
 /**
@@ -70,6 +75,26 @@ import taboolib.platform.util.asLangText
     newParser = false,
 )
 object ChoTenChatMainCommand {
+
+
+    @CommandBody
+    val about = subCommand {
+        execute<CommandSender> { sender, context, argument -> //
+            sender.sendInternalMessages("<gradient:#aaccff:#cc66ff:#ff66aa>ChoTenChat / DylsemChat</gradient> <#eeffaa>$pluginVersion")
+            sender.sendInternalMessages("<gradient:#6600ff:#aa00aa>Running on Platform:</gradient> <light_purple>${runningPlatform.name} - $minecraftVersion")
+            sender.sendInternalMessages("<#660099>Plugin by AkaCandyKAngel.")
+            sender.sendInternalMessages("<#660099>Use <blue>/chotenchat help</blue> for help.")
+        }
+    }
+    @CommandBody
+    val main = mainCommand {
+        createHelper()
+    }
+
+    @CommandBody
+    val help = subCommand {
+        createHelper()
+    }
 
     @CommandBody
     val api = ChoTenChatApiCommand
