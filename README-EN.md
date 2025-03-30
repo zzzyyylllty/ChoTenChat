@@ -50,12 +50,7 @@ ChoTenChat is free, but we do not provide build files for the development versio
 * Real money related
 * (a largest social media app in China) message forwarding with MC
 
-> _I don't support forwarding on the largest domestic software just because I am disgusted and like to BLINDLY block my account 5 TIMES IN A MONTH.
-After the account is banned, you still need to hold your ID card, scan your face, fill in your critical identity information, sign the security certificate, and then manually review it, which may not be resolved,
-If a certain company likes to collect your () privacy information so much, then I don't need it.
-If you recharge SVIP10 and BIG-VIP 7, Go buy a 5000 yuan (About 688.5 Dollars) () and feed the () are better than this,
-After calling customer service and confirming that the violation is true, I will not be unbanned. If I tried to () for unban, I will be required to submit my household registration book and ID photo before being unbanned,
-() software. The () thing is still there saying that my violation is true. I violated you (), () I really want to () your ()._
+> _The reason for not supporting the forwarding of a certain social media application is the platform's disgusting collection of key privacy information, chaotic and irregular account blocking system, and failure to fix vulnerabilities that allow anyone to easily block other people's accounts. The collected key information includes photos scanned with ID cards, filling in private identity information, and even signing insurance certificates to be unblocked depending on the situation, as well as the extremely poor service attitude of manual personnel. Don't insist, we will not make an exception again._
 
 Discord message forwarding is planned to support.
 
