@@ -3,6 +3,7 @@ import io.izzel.taboolib.gradle.Basic
 import io.izzel.taboolib.gradle.DatabaseAlkaidRedis
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kotlinx.*
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     java
@@ -50,12 +51,6 @@ taboolib {
         taboolib = "6.2.3"
         // Kotlinx Coroutines 版本（设为 null 表示禁用）
         coroutines = "1.7.3"
-        // 跳过 Kotlin 加载
-        skipKotlin = false
-        // 跳过 Kotlin 重定向
-        skipKotlinRelocate = false
-        // 跳过 TabooLib 重定向
-        skipTabooLibRelocate = false
     }
 }
 
@@ -96,7 +91,7 @@ dependencies {
     implementation("me.clip:placeholderapi:2.11.5")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
     implementation("net.kyori:adventure-text-serializer-legacy:4.19.0")
-    implementation("com.beust:klaxon:5.5")
+    compileOnly("com.beust:klaxon:5.5")
     implementation("net.kyori:adventure-api:4.19.0")
     compileOnly("ink.ptms.adyeshach:api:2.0.24")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
