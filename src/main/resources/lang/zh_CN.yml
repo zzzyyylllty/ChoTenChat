@@ -12,9 +12,12 @@ INTERNAL_SEVERE_RELOAD_ERROR: "尝试重载 ... 出现错误."
 INTERNAL_INFO_CREATING_CONFIG: "尝试创建配置文件 ..."
 INTERNAL_INFO_CREATED_CONFIG: "尝试创建配置文件 ... 完成."
 INTERNAL_SEVERE_CREATE_CONFIG_ERROR: "尝试创建配置文件 ... 出现错误."
-
+INTERNAL_DEBUG_USER: "用户信息: {0}"
 
 CHAT_SEVERE_NO_SUBSCRIBE_FOUND: "您尚未关注任何联系人. 请关注一个联系人后开始聊天."
+
+USER_NOT_FOUND: "未找到用户 {0}"
+PLAYER_NOT_FOUND: "未找到玩家 {0}"
 
 STRING_NONE: "无"
 STRING_UNKNOWN: "未知"
@@ -34,3 +37,6 @@ DIAGNOSE_TEXT_NO_LUCKPERMS: "未检测到 LuckPerms。"
 DIAGNOSE_TEXT_NO_PLACEHOLDERAPI: "未检测到 PlaceHolderAPI。"
 DIAGNOSE_TEXT_NO_VULPECULA: "未检测到 Vulpecula，如果您未计划安装，可忽略本消息。"
 DIAGNOSE_TEXT_NO_CHEMDAH: "Chemdah 挂钩已启用，但未检测到 Chemdah。"
+
+GROUP_CREATE_FAIL_EXISTED: "群聊 {0} 已经存在,无法创建。请先删除它,或使用 createOrWipe."
+GROUP_CREATED: "群聊 {0} 已创建/覆盖。注册名 {1} 创建者 {2}."

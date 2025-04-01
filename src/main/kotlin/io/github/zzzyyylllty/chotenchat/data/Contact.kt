@@ -8,6 +8,7 @@ import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.FANCY
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
+import kotlinx.serialization.Serializable
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
 import taboolib.module.lang.asLangText
 import java.util.UUID
@@ -63,6 +64,7 @@ public data class User(
     }
 }
 
+@Serializable
 public data class Group(
     override val registryName: String,
     override val nickName: String?,

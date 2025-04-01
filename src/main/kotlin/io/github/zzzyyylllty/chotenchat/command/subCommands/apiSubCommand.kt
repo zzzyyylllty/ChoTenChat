@@ -1,15 +1,31 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
+import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
+import io.github.zzzyyylllty.chotenchat.data.Group
+import io.github.zzzyyylllty.chotenchat.data.IdData
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.createGroup
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.generateRandomGroupId
 import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
 import io.github.zzzyyylllty.chotenchat.logger.infoS
+import io.github.zzzyyylllty.chotenchat.logger.severeS
+import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
+import taboolib.common.platform.command.CommandContext
 import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.PermissionDefault
 import taboolib.common.platform.command.player
 import taboolib.common.platform.command.subCommand
+import taboolib.common.platform.function.submitAsync
+import taboolib.platform.util.asLangText
+import kotlinx.serialization.decodeFromString
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
+import kotlin.text.toLong
+
 @CommandHeader(
     name = "chotenchatapi",
     aliases = ["dylsemchatapi","ctca","chatapi"],
@@ -95,5 +111,80 @@ object ChoTenChatApiCommand {
         }
     }
 
+    /** Create User */
+    @CommandBody
+    val createUser = subCommand {
+        player("player") {
+            dynamic("script") {
+                execute<CommandSender> { sender, context, argument ->
+                    val tabooPlayer = context.player("player")
+                    val bukkitPlayer = tabooPlayer.castSafely<Player>()
+                    bukkitPlayer?.asOrCreateUser()
+                    val mm = MiniMessage.miniMessage()
+                    // 获取参数的值
+                    val content = context["script"]
+                    content.evalKether(sender)
+                }
+            }
+        }
+    }
 
+    /** Create Group */
+    @CommandBody
+    val createGroup = subCommand {
+        player("player") {
+            dynamic("id") {
+                dynamic("registryName") {
+                    dynamic("fancytype") {
+                        execute<CommandSender> { sender, context, argument ->
+                            createGroupFromCommand(sender, context, argument)
+                        }
+                    }
+                    execute<CommandSender> { sender, context, argument ->
+                        createGroupFromCommand(sender, context, argument)
+                    }
+                }
+                execute<CommandSender> { sender, context, argument ->
+                    createGroupFromCommand(sender, context, argument)
+                }
+            }
+        }
+    }
+
+    /** Create Group */
+    @CommandBody
+    val createGroupFromJson = subCommand {
+        dynamic("json") {
+            execute<CommandSender> { sender, context, argument ->
+                val group = Json.decodeFromString<Group>(context["json"])
+                loadedGroupMap[group.longId] = group
+            }
+        }
+    }
+
+}
+
+fun createGroupFromCommand(sender: CommandSender, context: CommandContext<CommandSender>, argument: String) {
+        submitAsync {
+            val tabooPlayer = context.player("player")
+            val bukkitPlayer = tabooPlayer.castSafely<Player>()
+            if (bukkitPlayer == null) {
+                sender.severeS(sender.asLangText("PLAYER_NOT_FOUND", context["player"]), true)
+                throw NullPointerException()
+            }
+            val user = bukkitPlayer.asOrCreateUser()
+            val mm = MiniMessage.miniMessage()
+            // 获取参数的值
+            val id = context.getOrNull("id") ?: generateRandomGroupId()
+            createGroup(
+                id = context["id"].toLong(),
+                creator = user,
+                regName = context["registryName"],
+                idData = IdData(
+                    fancyAccountType = FancyAccountType.valueOf(context.getOrNull("fancytype") ?: "NORMAL"),
+                    fancyAccountValue = 0
+                ),
+                sender = sender
+            )
+        }
 }

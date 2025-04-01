@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.chotenchat.command
 
-import ink.ptms.adyeshach.core.entity.type.minecraftVersion
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatApiCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatDebugCommand
 import io.github.zzzyyylllty.chotenchat.logger.infoL
@@ -18,6 +17,7 @@ import taboolib.common.platform.command.subCommand
 import taboolib.common.platform.function.pluginVersion
 import taboolib.common.platform.function.runningPlatform
 import taboolib.expansion.createHelper
+import taboolib.module.nms.MinecraftVersion.minecraftVersion
 import taboolib.platform.util.asLangText
 
 /**

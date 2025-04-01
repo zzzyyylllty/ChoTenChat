@@ -55,7 +55,7 @@ object ChoTenChat : Plugin() {
     var loadedGroupMap = LinkedHashMap<Long, Group>()
     var devMode = true
     val console by lazy { console() }
-    val consoleSender by lazy { console.castSafely<CommandSender>() }
+    val consoleSender by lazy { console.castSafely<CommandSender>()!! }
 
     val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 

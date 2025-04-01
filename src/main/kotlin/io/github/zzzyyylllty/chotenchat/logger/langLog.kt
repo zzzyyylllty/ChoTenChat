@@ -23,24 +23,29 @@ fun warningL(node: String,vararg args: Any) {
     consoleSender?.warningS(console.asLangText(node,args))
 }
 
-fun CommandSender?.fineS(message: String) {
-    (this ?:consoleSender)?.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ffcc>FINES</#66ffcc>]</gray> <reset>$message")
+fun CommandSender?.fineS(message: String, bothSendConsole: Boolean = false) {
+    (this ?:consoleSender).sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ffcc>FINES</#66ffcc>]</gray> <reset>$message")
+    if (this != null && bothSendConsole) consoleSender.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ffcc>FINES</#66ffcc>]</gray> <reset>$message")
 }
 
-fun CommandSender?.debugS(message: String) {
-    (this ?:consoleSender)?.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ddaa77>DEBUG</#ddaa77>]</gray> <#aaaaaa>$message")
+fun CommandSender?.debugS(message: String, bothSendConsole: Boolean = false) {
+    (this ?:consoleSender).sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ddaa77>DEBUG</#ddaa77>]</gray> <#aaaaaa>$message")
+    if (this != null && bothSendConsole) consoleSender.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ddaa77>DEBUG</#ddaa77>]</gray> <#aaaaaa>$message")
 }
 
-fun CommandSender?.infoS(message: String) {
-    (this ?:consoleSender)?.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ccff>INFOS</#66ccff>]</gray> <reset>$message")
+fun CommandSender?.infoS(message: String, bothSendConsole: Boolean = false) {
+    (this ?:consoleSender).sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ccff>INFOS</#66ccff>]</gray> <reset>$message")
+    if (this != null && bothSendConsole) consoleSender.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#66ccff>INFOS</#66ccff>]</gray> <reset>$message")
 }
 
-fun CommandSender?.warningS(message: String) {
-    (this ?:consoleSender)?.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ffee66>WARNI</#ffee66>]</gray> <#eeeeaa>$message")
+fun CommandSender?.warningS(message: String, bothSendConsole: Boolean = false) {
+    (this ?:consoleSender).sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ffee66>WARNI</#ffee66>]</gray> <#eeeeaa>$message")
+    if (this != null && bothSendConsole) consoleSender.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ffee66>WARNI</#ffee66>]</gray> <#eeeeaa>$message")
 }
 
-fun CommandSender?.severeS(message: String) {
-    (this ?:consoleSender)?.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ff6600>ERROR</#ff6600>]</gray> <#ffccbb>$message")
+fun CommandSender?.severeS(message: String, bothSendConsole: Boolean = false) {
+    (this ?:consoleSender).sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ff6600>ERROR</#ff6600>]</gray> <#ffccbb>$message")
+    if (this != null && bothSendConsole) consoleSender.sendStringAsComponent("<gray>[<gradient:#99ccff:#dd66ff:#ff66aa>ChoTenChat</gradient>] [<#ff6600>ERROR</#ff6600>]</gray> <#ffccbb>$message")
 }
 
 fun CommandSender.sendStringAsComponent(message: String) {

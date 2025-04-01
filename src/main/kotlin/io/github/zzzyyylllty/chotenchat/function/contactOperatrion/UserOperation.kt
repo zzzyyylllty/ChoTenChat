@@ -14,7 +14,7 @@ import org.bukkit.entity.Player
 import kotlin.collections.set
 
 
-fun Player.createOrWipeUser() {
+fun Player.createOrWipeUser(): User {
 
     val player = this
     val user = User(
@@ -36,6 +36,7 @@ fun Player.createOrWipeUser() {
     userMap[id] = user
     playerAsUserMap[this.uniqueId] = id
     infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
+    return user
 }
 
 fun User.asMember(g: Long, permission: GroupPermission) : Member {

@@ -33,40 +33,40 @@ public open class SQLDataBase {
                 options(ColumnOptionSQL.UNIQUE_KEY)
             }
         }
-        add("id") { // LongID
+        add("long_id") { // LongID
             type(ColumnTypeSQL.VARCHAR, 64) {
                 // 创建索引
                 options(ColumnOptionSQL.UNIQUE_KEY)
             }
         }
         add("value") {
-            type(ColumnTypeSQL.JSON, 128)
+            type(ColumnTypeSQL.JSON)
         }
     }
 
     val groupTable = Table("group_table", host) {
         add { id() }
-        add("id") { // LongID
-            type(ColumnTypeSQL.VARCHAR, 64) {
+        add("long_id") { // LongID
+            type(ColumnTypeSQL.VARCHAR, 36) {
                 // 创建索引
                 options(ColumnOptionSQL.UNIQUE_KEY)
             }
         }
         add("value") {
-            type(ColumnTypeSQL.JSON, 128)
+            type(ColumnTypeSQL.JSON)
         }
     }
 
     public fun saveInDatabase(user: User) {
         val json = Klaxon().toJsonString(user)
-        userTable.insert(dataSource, "uuid", "id", "value") {
+        userTable.insert(dataSource, "uuid", "long_id", "value") {
             value(user.playerUUID, user.longId, json)
         }
     }
 
     public fun saveInDatabase(group: Group) {
         val json = Klaxon().toJsonString(group)
-        userTable.insert(dataSource, "id", "value") {
+        userTable.insert(dataSource, "long_id", "value") {
             value(group.longId, json)
         }
     }
@@ -91,7 +91,7 @@ public open class SQLDataBase {
         if (id == null) return null
         val string = userTable.select(dataSource) {
             rows("value")
-            where("id" eq id)
+            where("long_id" eq id)
             limit(1)
         }.firstOrNull {
             getString("value")
@@ -108,7 +108,7 @@ public open class SQLDataBase {
         if (id == null) return null
         val string = groupTable.select(dataSource) {
             rows("value")
-            where("id" eq id)
+            where("long_id" eq id)
             limit(1)
         }.firstOrNull {
             getString("value")
@@ -123,5 +123,6 @@ public open class SQLDataBase {
 
     init {
         userTable.createTable(dataSource)
+        groupTable.createTable(dataSource)
     }
 }

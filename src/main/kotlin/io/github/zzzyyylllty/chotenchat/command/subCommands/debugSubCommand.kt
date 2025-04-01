@@ -1,7 +1,11 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
+import com.beust.klaxon.JsonArray
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.logger.infoS
+import io.github.zzzyyylllty.chotenchat.logger.warningS
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
@@ -14,6 +18,7 @@ import taboolib.common.platform.command.PermissionDefault
 import taboolib.common.platform.command.player
 import taboolib.common.platform.command.subCommand
 import taboolib.platform.util.asLangText
+import kotlinx.serialization.encodeToString
 
 @CommandHeader(
     name = "chotenchatdebug",
@@ -37,7 +42,7 @@ object ChoTenChatDebugCommand {
                 val bukkitPlayer = tabooPlayer.castSafely<Player>()
                 val senderAsPlayer = sender as Player
                 if (bukkitPlayer == null) {
-                    sender.infoS(sender.asLangText("INTERNAL_DIRECT_PLAYER_NOT_FOUND", context.player("player")))
+                    sender.infoS(sender.asLangText("PLAYER_NOT_FOUND", context.player("player")))
                     return@execute
                 }
                 val user = bukkitPlayer.asUser()
@@ -46,7 +51,7 @@ object ChoTenChatDebugCommand {
                     return@execute
                 }
                 val data = user.data
-                sender.infoS(sender.asLangText("INTERNAL_DEBUG_USER", user, data))
+                sender.infoS(sender.asLangText("INTERNAL_DEBUG_USER", Json.encodeToString(user)))
             }
         }
     }
@@ -65,7 +70,7 @@ object ChoTenChatDebugCommand {
     @CommandBody
     val getUserDataMap = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            sender.infoS("<yellow>Command deprecated.From v0.3 user & userdata is merged.")
+            sender.warningS("Command deprecated.From v0.3 user & userdata is merged.")
         }
     }
 
@@ -75,7 +80,7 @@ object ChoTenChatDebugCommand {
         dynamic("id") {
             execute<CommandSender> { sender, context, argument ->
                 val id = context.get("id").toLong()
-                var message = "<yellow><b>Group:</b> <br>${loadedGroupMap[id]}"
+                var message = "<yellow><b>Group:</b> <br>${Json.encodeToString(loadedGroupMap[id])}"
                 sender.infoS(message)
             }
         }
@@ -87,7 +92,7 @@ object ChoTenChatDebugCommand {
         execute<CommandSender> { sender, context, argument ->
             var message = "<yellow><b>GroupMap Entries</b> (${loadedGroupMap.size}):<br>"
             for (entry in loadedGroupMap.entries) {
-                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+                message = "$message<br><white>${entry.key} <gray>- ${Json.encodeToString(entry.value)}"
             }
             sender.infoS(message)
         }
@@ -99,7 +104,7 @@ object ChoTenChatDebugCommand {
         execute<CommandSender> { sender, context, argument ->
             var message = "<yellow><b>UserDataMap Entries</b> (${ChoTenChat.playerAsUserMap.size}):<br>"
             for (entry in ChoTenChat.playerAsUserMap.entries) {
-                message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
+                message = "$message<br><white>${entry.key} <gray>- ${Json.encodeToString(entry.value)}"
             }
             sender.infoS(message)
         }
