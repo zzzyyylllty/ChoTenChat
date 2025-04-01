@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.chotenchat.data
 
+import kotlinx.serialization.Serializable
 
 
 /**
@@ -10,7 +11,7 @@ package io.github.zzzyyylllty.chotenchat.data
  * 1900-2050年之间的完整日期，排除敏感日期 20000530xx
  *
  */
-
+@Serializable
 data class IdData(
     val fancyAccountType: FancyAccountType,
     val fancyAccountValue: Int,
@@ -23,7 +24,7 @@ data class IdData(
 [BLACK_GOLD], 黑金号
 [ADMINISTRATOR] 管理员号
  */
-
+@Serializable
 enum class FancyAccountType {
     NORMAL,
     FANCY,
@@ -31,16 +32,16 @@ enum class FancyAccountType {
     BLACK_GOLD,
     ADMINISTRATOR,
 }
-
+@Serializable
 data class UserData(
     val subscribeContact: Contact?,
     val contactSettings: LinkedHashMap<Contact, ContactSetting>,
 )
-
+@Serializable
 data class ContactSetting(
     val receiveMode: ReceiveMode = ReceiveMode.ALWAYS,
 )
-
+@Serializable
 enum class ReceiveMode {
     SUBSCRIBE,
     ALWAYS,

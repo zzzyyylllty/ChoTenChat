@@ -14,7 +14,7 @@ import taboolib.module.lang.asLangText
 import java.util.UUID
 import kotlin.math.floor
 
-
+@Serializable
 public interface Contact {
     val registryName: String
     val nickName: String?
@@ -44,7 +44,7 @@ public interface Contact {
         return Klaxon().toJsonString(this)
     }
 }
-
+@Serializable
 public data class User(
     override val registryName: String,
     override val nickName: String?,
@@ -87,7 +87,7 @@ public data class Group(
         return lastTitle
     }
 }
-
+@Serializable
 public data class Member(
     val groupName: String?,
     val longId: Long,
@@ -126,7 +126,7 @@ public data class Member(
         }.toString()
     }
 }
-
+@Serializable
 enum class GroupPermission {
     MEMBER,
     TRUSTED,
@@ -134,7 +134,7 @@ enum class GroupPermission {
     BUREAUCRAT,
     OWNER
 }
-
+@Serializable
 enum class TitleSelection {
     TEMPERATURE,
     PERMISSION,
