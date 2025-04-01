@@ -52,6 +52,7 @@ taboolib {
         // Kotlinx Coroutines 版本（设为 null 表示禁用）
         coroutines = "1.7.3"
     }
+    relocate("kotlinx.serialization", "kotlinx.serialization133")
 }
 
 repositories {
@@ -101,6 +102,9 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") { isTransitive = false }
     implementation("net.kyori:adventure-text-minimessage:4.19.0")
     testImplementation(kotlin("test"))
+    taboo("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.3.3") { isTransitive = false }
+    taboo("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.3") { isTransitive = false }
+
 }
 
 tasks.withType<JavaCompile> {

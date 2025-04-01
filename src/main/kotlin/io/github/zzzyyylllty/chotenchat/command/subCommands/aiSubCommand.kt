@@ -1,7 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
-import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
+import io.github.zzzyyylllty.chotenchat.logger.warningS
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -24,14 +24,14 @@ object ChoTenChatAiCommand {
     @CommandBody
     val chat = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            sender.sendInternalMessages("In developing...", false)
+            sender.warningS("In developing...")
         }
     }
 
     @CommandBody
     val name = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            sender.sendInternalMessages("In developing...", false)
+            sender.warningS("In developing...")
         }
     }
 

@@ -1,10 +1,13 @@
 package main.kotlin.io.github.zzzyyylllty.chotenchat
 
+import ink.ptms.adyeshach.taboolib.common.env.RuntimeDependencies
+import ink.ptms.adyeshach.taboolib.common.env.RuntimeDependency
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.severeL
+import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.YamlConfiguration
 import taboolib.common.LifeCycle
 import taboolib.common.io.newFile
@@ -24,6 +27,23 @@ import java.io.File
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+
+@RuntimeDependencies(
+    RuntimeDependency(
+        "!org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.3.3",
+        test = "!kotlinx.serialization.Serializer",
+        relocate = ["!kotlin.", "!kotlin1822.", "!kotlinx.serialization.", "!kotlinx.serialization133."],
+        transitive = false
+    ),
+    RuntimeDependency(
+        "!org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.3",
+        test = "!kotlinx.serialization.json.Json",
+        relocate = ["!kotlin.", "!kotlin1822.", "!kotlinx.serialization.", "!kotlinx.serialization133."],
+        transitive = false
+    )
+)
+class RuntimeEnv
+
 object ChoTenChat : Plugin() {
 
     val plugin by lazy { this }
@@ -35,6 +55,8 @@ object ChoTenChat : Plugin() {
     var loadedGroupMap = LinkedHashMap<Long, Group>()
     var devMode = true
     val console by lazy { console() }
+    val consoleSender by lazy { console.castSafely<CommandSender>() }
+
     val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
     val config by lazy { Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML) }
@@ -46,7 +68,6 @@ object ChoTenChat : Plugin() {
     }
 
     override fun onDisable() {
-        info("Successfully running ExamplePlugin!")
     }
 
     fun reloadCustomConfig() {

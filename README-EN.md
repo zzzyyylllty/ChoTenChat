@@ -14,7 +14,7 @@ Based on<a ref="https://tabooproject.org"> Taboolib 6.x </a>and Kotlin
 
 At present, we only support Bukkit (Redis cross server), but support for Bungee and Velocity is planned after the completion of the ontology plugin.
 
-**This project is still under construction, please be patient or submit a PR**
+**This project is still under construction, please be patient or submit a Pull Request.**
 
 The name of this project comes from：
 <div style="text-align: center;">Character named ChoTen-Chan In Game <a href = "https://needystreameroverload.wiki.gg/wiki/">Needy Girl Overdose</a> </div>

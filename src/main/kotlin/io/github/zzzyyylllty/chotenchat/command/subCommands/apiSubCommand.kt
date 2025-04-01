@@ -1,7 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
-import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
+import io.github.zzzyyylllty.chotenchat.logger.infoS
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -29,8 +29,7 @@ object ChoTenChatApiCommand {
                 val mm = MiniMessage.miniMessage()
                 // 获取参数的值
                 val content = context["content"]
-                sender.sendInternalMessages("Original: $content", false)
-                sender.sendInternalMessages(content)
+                sender.infoS(content)
             }
         }
     }
@@ -44,8 +43,7 @@ object ChoTenChatApiCommand {
                 // 获取参数的值
                 val content = context["script"]
                 val ret = content.evalKether(sender)
-                sender.sendInternalMessages("§5Kether: §7$content", false)
-                sender.sendInternalMessages("§5Return: §7${ret.get()}", false)
+                sender.infoS("§5Return: §7${ret.get()}")
             }
         }
     }
@@ -62,8 +60,7 @@ object ChoTenChatApiCommand {
                     // 获取参数的值
                     val content = context["script"]
                     val ret = content.evalKether(sender)
-                    sender.sendInternalMessages("§5Kether: §7$content", false)
-                    sender.sendInternalMessages("§5Return: §7${ret.get()}", false)
+                    sender.infoS("§5Return: §7${ret.get()}")
                 }
             }
         }

@@ -11,6 +11,5 @@ import taboolib.common.platform.function.severe
 fun initializeData() {
     reloadCustomConfig()
 
-    info("ChoTenChat now running.")
 
 }

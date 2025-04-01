@@ -1,7 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
-import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
+import io.github.zzzyyylllty.chotenchat.logger.infoS
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
@@ -37,16 +37,16 @@ object ChoTenChatDebugCommand {
                 val bukkitPlayer = tabooPlayer.castSafely<Player>()
                 val senderAsPlayer = sender as Player
                 if (bukkitPlayer == null) {
-                    sender.sendInternalMessages(sender.asLangText("INTERNAL_DIRECT_PLAYER_NOT_FOUND", context.player("player")))
+                    sender.infoS(sender.asLangText("INTERNAL_DIRECT_PLAYER_NOT_FOUND", context.player("player")))
                     return@execute
                 }
                 val user = bukkitPlayer.asUser()
                 if (user == null) {
-                    sender.sendInternalMessages(sender.asLangText("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", bukkitPlayer.name, bukkitPlayer.uniqueId))
+                    sender.infoS(sender.asLangText("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", bukkitPlayer.name, bukkitPlayer.uniqueId))
                     return@execute
                 }
                 val data = user.data
-                sender.sendInternalMessages(sender.asLangText("INTERNAL_DEBUG_USER", user, data))
+                sender.infoS(sender.asLangText("INTERNAL_DEBUG_USER", user, data))
             }
         }
     }
@@ -58,14 +58,14 @@ object ChoTenChatDebugCommand {
             for (entry in userMap.entries) {
                 message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
             }
-            sender.sendInternalMessages(message)
+            sender.infoS(message)
         }
     }
 
     @CommandBody
     val getUserDataMap = subCommand {
         execute<CommandSender> { sender, context, argument ->
-            sender.sendInternalMessages("<yellow>Command deprecated.From v0.3 user & userdata is merged.")
+            sender.infoS("<yellow>Command deprecated.From v0.3 user & userdata is merged.")
         }
     }
 
@@ -76,7 +76,7 @@ object ChoTenChatDebugCommand {
             execute<CommandSender> { sender, context, argument ->
                 val id = context.get("id").toLong()
                 var message = "<yellow><b>Group:</b> <br>${loadedGroupMap[id]}"
-                sender.sendInternalMessages(message)
+                sender.infoS(message)
             }
         }
     }
@@ -89,7 +89,7 @@ object ChoTenChatDebugCommand {
             for (entry in loadedGroupMap.entries) {
                 message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
             }
-            sender.sendInternalMessages(message)
+            sender.infoS(message)
         }
     }
 
@@ -101,7 +101,7 @@ object ChoTenChatDebugCommand {
             for (entry in ChoTenChat.playerAsUserMap.entries) {
                 message = "$message<br><white>${entry.key} <gray>- ${entry.value}"
             }
-            sender.sendInternalMessages(message)
+            sender.infoS(message)
         }
     }
 
