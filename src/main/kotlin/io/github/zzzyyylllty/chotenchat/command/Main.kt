@@ -1,10 +1,12 @@
 package io.github.zzzyyylllty.chotenchat.command
 
+import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatAdminCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatApiCommand
 import io.github.zzzyyylllty.chotenchat.command.subCommands.ChoTenChatDebugCommand
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.infoS
 import io.github.zzzyyylllty.chotenchat.logger.severeL
+import io.github.zzzyyylllty.chotenchat.logger.severeS
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -19,6 +21,7 @@ import taboolib.common.platform.function.runningPlatform
 import taboolib.expansion.createHelper
 import taboolib.module.nms.MinecraftVersion.minecraftVersion
 import taboolib.platform.util.asLangText
+import taboolib.common.platform.function.severe
 
 /**
  * Usage: /dylsemchat,chotenchat
@@ -103,6 +106,9 @@ object ChoTenChatMainCommand {
     val debug = ChoTenChatDebugCommand
 
     @CommandBody
+    val admin = ChoTenChatAdminCommand
+
+    @CommandBody
     val reload = subCommand {
         execute<CommandSender> { sender, context, argument ->
             infoL("INTERNAL_INFO_RELOADING")
@@ -111,9 +117,9 @@ object ChoTenChatMainCommand {
                 ChoTenChat.reloadCustomConfig()
                 sender.infoS(sender.asLangText("INTERNAL_INFO_RELOADED"))
                 infoL("INTERNAL_INFO_RELOADED")
-            } catch (e: Throwable) {
+            } catch (e: Exception) {
                 severeL("INTERNAL_SEVERE_RELOAD_ERROR")
-                sender.infoS(sender.asLangText("INTERNAL_SEVERE_RELOAD_ERROR"))
+                sender.severeS(sender.asLangText("INTERNAL_SEVERE_RELOAD_ERROR"))
                 e.printStackTrace()
             }
         }

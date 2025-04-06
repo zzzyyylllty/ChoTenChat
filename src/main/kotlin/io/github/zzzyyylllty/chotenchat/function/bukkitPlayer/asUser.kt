@@ -12,8 +12,8 @@ fun Player.asUser(): User? {
     return userMap[playerAsUserMap[this.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)
 }
 
-fun Player.asOrCreateUser(): User {
-    return (userMap[playerAsUserMap[this.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)) ?: this.createOrWipeUser()
+fun Player?.asOrCreateUser(): User {
+    return (userMap[playerAsUserMap[this?.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)) ?: this.createOrWipeUser()
 }
 
 fun Player.asUserOrFail(): User {

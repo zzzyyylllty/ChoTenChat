@@ -5,12 +5,8 @@ chat:
     default-chatcolor: "#cccccc"
     default-namecolor: "#aaaaaa"
   format:
-    GROUP: |
-      {format-group} {format-title} {format-nick}
-      {format-reply}{format-message}
-    USER: |
-      {format-nick}
-      {format-reply}{format-message}
+    GROUP: '{format-group} {format-title} {format-nick} <br> {format-reply}{format-message}'
+    USER: '{format-nick} <br> {format-reply}{format-message}'
   
 
 title:
@@ -68,3 +64,19 @@ debug:
   tolerance-kether: true
   # Kether 宽容解析
   # 默认值 true 不推荐关闭
+
+    #override val registryName: String,
+    #override val nickName: String?,
+    #override val longId: Long,
+    #override val idData: IdData,
+    #val playerUUID: String?,
+    #val playerName: String?,
+  # val data: UserData,
+###
+defaults:
+  user:
+    - registryName: 'ChoTenChan'
+      nickName: 'ChoTenChan'
+      longId: '1'
+      fancyAccountType: ADMINISTRATOR
+

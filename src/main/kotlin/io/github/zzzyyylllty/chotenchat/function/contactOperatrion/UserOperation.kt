@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.chotenchat.function.contactOperatrion
 
+import io.github.zzzyyylllty.chotenchat.data.Contact
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
 import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.IdData
@@ -7,26 +8,65 @@ import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.logger.infoL
+import io.github.zzzyyylllty.chotenchat.logger.severeS
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.consoleSender
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import taboolib.common.util.random
+import taboolib.platform.util.asLangText
 import kotlin.collections.set
 
 
-fun Player.createOrWipeUser(): User {
+fun Player?.createUser(
+    regName: String,
+    nickName: String?,
+    longId: Long,
+    idData: IdData = IdData(
+        fancyAccountType = FancyAccountType.NORMAL,
+        fancyAccountValue = 0
+    ),
+    userData : UserData = UserData(
+        subscribeContact = null,
+        contactSettings = LinkedHashMap()
+    ),
+    sender: CommandSender = consoleSender) {
+    if (longId.asGroup() == null) {
+        this.createOrWipeUser(
+            regName,
+            nickName,
+            longId,
+            idData,
+            userData
+        )
+    } else sender.severeS(consoleSender.asLangText("GROUP_CREATE_FAIL_EXISTED", longId))
+}
+
+fun Player?.createOrWipeUser(
+    regName: String = this?.player?.name ?: "UnName User",
+    nickName: String? = null,
+    longId: Long = generateRandomUserId(),
+    idData: IdData = IdData(
+        fancyAccountType = FancyAccountType.NORMAL,
+        fancyAccountValue = 0
+    ),
+    userData : UserData = UserData(
+            subscribeContact = null,
+    contactSettings = LinkedHashMap()
+)
+): User {
 
     val player = this
     val user = User(
-        registryName = player.name,
+        registryName = regName, // TODO
         nickName = null,
         longId = 1000000,
-        idData = IdData(
-            fancyAccountType = FancyAccountType.NORMAL,
-            fancyAccountValue = 0
-        ),
-        playerUUID = player.uniqueId.toString(),
-        playerName = player.name,
+        idData = idData,
+        playerUUID = player?.uniqueId.toString(),
+        playerName = player?.name,
         data = UserData(
             subscribeContact = null,
             contactSettings = LinkedHashMap()
@@ -34,8 +74,10 @@ fun Player.createOrWipeUser(): User {
     )
     val id = user.longId
     userMap[id] = user
-    playerAsUserMap[this.uniqueId] = id
-    infoL("INTERNAL_INFO_CREATING_USER", this.name ,user)
+    if (this != null) {
+        playerAsUserMap[this.uniqueId] = id
+    }
+    infoL("INTERNAL_INFO_CREATING_USER", this?.name ?: "<No Name>" ,user)
     return user
 }
 
@@ -52,4 +94,18 @@ fun User.asMember(g: Long, permission: GroupPermission) : Member {
         titleSelection = TitleSelection.PERMISSION,
         titleTheme = "default"
     )
+}
+
+
+fun generateRandomUserId() : Long{
+    var randomId = 0
+    while (true) {
+        randomId = random(100000,999999)
+        if (randomId.toLong().asUser() == null) break
+    }
+    return randomId.toLong()
+}
+
+fun User.subscribeContact(contact: Contact) {
+    this.data.subscribeContact = contact
 }

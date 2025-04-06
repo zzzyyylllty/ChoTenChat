@@ -9,6 +9,7 @@ import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
 import kotlinx.serialization.Serializable
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.config
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
 import taboolib.module.lang.asLangText
 import java.util.UUID
@@ -50,11 +51,11 @@ public data class User(
     override val nickName: String?,
     override val longId: Long,
     override val idData: IdData,
-    val playerUUID: String,
-    val playerName: String,
+    val playerUUID: String?,
+    val playerName: String?,
     val data: UserData,
 ) : Contact {
-    @Deprecated("direct use User.data instead. From v0.3 user & userdata is merged.")
+    @Deprecated("direct use User.data instead. From v0.1.3 user & userdata is merged.")
     fun asUserData(): UserData {
         return data
     }
@@ -92,8 +93,8 @@ public data class Member(
     val groupName: String?,
     val longId: Long,
     val group: Long,
-    val playerUUID: String,
-    val playerName: String,
+    val playerUUID: String?,
+    val playerName: String?,
     val temperature: Long,
     val specialTitle: String?,
     var groupPermission: GroupPermission,
@@ -121,7 +122,7 @@ public data class Member(
     fun getTitle(g: Group): String {
         return when (titleSelection) {
             TEMPERATURE -> g.getTemperatureTitle(getTempLevel())
-            PERMISSION -> groupPermission.name
+            PERMISSION -> config.getString("title.${groupPermission.name}", "Unknown")
             SPECIAL -> specialTitle
         }.toString()
     }

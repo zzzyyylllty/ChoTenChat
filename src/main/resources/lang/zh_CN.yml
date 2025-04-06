@@ -40,3 +40,12 @@ DIAGNOSE_TEXT_NO_CHEMDAH: "Chemdah 挂钩已启用，但未检测到 Chemdah。"
 
 GROUP_CREATE_FAIL_EXISTED: "群聊 {0} 已经存在,无法创建。请先删除它,或使用 createOrWipe."
 GROUP_CREATED: "群聊 {0} 已创建/覆盖。注册名 {1} 创建者 {2}."
+
+INDEX_TIMED_OUT: "超时."
+INDEX_CANCELED: "已取消."
+INDEX_TIMED_TYPED: "记录成功: {0}"
+INDEX_CREATING_GROUP: "创建群聊流程已开始."
+INDEX_CREATING_GROUP_TYPING_ID: "请输入群聊的 数字ID (例如: 1000000)."
+INDEX_CREATING_GROUP_TYPING_REGNAME: "请输入群聊的 注册名 (例如: \"ChoTenFans\")."
+INDEX_CREATING_GROUP_TYPING_FANCY: "请输入群聊的 靓号类型与额外分数, 以英文逗号分割, 输入 \"~\"使用默认数(NORMAL,0)."
+INDEX_CREATING_GROUP_TYPING_MEMBER: "请输入群聊的 成员 id,首个id为群主。以英文逗号分割 例如 (1000000,66666,99999 即1000000是群主)."

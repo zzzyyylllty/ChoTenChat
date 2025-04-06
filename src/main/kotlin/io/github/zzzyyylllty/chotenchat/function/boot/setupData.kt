@@ -10,6 +10,4 @@ import taboolib.common.platform.function.severe
 @Awake(LifeCycle.ENABLE)
 fun initializeData() {
     reloadCustomConfig()
-
-
 }

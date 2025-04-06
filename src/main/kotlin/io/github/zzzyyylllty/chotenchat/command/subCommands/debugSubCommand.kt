@@ -2,6 +2,8 @@ package io.github.zzzyyylllty.chotenchat.command.subCommands
 
 import com.beust.klaxon.JsonArray
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asGroup
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.subscribeContact
 import io.github.zzzyyylllty.chotenchat.logger.infoS
 import io.github.zzzyyylllty.chotenchat.logger.warningS
 import kotlinx.serialization.decodeFromString
@@ -19,6 +21,7 @@ import taboolib.common.platform.command.player
 import taboolib.common.platform.command.subCommand
 import taboolib.platform.util.asLangText
 import kotlinx.serialization.encodeToString
+import kotlin.text.toLong
 
 @CommandHeader(
     name = "chotenchatdebug",
@@ -111,4 +114,34 @@ object ChoTenChatDebugCommand {
     }
 
 
+    @CommandBody
+    val subscribe = subCommand {
+        dynamic("type") {
+            dynamic("id") {
+                execute<CommandSender> { sender, context, argument ->
+                    val id = context.get("id").toLong()
+                    val type = context.get("type")
+                    if (sender !is Player) throw IllegalStateException("Sender Type must be Player")
+                    when (type) {
+                        "GROUP" -> id.asGroup()?.let { sender.asUser()?.subscribeContact(it) }
+                        "USER" -> id.asUser()?.let { sender.asUser()?.subscribeContact(it) }
+                    }
+                }
+                suggestion<CommandSender>(uncheck = true) { sender, context ->
+                    suggesstionGroupOrUser(context.get("type"))
+                }
+            }
+            suggestion<CommandSender>(uncheck = false) { sender, context ->
+                listOf("GROUP","USER")
+            }
+        }
+    }
+}
+
+fun suggesstionGroupOrUser(type: String): List<String> {
+    return when (type) {
+        "GROUP" -> loadedGroupMap.keys.toList() as List<String>
+        "USER" -> userMap.keys.toList() as List<String>
+        else -> {listOf<String>()}
+    }
 }
