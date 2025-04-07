@@ -43,7 +43,7 @@ GROUP_CREATED: "群聊 {0} 已创建/覆盖。注册名 {1} 创建者 {2}."
 
 INDEX_TIMED_OUT: "超时."
 INDEX_CANCELED: "已取消."
-INDEX_TIMED_TYPED: "记录成功: {0}"
+INDEX_TYPED: "记录成功: {0}"
 INDEX_CREATING_GROUP: "创建群聊流程已开始."
 INDEX_CREATING_GROUP_TYPING_ID: "请输入群聊的 数字ID (例如: 1000000)."
 INDEX_CREATING_GROUP_TYPING_REGNAME: "请输入群聊的 注册名 (例如: \"ChoTenFans\")."

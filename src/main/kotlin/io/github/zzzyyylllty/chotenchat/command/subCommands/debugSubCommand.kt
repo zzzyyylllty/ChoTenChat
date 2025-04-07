@@ -140,8 +140,16 @@ object ChoTenChatDebugCommand {
 
 fun suggesstionGroupOrUser(type: String): List<String> {
     return when (type) {
-        "GROUP" -> loadedGroupMap.keys.toList() as List<String>
-        "USER" -> userMap.keys.toList() as List<String>
+        "GROUP" -> {
+            val list = mutableListOf<String>()
+            loadedGroupMap.keys.toList().forEach { list.add(it.toString()) }
+            list
+        }
+        "USER" -> {
+            val list = mutableListOf<String>()
+            userMap.keys.toList().forEach { list.add(it.toString()) }
+            list
+        }
         else -> {listOf<String>()}
     }
 }
