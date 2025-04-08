@@ -18,7 +18,7 @@ fun Message.buildMessage(string: String,receiver: User) : String {
 
     val sender = this.sender
 
-    val replace = receiver.data.contactSettings[sender]?.receiveMode ?: "ALWAYS"
+    val replace = receiver.data.contactSettings[sender]?.receiveMode ?: run { if (sender.longId == receiver.longId) "SELF" else "ALWAYS" }
 
     return string.replace("{format-message}", placeHolderConfig.getString("message-$replace") ?: "NULL").replace("{message.message}", this.content)
 

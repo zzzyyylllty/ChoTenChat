@@ -61,7 +61,7 @@ fun Message.buildCompString() : String {
         "{group.shortname}" to contactAsGroup.getShortName(),
         "{group.color}" to contactAsGroup.getIdColor(),
         "{title.score}" to member?.temperature.toString(),
-        "{title.color}" to "<white>", // TODO
+        "{title.color}" to "<gradient:#ffff00:#ff0000>", // TODO
         "{title.level}" to (member?.getTempLevel() ?: "1").toString(),
         "{title.special}" to (member?.specialTitle ?: console.asLangText("STRING_NONE")),
         "{title.permission}" to (member?.groupPermission?.name ?: console.asLangText("STRING_UNKNOWN")),

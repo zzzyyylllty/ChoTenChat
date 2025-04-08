@@ -30,11 +30,11 @@ public interface Contact {
     }
     fun getShortName(): String {
         var name = (nickName ?: registryName)
-        return if (name.length >= 5) name.substring(0, 5) else name
+        return if (name.length >= 7) ("${name.substring(0, )}...") else name
     }
     fun getIdColor(): String {
         return when (idData.fancyAccountType) {
-            NORMAL -> "<#ff0000>"
+            NORMAL -> "<#aaaaaa>"
             FANCY -> "<gradient:#ffaa99:#ff5500>"
             GOLD -> "<gradient:#eeee99:#ffcc00>"
             BLACK_GOLD -> "<gradient:#ffff66:#ffcc00:#888877:#555566>"
@@ -122,7 +122,7 @@ public data class Member(
     fun getTitle(g: Group): String {
         return when (titleSelection) {
             TEMPERATURE -> g.getTemperatureTitle(getTempLevel())
-            PERMISSION -> config.getString("title.${groupPermission.name}", "Unknown")
+            PERMISSION -> config.getString("title.PERMISSION-${groupPermission.name}", "Unknown")
             SPECIAL -> specialTitle
         }.toString()
     }

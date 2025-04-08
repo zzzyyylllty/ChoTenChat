@@ -22,10 +22,10 @@
 # {title.score} {title.color} {title.level} {title.special} {title.permission} {title.level} {title.title}
 # {nick.nick} {nick.playername} {nick.color} {nick.level} {nick.permission} {nick.color}
 # {message.message} {message.time} {reply.sender} {reply.message}
-group: <font:uniform><gray>[<yellow><hover:show_text:'<reset><b>| </b><gray>群组名称 <aqua>{group.name}<br><reset><b>| </b><gray>群组号码 {group.color}{group.number}<br><reset><b>| </b><yellow>点击查看详情...'>{group.shortname}<gray>]
+group: <font:uniform><gray>[<yellow><hover:show_text:'<reset><b>| </b><gray>群组名称 <aqua>{group.name}<br><reset><b>| </b><gray>群组号码 {group.color}{group.number}<br><reset><b>| </b>{group.color}点击查看详情...'>{group.shortname}<gray>]
 title: <gray>[<yellow><hover:show_text:'<b>| </b><gray>活跃分数 <aqua>{title.score}<reset><br><b>| </b><gray>活跃等级 {title.color}{title.level}<reset><br><b>| </b><gray>专属称号 <gradient:white:light_purple>{title.special}<reset><br><b>| </b><gray>群身份组 {title.permission}<reset><br><b>| </b><yellow>点击查看详情...'>{title.color}Lv{title.level} {title.title}<gray>]
 nick: <gray>[<yellow><hover:show_text:'<reset><br><b>| </b><gray>用户名称 {nick.nick} <gray>({nick.playername})<reset><br><b>| </b><gray>用户等级 {nick.color}{nick.level}<reset><br><b>| </b><gray>用户权限 {nick.permission} <gray>(%luckperms_primary_group%)<reset><br><b>| </b><yellow>点击打开资料卡...'>{nick.nick}<gray>]</font><reset>
-message-SUBSCRIBE: <yellow>*** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-SUBSCRIBE: <yellow>[!] {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-ALWAYS: <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-NOTE: <gray>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-SELF: <dark_aqua>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
