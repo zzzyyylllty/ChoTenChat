@@ -5,6 +5,7 @@ import ink.ptms.adyeshach.taboolib.common.env.RuntimeDependency
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
+import io.github.zzzyyylllty.chotenchat.database.SQLDataBase
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.severeL
 import org.bukkit.command.CommandSender
@@ -18,6 +19,7 @@ import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.info
 import taboolib.common.platform.function.warning
 import taboolib.common.platform.function.severe
+import taboolib.common.platform.function.submitAsync
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
 import taboolib.module.configuration.Configuration
@@ -68,6 +70,19 @@ object ChoTenChat : Plugin() {
     }
 
     override fun onDisable() {
+        saveData()
+    }
+
+    fun saveData() {
+        submitAsync {
+            val sql = SQLDataBase()
+            for (value in loadedGroupMap.values) {
+                sql.saveInDatabase(value)
+            }
+            for (value in userMap.values) {
+                sql.saveInDatabase(value)
+            }
+        }
     }
 
     fun reloadCustomConfig() {

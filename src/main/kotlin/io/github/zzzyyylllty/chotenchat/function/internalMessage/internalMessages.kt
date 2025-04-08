@@ -10,7 +10,7 @@ import taboolib.common.platform.function.warning
 
 @Deprecated(
     "Deprecated. use CommandSender.infoS instead.",
-    ReplaceWith("langLog"),
+    ReplaceWith("infoS"),
     DeprecationLevel.ERROR
 )
 fun CommandSender.sendInternalMessages(message: String) {
