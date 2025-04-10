@@ -48,7 +48,7 @@ fun Long.asGroup(): Group? {
     return loadedGroupMap[this] ?: SQLDataBase().getGroupInDatabase(this)
 }
 
-fun Long.asUserOrFail(): Group {
+fun Long.asGroupOrFail(): Group {
     return this.asGroup() ?: throw NullPointerException("Could not found user for Group $this")
 }
 

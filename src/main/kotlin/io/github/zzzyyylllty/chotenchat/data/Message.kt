@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.chotenchat.data
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 import java.util.Calendar
@@ -11,8 +12,8 @@ public data class Message(
     val sender: User,
     val subscribeContact: Contact,
     val receiveContacts: List<Contact>,
-    val uuid: UUID,
+    val uuid: @Contextual  UUID,
     val mentionedUsers: List<User>,
-    val sendTime: LocalDateTime,
+    val sendTime: @Contextual LocalDateTime,
     val reply: Message?
 )

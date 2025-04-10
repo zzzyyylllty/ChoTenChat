@@ -12,6 +12,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.craftbukkit.v1_20_R3.util.TerminalConsoleWriterThread
 import io.github.zzzyyylllty.chotenchat.database.SQLDataBase
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUserOrFail
 import io.github.zzzyyylllty.chotenchat.function.internalMessage.sendInternalMessages
 import io.github.zzzyyylllty.chotenchat.function.message.buildCompString
@@ -29,11 +30,11 @@ import java.util.UUID
 
 @SubscribeEvent(EventPriority.LOWEST)
 fun onChat(e: AsyncChatEvent) {
-    val sender = e.player.asUser()
+    var sender = e.player.asUser()
     val mm = MiniMessage.miniMessage()
         if (sender == null) {
             warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", e.player.name, e.player.uniqueId)
-            throw NullPointerException()
+            sender = e.player.asOrCreateUser()
         }
         val subscribe = sender.data.subscribeContact
         if (subscribe == null) {

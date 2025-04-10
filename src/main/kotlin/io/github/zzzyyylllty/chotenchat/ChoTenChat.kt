@@ -33,13 +33,13 @@ import java.util.*
 
 @RuntimeDependencies(
     RuntimeDependency(
-        "!org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.3.3",
+        "!org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.0",
         test = "!kotlinx.serialization.Serializer",
         relocate = ["!kotlin.", "!kotlin1822.", "!kotlinx.serialization.", "!kotlinx.serialization133."],
         transitive = false
     ),
     RuntimeDependency(
-        "!org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.3",
+        "!org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.0",
         test = "!kotlinx.serialization.json.Json",
         relocate = ["!kotlin.", "!kotlin1822.", "!kotlinx.serialization.", "!kotlinx.serialization133."],
         transitive = false
@@ -71,19 +71,6 @@ object ChoTenChat : Plugin() {
     }
 
     override fun onDisable() {
-        saveData(false)
-    }
-
-    fun saveData(async : Boolean = true) {
-        submit(async = async) {
-            val sql = SQLDataBase()
-            for (value in loadedGroupMap.values) {
-                sql.saveInDatabase(value)
-            }
-            for (value in userMap.values) {
-                sql.saveInDatabase(value)
-            }
-        }
     }
 
     fun reloadCustomConfig() {

@@ -1,7 +1,5 @@
 package io.github.zzzyyylllty.chotenchat.database
 
-import com.beust.klaxon.Json
-import com.beust.klaxon.Klaxon
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dataSource
@@ -23,6 +21,19 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
 import javax.sql.DataSource
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
+val jsonUtils = Json {
+    prettyPrint = true
+    isLenient = true
+    ignoreUnknownKeys = true
+    coerceInputValues = true
+    encodeDefaults = true
+    allowStructuredMapKeys = true
+    allowSpecialFloatingPointValues = true
+}
 
 public open class SQLDataBase {
 
@@ -58,15 +69,15 @@ public open class SQLDataBase {
     }
 
     public fun saveInDatabase(user: User) {
-        val json = Klaxon().toJsonString(user)
+        val json = jsonUtils.encodeToString(user)
         userTable.insert(dataSource, "uuid", "long_id", "value") {
             value(user.playerUUID, user.longId, json)
         }
     }
 
     public fun saveInDatabase(group: Group) {
-        val json = Klaxon().toJsonString(group)
-        userTable.insert(dataSource, "long_id", "value") {
+        val json = jsonUtils.encodeToString(group)
+        groupTable.insert(dataSource, "long_id", "value") {
             value(group.longId, json)
         }
     }
@@ -82,7 +93,7 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            return Klaxon().parse<User>(string)
+            return jsonUtils.decodeFromString<User>(string)
             // Expansion fun import kotlinx.serialization.encodeToString required.
         }
     }
@@ -97,7 +108,7 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            val parsed = Klaxon().parse<User>(string)
+            val parsed = jsonUtils.decodeFromString<User?>(string)
             val uuid = UUID.fromString(parsed?.playerUUID)
             if (userMap[id] == null && parsed != null) userMap[id] = parsed
             if (parsed != null && playerAsUserMap[uuid] == null) playerAsUserMap[uuid] = id
@@ -114,9 +125,9 @@ public open class SQLDataBase {
             getString("value")
         }
         if (string == null) return null else {
-            val parsed = Klaxon().parse<Group>(string)
+            val parsed = jsonUtils.decodeFromString<Group?>(string)
             if (loadedGroupMap[id] == null && parsed != null) loadedGroupMap[id] = parsed
-            return Klaxon().parse<Group>(string)
+            return parsed
         }
     }
 

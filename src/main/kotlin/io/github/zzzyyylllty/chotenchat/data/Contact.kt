@@ -15,7 +15,6 @@ import taboolib.module.lang.asLangText
 import java.util.UUID
 import kotlin.math.floor
 
-@Serializable
 public interface Contact {
     val registryName: String
     val nickName: String?
@@ -30,7 +29,7 @@ public interface Contact {
     }
     fun getShortName(): String {
         var name = (nickName ?: registryName)
-        return if (name.length >= 7) ("${name.substring(0, )}...") else name
+        return if (name.length >= 7) ("${name.substring(0, 6)}...") else name
     }
     fun getIdColor(): String {
         return when (idData.fancyAccountType) {
