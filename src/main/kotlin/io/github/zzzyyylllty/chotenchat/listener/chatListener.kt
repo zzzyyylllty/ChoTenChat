@@ -69,7 +69,6 @@ fun onChat(e: AsyncChatEvent) {
 @SubscribeEvent(EventPriority.MONITOR)
 fun onJoin(e: PlayerJoinEvent) {
     // create
-    e.player.createOrWipeUser()
+    if (e.player.asUser() == null) e.player.createOrWipeUser()
     // createGroup(1000000, "ChoTenGroup", "ChoTenGroup")
-    e.player.asUser()
 }

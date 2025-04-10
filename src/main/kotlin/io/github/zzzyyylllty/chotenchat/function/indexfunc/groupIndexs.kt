@@ -15,11 +15,6 @@ import taboolib.platform.util.inputBook
 import taboolib.platform.util.nextChat
 import taboolib.platform.util.nextChatInTick
 
-fun String.indexParse() : String? {
-    return if (this == "~") null else this
-}
-
-
 fun Player.createGroupInIndex() {
     val player = this
 

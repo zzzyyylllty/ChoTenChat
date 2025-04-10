@@ -79,4 +79,5 @@ defaults:
       nickName: 'ChoTenChan'
       longId: '1'
       fancyAccountType: ADMINISTRATOR
+      fancyAccountValue: 9999
 

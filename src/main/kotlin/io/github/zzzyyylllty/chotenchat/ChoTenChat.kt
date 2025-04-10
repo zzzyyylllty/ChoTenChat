@@ -19,6 +19,7 @@ import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.info
 import taboolib.common.platform.function.warning
 import taboolib.common.platform.function.severe
+import taboolib.common.platform.function.submit
 import taboolib.common.platform.function.submitAsync
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
@@ -70,11 +71,11 @@ object ChoTenChat : Plugin() {
     }
 
     override fun onDisable() {
-        saveData()
+        saveData(false)
     }
 
-    fun saveData() {
-        submitAsync {
+    fun saveData(async : Boolean = true) {
+        submit(async = async) {
             val sql = SQLDataBase()
             for (value in loadedGroupMap.values) {
                 sql.saveInDatabase(value)
