@@ -66,4 +66,12 @@ object ChoTenChatAdminCommand {
         }
     }
 
+    /** 更改头衔 */
+    @CommandBody
+    val changeTitleSelect = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            (sender as Player).createGroupInIndex()
+        }
+    }
+
 }

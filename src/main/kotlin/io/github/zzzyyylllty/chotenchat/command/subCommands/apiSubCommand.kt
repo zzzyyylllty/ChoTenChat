@@ -8,6 +8,7 @@ import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.createGroup
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.generateRandomGroupId
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.tabooPlayerAsUser
 import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
 import io.github.zzzyyylllty.chotenchat.logger.fineS
 import io.github.zzzyyylllty.chotenchat.logger.infoS
@@ -197,13 +198,7 @@ object ChoTenChatApiCommand {
 
 fun createGroupFromCommand(sender: CommandSender, context: CommandContext<CommandSender>, argument: String) {
     submitAsync {
-        val tabooPlayer = context.player("player")
-        val bukkitPlayer = tabooPlayer.castSafely<Player>()
-        if (bukkitPlayer == null) {
-            sender.severeS(sender.asLangText("PLAYER_NOT_FOUND", context["player"]), true)
-            throw NullPointerException()
-        }
-        val user = bukkitPlayer.asOrCreateUser()
+        val user = tabooPlayerAsUser(sender, context)
         val mm = MiniMessage.miniMessage()
         // 获取参数的值
         val id = context.getOrNull("id") ?: generateRandomGroupId()

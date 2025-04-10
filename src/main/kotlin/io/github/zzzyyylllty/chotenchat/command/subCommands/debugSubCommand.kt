@@ -4,6 +4,7 @@ import com.beust.klaxon.JsonArray
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asGroup
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.subscribeContact
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.tabooPlayerAsUser
 import io.github.zzzyyylllty.chotenchat.logger.infoS
 import io.github.zzzyyylllty.chotenchat.logger.warningS
 import kotlinx.serialization.decodeFromString
@@ -48,7 +49,7 @@ object ChoTenChatDebugCommand {
                     sender.infoS(sender.asLangText("PLAYER_NOT_FOUND", context.player("player")))
                     return@execute
                 }
-                val user = bukkitPlayer.asUser()
+                val user = tabooPlayerAsUser(sender, context)
                 if (user == null) {
                     sender.infoS(sender.asLangText("INTERNAL_WARNING_UNABLE_TO_FIND_USER_BY_PLAYER", bukkitPlayer.name, bukkitPlayer.uniqueId))
                     return@execute

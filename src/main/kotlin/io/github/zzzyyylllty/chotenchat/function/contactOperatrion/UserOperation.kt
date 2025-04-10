@@ -1,13 +1,17 @@
 package io.github.zzzyyylllty.chotenchat.function.contactOperatrion
 
 import io.github.zzzyyylllty.chotenchat.data.Contact
+import io.github.zzzyyylllty.chotenchat.data.ContainedContact
+import io.github.zzzyyylllty.chotenchat.data.ContainedContactType
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
+import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.IdData
 import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.logger.infoL
 import io.github.zzzyyylllty.chotenchat.logger.severeS
@@ -16,6 +20,8 @@ import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import taboolib.common.platform.command.CommandContext
+import taboolib.common.platform.command.player
 import taboolib.common.util.random
 import taboolib.platform.util.asLangText
 import kotlin.collections.set
@@ -107,5 +113,42 @@ fun generateRandomUserId() : Long{
 }
 
 fun User.subscribeContact(contact: Contact) {
-    this.data.subscribeContact = contact
+    this.data.subscribeContact = contact.toContained()
+}
+
+fun Contact.toContained(): ContainedContact {
+    return when (this) {
+        is Group -> {
+            ContainedContact(ContainedContactType.GROUP, this.longId)
+        }
+
+        is User -> {
+            ContainedContact(ContainedContactType.USER, this.longId)
+        }
+
+        else -> {
+            throw IllegalStateException("Not a Group Or User")
+        }
+    }
+}
+
+fun ContainedContact.toUnContained(): Contact? {
+    return when (this.contactType) {
+        ContainedContactType.GROUP -> {
+            this.longId.asGroup()
+        }
+        ContainedContactType.USER -> {
+            this.longId.asUser()
+        }
+    }
+}
+
+fun tabooPlayerAsUser(sender: CommandSender, context: CommandContext<CommandSender>): User {
+    val tabooPlayer = context.player("player")
+    val bukkitPlayer = tabooPlayer.castSafely<Player>()
+    if (bukkitPlayer == null) {
+        sender.severeS(sender.asLangText("PLAYER_NOT_FOUND", context["player"]), true)
+        throw NullPointerException()
+    }
+    return bukkitPlayer.asOrCreateUser()
 }

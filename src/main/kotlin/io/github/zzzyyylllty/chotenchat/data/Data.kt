@@ -34,7 +34,7 @@ enum class FancyAccountType {
 }
 @Serializable
 data class UserData(
-    var subscribeContact: Contact?,
+    var subscribeContact: ContainedContact?,
     val contactSettings: LinkedHashMap<Contact, ContactSetting>,
 )
 @Serializable

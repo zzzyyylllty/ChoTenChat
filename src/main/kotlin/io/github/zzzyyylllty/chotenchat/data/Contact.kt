@@ -2,20 +2,23 @@ package io.github.zzzyyylllty.chotenchat.data
 
 
 import com.beust.klaxon.Klaxon
+import io.github.zzzyyylllty.chotenchat.data.ContainedContactType.*
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.ADMINISTRATOR
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.BLACK_GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.FANCY
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.GOLD
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.NORMAL
 import io.github.zzzyyylllty.chotenchat.data.TitleSelection.*
+import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asGroup
 import kotlinx.serialization.Serializable
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.config
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
 import taboolib.module.lang.asLangText
 import java.util.UUID
 import kotlin.math.floor
-
-public interface Contact {
+@Serializable
+sealed interface Contact {
     val registryName: String
     val nickName: String?
     val longId: Long
@@ -61,6 +64,15 @@ public data class User(
 
     fun getUUID(): UUID? {
         return UUID.fromString(playerUUID)
+    }
+
+    fun getSubscribeContact() : Contact? {
+        val id = data.subscribeContact?.longId
+        return when (data.subscribeContact?.contactType) {
+            GROUP -> id?.asGroup()
+            USER -> id?.asUser()
+            null -> null
+        }
     }
 }
 
@@ -140,3 +152,17 @@ enum class TitleSelection {
     PERMISSION,
     SPECIAL
 }
+
+
+@Serializable
+enum class ContainedContactType {
+    GROUP,
+    USER
+}
+
+
+@Serializable
+data class ContainedContact (
+    val contactType: ContainedContactType,
+    val longId: Long
+)

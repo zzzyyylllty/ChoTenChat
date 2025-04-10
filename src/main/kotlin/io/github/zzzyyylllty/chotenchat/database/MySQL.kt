@@ -70,16 +70,31 @@ public open class SQLDataBase {
 
     public fun saveInDatabase(user: User) {
         val json = jsonUtils.encodeToString(user)
+        userTable.update(dataSource) {
+            set("long_id", user.longId)
+            set("value", json)
+            where("uuid" eq user.playerUUID)
+        }
+        /*
         userTable.insert(dataSource, "uuid", "long_id", "value") {
             value(user.playerUUID, user.longId, json)
         }
+        */
+
     }
 
     public fun saveInDatabase(group: Group) {
         val json = jsonUtils.encodeToString(group)
-        groupTable.insert(dataSource, "long_id", "value") {
-            value(group.longId, json)
+
+        groupTable.update(dataSource) {
+            set("value", json)
+            where("long_id" eq group.longId)
         }
+        /*
+        groupTable.insert(dataSource, "long_id", "value") {
+            onDuplicateKeyUpdate { value(group.longId, json) }
+        }*/
+
     }
 
     public fun getUserInDatabase(player: Player?): User? {
