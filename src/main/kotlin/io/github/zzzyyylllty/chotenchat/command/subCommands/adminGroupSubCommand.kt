@@ -82,7 +82,7 @@ object ChoTenChatAdminGroupCommand {
             dynamic("group_id") {
                 dynamic("value") {
                     execute<CommandSender> { sender, context, argument ->
-                        getMemberInContext(context)?.changeSpecialTitle(context["value"].toLong())
+                        getMemberInContext(context)?.changeSpecialTitle(context["value"])
                     }
                 }
             }
