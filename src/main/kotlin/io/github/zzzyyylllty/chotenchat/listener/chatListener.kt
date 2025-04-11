@@ -1,5 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.listener
 
+import io.github.zzzyyylllty.chotenchat.data.ContainedContactType
+import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.Message
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.createOrWipeUser
@@ -10,6 +12,8 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.ConsoleCommandSender
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asMember
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.getMember
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.toUnContained
 import io.github.zzzyyylllty.chotenchat.function.message.buildCompString
 import io.github.zzzyyylllty.chotenchat.function.message.buildMessage
@@ -46,6 +50,12 @@ fun onChat(e: AsyncChatEvent) {
             sendTime = LocalDateTime.now(),
             reply = null
         )
+
+    if (subscribe.contactType == ContainedContactType.GROUP) {
+        val member = sender.getMember(subscribe.longId)?.temperature?.plus(1)
+        if (member != null) sender.getMember(subscribe.longId)?.temperature = member
+    }
+
     val compedString = chotenMessage.buildCompString()
         e.renderer { source: Player?, sourceDisplayName: Component?, message: Component?, viewer: Audience? ->
             if (viewer !is ConsoleCommandSender) {

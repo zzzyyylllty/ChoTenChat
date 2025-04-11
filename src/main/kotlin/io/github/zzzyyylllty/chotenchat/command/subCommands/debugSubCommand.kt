@@ -114,7 +114,6 @@ object ChoTenChatDebugCommand {
         }
     }
 
-
     @CommandBody
     val subscribe = subCommand {
         dynamic("type") {

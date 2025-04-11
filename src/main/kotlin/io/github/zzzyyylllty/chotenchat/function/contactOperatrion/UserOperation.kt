@@ -97,9 +97,13 @@ fun User.asMember(g: Long, permission: GroupPermission) : Member {
         temperature = 0,
         specialTitle = null,
         groupPermission = permission,
-        titleSelection = TitleSelection.PERMISSION,
+        titleSelection = TitleSelection.TEMPERATURE,
         titleTheme = "default"
     )
+}
+
+fun User.getMember(g: Long) : Member? {
+    return g.asGroup()?.members?.get(this.longId)
 }
 
 

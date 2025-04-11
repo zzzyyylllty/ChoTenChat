@@ -106,11 +106,11 @@ public data class Member(
     val group: Long,
     val playerUUID: String?,
     val playerName: String?,
-    val temperature: Long,
-    val specialTitle: String?,
+    var temperature: Long,
+    var specialTitle: String?,
     var groupPermission: GroupPermission,
-    var titleSelection: TitleSelection,
-    var titleTheme: String,
+    var titleSelection: TitleSelection = TEMPERATURE,
+    var titleTheme: String = "default",
 ) {
     fun isTrusted(): Boolean {
         return (groupPermission == GroupPermission.TRUSTED || groupPermission == GroupPermission.ADMINISTRATOR || groupPermission == GroupPermission.BUREAUCRAT || groupPermission == GroupPermission.OWNER)

@@ -3,11 +3,16 @@ package io.github.zzzyyylllty.chotenchat.command.subCommands
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.IdData
+import io.github.zzzyyylllty.chotenchat.data.Member
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.addTemperature
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.changeSpecialTitle
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.createGroup
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.generateRandomGroupId
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.getMember
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.setTemperature
 import io.github.zzzyyylllty.chotenchat.function.indexfunc.createGroupInIndex
 import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
 import io.github.zzzyyylllty.chotenchat.logger.fineS
@@ -36,45 +41,56 @@ import java.util.UUID
 import kotlin.text.toLong
 
 @CommandHeader(
-    name = "chotenchatadmin",
-    aliases = ["dylsemchatadmin","ctcadmin","chatadmin"],
-    permission = "chotenchat.command.admin",
-    description = "ADMIN Command of ChoTenChat.",
+    name = "chotenchatadmingroup",
+    aliases = ["dylsemchatadmingroup","ctcadmingroup","chatadmingroup"],
+    permission = "chotenchat.command.admin.group",
+    description = "ADMIN Group Command of ChoTenChat.",
     permissionMessage = "",
     permissionDefault = PermissionDefault.OP,
     newParser = false,
 )
-object ChoTenChatAdminCommand {
+object ChoTenChatAdminGroupCommand {
 
-    /** 创建群聊 */
     @CommandBody
-    val createGroup = subCommand {
-        dynamic("content") {
-            execute<CommandSender> { sender, context, argument ->
-                val mm = MiniMessage.miniMessage()
-                // 获取参数的值
-                val content = context["content"]
-                sender.infoS(content)
+    val addTemperature = subCommand {
+        dynamic("member_id") {
+            dynamic("group_id") {
+                dynamic("value") {
+                    execute<CommandSender> { sender, context, argument ->
+                        getMemberInContext(context)?.addTemperature(context["value"].toLong())
+                    }
+                }
             }
         }
     }
-    /** 创建群聊 - 索引模式 */
     @CommandBody
-    val createGroupIndex = subCommand {
-        execute<CommandSender> { sender, context, argument ->
-            (sender as Player).createGroupInIndex()
+    val setTemperature = subCommand {
+        dynamic("member_id") {
+            dynamic("group_id") {
+                dynamic("value") {
+                    execute<CommandSender> { sender, context, argument ->
+                        getMemberInContext(context)?.setTemperature(context["value"].toLong())
+                    }
+                }
+            }
         }
     }
 
-    /** 更改头衔选择 */
     @CommandBody
-    val changeTitleSelect = subCommand {
-        execute<CommandSender> { sender, context, argument ->
-            (sender as Player).createGroupInIndex()
+    val changeSpecialTitle = subCommand {
+        dynamic("member_id") {
+            dynamic("group_id") {
+                dynamic("value") {
+                    execute<CommandSender> { sender, context, argument ->
+                        getMemberInContext(context)?.changeSpecialTitle(context["value"].toLong())
+                    }
+                }
+            }
         }
     }
 
+}
 
-@CommandBody
-val group = ChoTenChatAdminGroupCommand
+fun getMemberInContext(context: CommandContext<CommandSender>): Member? {
+    return context["member_id"].toLong().asUser()?.getMember(context["group_id"].toLong())
 }
