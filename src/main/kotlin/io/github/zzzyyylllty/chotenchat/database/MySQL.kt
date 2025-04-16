@@ -2,8 +2,6 @@ package io.github.zzzyyylllty.chotenchat.database
 
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.User
-import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.dataSource
-import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.host
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
@@ -24,7 +22,7 @@ import javax.sql.DataSource
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-
+import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.config
 val jsonUtils = Json {
     prettyPrint = true
     isLenient = true
@@ -36,6 +34,9 @@ val jsonUtils = Json {
 }
 
 public open class SQLDataBase {
+
+    val host by lazy { config.getHost("database") }
+    val dataSource by lazy { host.createDataSource() }
 
     val userTable = Table("user_table", host) {
         add { id() }
@@ -70,6 +71,9 @@ public open class SQLDataBase {
 
     public fun saveInDatabase(user: User) {
         val json = jsonUtils.encodeToString(user)
+        userTable.insert(dataSource,"uuid", "long_id", "value") {
+            onDuplicateKeyUpdate { value(user.playerUUID, user.playerUUID, user.longId, json) }
+        }
         userTable.update(dataSource) {
             set("long_id", user.longId)
             set("value", json)
@@ -85,7 +89,9 @@ public open class SQLDataBase {
 
     public fun saveInDatabase(group: Group) {
         val json = jsonUtils.encodeToString(group)
-
+        groupTable.insert(dataSource, "long_id", "value") {
+            onDuplicateKeyUpdate { value(group.longId, json) }
+        }
         groupTable.update(dataSource) {
             set("value", json)
             where("long_id" eq group.longId)

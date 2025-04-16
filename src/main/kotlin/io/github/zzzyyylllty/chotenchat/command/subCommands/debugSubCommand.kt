@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.chotenchat.command.subCommands
 
 import com.beust.klaxon.JsonArray
+import io.github.zzzyyylllty.chotenchat.function.boot.saveData
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asGroup
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.subscribeContact
@@ -111,6 +112,12 @@ object ChoTenChatDebugCommand {
                 message = "$message<br><white>${entry.key} <gray>- ${Json.encodeToString(entry.value)}"
             }
             sender.infoS(message)
+        }
+    }
+    @CommandBody
+    val saveDataBase = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            saveData()
         }
     }
 

@@ -50,8 +50,6 @@ class RuntimeEnv
 object ChoTenChat : Plugin() {
 
     val plugin by lazy { this }
-    val host by lazy { config.getHost("database") }
-    val dataSource by lazy { host.createDataSource() }
     var dataFolder = nativeDataFolder()
     var userMap = LinkedHashMap<Long, User>() // KID, User...
     var playerAsUserMap = LinkedHashMap<UUID, Long>() // PlayerUUID, KID
