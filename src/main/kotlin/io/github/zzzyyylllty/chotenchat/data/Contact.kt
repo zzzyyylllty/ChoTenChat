@@ -53,7 +53,7 @@ public data class User(
     override val nickName: String?,
     override val longId: Long,
     override val idData: IdData,
-    val playerUUID: String?,
+    val playerUUID: String,
     val playerName: String?,
     val data: UserData,
 ) : Contact {

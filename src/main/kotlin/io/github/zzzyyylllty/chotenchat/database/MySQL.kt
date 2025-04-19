@@ -42,13 +42,15 @@ public open class SQLDataBase {
         add { id() }
         add("uuid") { // Player UUID
             type(ColumnTypeSQL.VARCHAR, 36) {
-                options(ColumnOptionSQL.UNIQUE_KEY)
+                options(
+                    ColumnOptionSQL.NOTNULL, ColumnOptionSQL.KEY)
             }
         }
         add("long_id") { // LongID
             type(ColumnTypeSQL.VARCHAR, 64) {
                 // 创建索引
-                options(ColumnOptionSQL.UNIQUE_KEY)
+                options(
+                    ColumnOptionSQL.NOTNULL, ColumnOptionSQL.KEY)
             }
         }
         add("value") {
@@ -71,6 +73,21 @@ public open class SQLDataBase {
 
     public fun saveInDatabase(user: User) {
         val json = jsonUtils.encodeToString(user)
+        if (getUserInDatabase(user.longId) == null) {
+            userTable.insert(dataSource, "uuid", "long_id", "value") {
+                value(user.playerUUID, user.longId, json)
+            }
+        } else {
+            userTable.update(dataSource) {
+                set("uuid", user.playerUUID)
+                set("long_id", user.longId)
+                set("value", json)
+            }
+        }
+    }
+    /*
+    public fun saveInDatabase(user: User) {
+        val json = jsonUtils.encodeToString(user)
         userTable.insert(dataSource,"uuid", "long_id", "value") {
             onDuplicateKeyUpdate { value(user.playerUUID, user.playerUUID, user.longId, json) }
         }
@@ -85,22 +102,23 @@ public open class SQLDataBase {
         }
         */
 
-    }
+    }*/
 
     public fun saveInDatabase(group: Group) {
         val json = jsonUtils.encodeToString(group)
-        groupTable.insert(dataSource, "long_id", "value") {
-            onDuplicateKeyUpdate { value(group.longId, json) }
-        }
-        groupTable.update(dataSource) {
-            set("value", json)
-            where("long_id" eq group.longId)
-        }
-        /*
-        groupTable.insert(dataSource, "long_id", "value") {
-            onDuplicateKeyUpdate { value(group.longId, json) }
-        }*/
 
+        if (getUserInDatabase(group.longId) == null) {
+            groupTable.insert(dataSource, "long_id", "value") {
+                onDuplicateKeyUpdate {
+                    value(group.longId, json)
+                }
+            }
+        } else {
+            userTable.update(dataSource) {
+                set("value", json)
+            }
+
+        }
     }
 
     public fun getUserInDatabase(player: Player?): User? {
