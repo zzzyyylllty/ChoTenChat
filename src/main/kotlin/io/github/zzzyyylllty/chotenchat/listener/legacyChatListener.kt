@@ -24,6 +24,7 @@ import taboolib.platform.util.asLangText
 import java.time.LocalDateTime
 
 
+@SubscribeEvent(EventPriority.LOWEST)
 fun onChat(e: AsyncChatEvent) {
     var sender = e.player.asUser()
     val mm = MiniMessage.miniMessage()

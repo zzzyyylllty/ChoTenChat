@@ -5,6 +5,7 @@ import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.GroupPermission
 import io.github.zzzyyylllty.chotenchat.data.IdData
 import io.github.zzzyyylllty.chotenchat.data.Member
+import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.data.UserData
 import io.github.zzzyyylllty.chotenchat.database.SQLDataBase
@@ -32,6 +33,9 @@ fun Member.setTemperature(amount: Long) {
 }
 fun Member.changeSpecialTitle(title: String) {
     specialTitle = title
+}
+fun Member.changeTitleSelect(selection: TitleSelection) {
+    titleSelection = selection
 }
 fun Member.changePermission(permission: GroupPermission) {
     groupPermission = permission

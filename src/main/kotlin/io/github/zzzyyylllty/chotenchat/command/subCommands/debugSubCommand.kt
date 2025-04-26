@@ -168,6 +168,6 @@ fun suggesstionGroup(): List<String> {
 fun suggesstionMember(group: String): List<String> {
     val list = mutableListOf<String>()
     val g = (group.toLong()).asGroup() ?: return listOf("Unknown")
-    g.members.toList().forEach { list.add(it.toString()) }
+    g.members.values.forEach { list.add(it.longId.toString()) }
     return list
 }

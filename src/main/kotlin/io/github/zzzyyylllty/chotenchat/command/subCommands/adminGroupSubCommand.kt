@@ -4,11 +4,13 @@ import io.github.zzzyyylllty.chotenchat.data.FancyAccountType
 import io.github.zzzyyylllty.chotenchat.data.Group
 import io.github.zzzyyylllty.chotenchat.data.IdData
 import io.github.zzzyyylllty.chotenchat.data.Member
+import io.github.zzzyyylllty.chotenchat.data.TitleSelection
 import io.github.zzzyyylllty.chotenchat.data.User
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asOrCreateUser
 import io.github.zzzyyylllty.chotenchat.function.bukkitPlayer.asUser
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.addTemperature
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.changeSpecialTitle
+import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.changeTitleSelect
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.createGroup
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.generateRandomGroupId
 import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.getMember
@@ -53,7 +55,6 @@ object ChoTenChatAdminGroupCommand {
 
     @CommandBody
     val temperature = subCommand {
-        submitAsync {
         dynamic("operation") {
             dynamic("group_id") {
                 dynamic("member_id") {
@@ -76,12 +77,10 @@ object ChoTenChatAdminGroupCommand {
             }
         }
         }
-    }
 
 
     @CommandBody
     val changeSpecialTitle = subCommand {
-        submitAsync {
             dynamic("group_id") {
                 dynamic("member_id") {
                     dynamic("value") {
@@ -94,17 +93,15 @@ object ChoTenChatAdminGroupCommand {
                 }
                 suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionGroup() }
             }
-        }
     }
 
     @CommandBody
     val changeSelectionTitle = subCommand {
-        submitAsync {
             dynamic("group_id") {
                 dynamic("member_id") {
                     dynamic("value") {
                         execute<CommandSender> { sender, context, argument ->
-                            getMemberInContext(context)?.changeSpecialTitle(context["value"])
+                            getMemberInContext(context)?.changeTitleSelect(TitleSelection.valueOf(context["value"] ?: "TEMPERATURE"))
                         }
                     }
                     suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionMember(context["group_id"]) }
@@ -112,7 +109,6 @@ object ChoTenChatAdminGroupCommand {
                 suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionGroup() }
             }
         }
-    }
 
 }
 

@@ -39,7 +39,7 @@ fun onBukkitChatEvent(e: AsyncPlayerChatEvent) {
         e.recipients.clear()
     }
     val sender = e.player.asUser() ?: throw NullPointerException("User for event player ${e.player} not found")
-    val subscribe = sender?.data?.subscribeContact
+    val subscribe = sender.data.subscribeContact
     if (subscribe == null) {
         warningL("INTERNAL_WARNING_UNABLE_TO_FIND_USER_SUBSCRIBE", sender.registryName)
         e.player.severeS(e.player.asLangText("CHAT_SEVERE_NO_SUBSCRIBE_FOUND"))

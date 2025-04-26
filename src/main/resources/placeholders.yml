@@ -28,6 +28,6 @@ nick: <gray>[<yellow><hover:show_text:'<reset><br><b>| </b><gray>用户名称 {n
 message-SUBSCRIBE: <yellow>[!] {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-ALWAYS: <white>** {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 message-NOTE: <gray>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
-message-SELF: <dark_aqua>* {message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
+message-SELF: <yellow>-> <dark_aqua>{message.message} <hover:show_text:'<gray>{message.time} <yellow>点击管理本条消息...'><#886688><b>≡</hover>
 reply: '<dark_gray>[ {reply.sender}: {reply.message} ]<br>'
 system: '<gray>[<red>系统<gray>]'
