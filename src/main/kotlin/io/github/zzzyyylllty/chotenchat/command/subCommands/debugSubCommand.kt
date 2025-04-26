@@ -85,7 +85,7 @@ object ChoTenChatDebugCommand {
         dynamic("id") {
             execute<CommandSender> { sender, context, argument ->
                 val id = context.get("id").toLong()
-                var message = "<yellow><b>Group:</b> <br>${loadedGroupMap[id]}"
+                var message = "<yellow><b>Group:</b> <br>${id.asGroup()}"
                 sender.infoS(message)
             }
         }
@@ -159,4 +159,15 @@ fun suggesstionGroupOrUser(type: String): List<String> {
         }
         else -> {listOf<String>()}
     }
+}
+fun suggesstionGroup(): List<String> {
+    val list = mutableListOf<String>()
+    loadedGroupMap.keys.toList().forEach { list.add(it.toString()) }
+    return list
+}
+fun suggesstionMember(group: String): List<String> {
+    val list = mutableListOf<String>()
+    val g = (group.toLong()).asGroup() ?: return listOf("Unknown")
+    g.members.toList().forEach { list.add(it.toString()) }
+    return list
 }

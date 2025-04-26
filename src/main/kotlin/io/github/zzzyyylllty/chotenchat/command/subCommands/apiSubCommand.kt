@@ -13,6 +13,7 @@ import io.github.zzzyyylllty.chotenchat.function.kether.evalKether
 import io.github.zzzyyylllty.chotenchat.logger.fineS
 import io.github.zzzyyylllty.chotenchat.logger.infoS
 import io.github.zzzyyylllty.chotenchat.logger.severeS
+import io.papermc.paper.event.player.AsyncChatEvent
 import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
@@ -29,6 +30,7 @@ import kotlinx.serialization.decodeFromString
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.loadedGroupMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
+import org.bukkit.Bukkit
 import java.util.UUID
 import kotlin.text.toLong
 
@@ -190,6 +192,21 @@ object ChoTenChatApiCommand {
                 val user = Json.decodeFromString<User>(context["json"])
                 userMap[user.longId] = user
                 playerAsUserMap[UUID.fromString(user.playerUUID)] = user.longId
+            }
+        }
+    }
+
+    /** sudo other player to saying */
+    @CommandBody
+    val sudoPlayerChat = subCommand {
+        submitAsync {
+            player("player") {
+                dynamic("content") {
+                    execute<CommandSender> { sender, context, argument ->
+                        val content = context["content"]
+                        val user = tabooPlayerAsUser(sender, context)
+                    }
+                }
             }
         }
     }

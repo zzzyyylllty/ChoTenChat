@@ -68,7 +68,7 @@ fun Message.buildCompString() : String {
         "{title.title}" to (member?.getTitle(contactAsGroup) ?: console.asLangText("STRING_UNKNOWN")),
         "{nick.nick}" to sender.getGroupOrNickOrReg(member),
         "{nick.playername}" to (sender.playerName ?: "Unknown"),
-        "{nick.playeruuid}" to (sender.playerUUID ?: "Unknown"),
+        "{nick.playeruuid}" to (sender.playerUUID),
         "{nick.namecolor}" to "<$nameColor>",
         "{nick.color}" to "<gold>", // TODO
         "{nick.level}" to "100", // TODO

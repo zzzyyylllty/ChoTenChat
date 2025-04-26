@@ -52,39 +52,64 @@ import kotlin.text.toLong
 object ChoTenChatAdminGroupCommand {
 
     @CommandBody
-    val addTemperature = subCommand {
-        dynamic("member_id") {
+    val temperature = subCommand {
+        submitAsync {
+        dynamic("operation") {
             dynamic("group_id") {
-                dynamic("value") {
-                    execute<CommandSender> { sender, context, argument ->
-                        getMemberInContext(context)?.addTemperature(context["value"].toLong())
+                dynamic("member_id") {
+                    dynamic("value") {
+                        execute<CommandSender> { sender, context, argument ->
+                            when (context["operation"]) {
+                                "add" -> getMemberInContext(context)?.addTemperature(context["value"].toLong())
+                                "remove" -> getMemberInContext(context)?.addTemperature((context["value"].toLong()) * -1L)
+                                "set" -> getMemberInContext(context)?.setTemperature(context["value"].toLong())
+                                else -> throw IllegalStateException("operation must be add/remove/set.")
+                            }
+                        }
                     }
+                    suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionMember(context["group_id"]) }
                 }
+                suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionGroup() }
+            }
+            suggestion<CommandSender>(uncheck = true) { sender, context ->
+                listOf("add", "remove", "set")
             }
         }
+        }
     }
+
+
     @CommandBody
-    val setTemperature = subCommand {
-        dynamic("member_id") {
+    val changeSpecialTitle = subCommand {
+        submitAsync {
             dynamic("group_id") {
-                dynamic("value") {
-                    execute<CommandSender> { sender, context, argument ->
-                        getMemberInContext(context)?.setTemperature(context["value"].toLong())
+                dynamic("member_id") {
+                    dynamic("value") {
+                        execute<CommandSender> { sender, context, argument ->
+                            getMemberInContext(context)?.changeSpecialTitle(context["value"])
+                        }
+
                     }
+                    suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionMember(context["group_id"]) }
                 }
+                suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionGroup() }
             }
         }
     }
 
     @CommandBody
-    val changeSpecialTitle = subCommand {
-        dynamic("member_id") {
+    val changeSelectionTitle = subCommand {
+        submitAsync {
             dynamic("group_id") {
-                dynamic("value") {
-                    execute<CommandSender> { sender, context, argument ->
-                        getMemberInContext(context)?.changeSpecialTitle(context["value"])
+                dynamic("member_id") {
+                    dynamic("value") {
+                        execute<CommandSender> { sender, context, argument ->
+                            getMemberInContext(context)?.changeSpecialTitle(context["value"])
+                        }
                     }
+                    suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionMember(context["group_id"]) }
                 }
+                suggestion<CommandSender>(uncheck = true) { sender, context -> suggesstionGroup() }
             }
         }
     }

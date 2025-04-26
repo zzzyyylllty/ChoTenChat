@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.chotenchat.data
 
-
 import com.beust.klaxon.Klaxon
 import io.github.zzzyyylllty.chotenchat.data.ContainedContactType.*
 import io.github.zzzyyylllty.chotenchat.data.FancyAccountType.ADMINISTRATOR
@@ -14,9 +13,13 @@ import io.github.zzzyyylllty.chotenchat.function.contactOperatrion.asGroup
 import kotlinx.serialization.Serializable
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.config
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.console
+import net.kyori.adventure.audience.Audience
+import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import taboolib.module.lang.asLangText
 import java.util.UUID
 import kotlin.math.floor
+
 @Serializable
 sealed interface Contact {
     val registryName: String
@@ -46,6 +49,7 @@ sealed interface Contact {
     fun getJson(): String {
         return Klaxon().toJsonString(this)
     }
+    fun sendMessage(component: Component)
 }
 @Serializable
 public data class User(
@@ -74,6 +78,9 @@ public data class User(
             null -> null
         }
     }
+    override fun sendMessage(component: Component) {
+        (Bukkit.getPlayer(UUID.fromString(playerUUID)) as Audience).sendMessage(component)
+    }
 }
 
 @Serializable
@@ -97,6 +104,11 @@ public data class Group(
             }
         }
         return lastTitle
+    }
+    override fun sendMessage(component: Component) {
+        members.values.forEach { it ->
+            (Bukkit.getPlayer(UUID.fromString(it.playerUUID)) as Audience).sendMessage(component)
+        }
     }
 }
 @Serializable

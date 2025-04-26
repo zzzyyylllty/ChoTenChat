@@ -7,6 +7,7 @@ import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.playerAsUserMap
 import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.userMap
 import org.bukkit.entity.Player
 import taboolib.expansion.getDataContainer
+import java.util.UUID
 
 fun Player.asUser(): User? {
     return userMap[playerAsUserMap[this.uniqueId]] ?: SQLDataBase().getUserInDatabase(this)
@@ -24,7 +25,16 @@ fun Player.asUserOrFail(): User {
 fun Long.asUser(): User? {
     return userMap[this] ?: SQLDataBase().getUserInDatabase(this)
 }
+fun Long.asUserWithoutDB(): User? {
+    return userMap[this]
+}
 
+fun UUID.asUser(): User? {
+    return userMap[playerAsUserMap[this]] ?: SQLDataBase().getUserInDatabase(this)
+}
+fun UUID.asUserWithoutDB(): User? {
+    return userMap[playerAsUserMap[this]]
+}
 fun Long.asUserOrFail(): User {
     return this.asUser() ?: throw NullPointerException("Could not found user for ID ${this}")
 }

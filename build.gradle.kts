@@ -83,6 +83,8 @@ repositories {
         url = uri("https://maven.citizensnpcs.co/repo")
     }
     mavenCentral()
+    //mavenLocal()
+    maven { url = uri("https://jitpack.io") }
     maven("https://mvnrepository.com/artifact/")
     maven("https://mvnrepository.com/artifact/net.byteflux/libby-bukkit")
     maven(url = "https://mvn.lumine.io/repository/maven-public/")
@@ -104,6 +106,7 @@ dependencies {
     testImplementation(kotlin("test"))
     taboo("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.0") { isTransitive = false }
     taboo("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.0") { isTransitive = false }
+
 
 }
 

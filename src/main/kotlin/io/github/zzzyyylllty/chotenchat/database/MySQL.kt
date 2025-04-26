@@ -53,7 +53,7 @@ public open class SQLDataBase {
                     ColumnOptionSQL.NOTNULL, ColumnOptionSQL.KEY)
             }
         }
-        add("value") {
+        add("data") {
             type(ColumnTypeSQL.JSON)
         }
     }
@@ -66,7 +66,7 @@ public open class SQLDataBase {
                 options(ColumnOptionSQL.UNIQUE_KEY)
             }
         }
-        add("value") {
+        add("data") {
             type(ColumnTypeSQL.JSON)
         }
     }
@@ -74,62 +74,45 @@ public open class SQLDataBase {
     public fun saveInDatabase(user: User) {
         val json = jsonUtils.encodeToString(user)
         if (getUserInDatabase(user.longId) == null) {
-            userTable.insert(dataSource, "uuid", "long_id", "value") {
+            userTable.insert(dataSource, "uuid", "long_id", "data") {
                 value(user.playerUUID, user.longId, json)
             }
         } else {
             userTable.update(dataSource) {
                 set("uuid", user.playerUUID)
                 set("long_id", user.longId)
-                set("value", json)
+                set("data", json)
             }
         }
     }
-    /*
-    public fun saveInDatabase(user: User) {
-        val json = jsonUtils.encodeToString(user)
-        userTable.insert(dataSource,"uuid", "long_id", "value") {
-            onDuplicateKeyUpdate { value(user.playerUUID, user.playerUUID, user.longId, json) }
-        }
-        userTable.update(dataSource) {
-            set("long_id", user.longId)
-            set("value", json)
-            where("uuid" eq user.playerUUID)
-        }
-        /*
-        userTable.insert(dataSource, "uuid", "long_id", "value") {
-            value(user.playerUUID, user.longId, json)
-        }
-        */
-
-    }*/
 
     public fun saveInDatabase(group: Group) {
         val json = jsonUtils.encodeToString(group)
 
         if (getUserInDatabase(group.longId) == null) {
-            groupTable.insert(dataSource, "long_id", "value") {
+            groupTable.insert(dataSource, "long_id", "data") {
                 onDuplicateKeyUpdate {
                     value(group.longId, json)
                 }
             }
         } else {
             userTable.update(dataSource) {
-                set("value", json)
+                set("data", json)
             }
 
         }
     }
-
     public fun getUserInDatabase(player: Player?): User? {
-        if (player == null) return null
-        val uuid = player.uniqueId
+        if (player == null) return null else return getUserInDatabase(player.uniqueId)
+    }
+
+    public fun getUserInDatabase(uuid: UUID?): User? {
         val string = userTable.select(dataSource) {
-            rows("value")
+            rows("data")
             where("uuid" eq uuid)
             limit(1)
         }.firstOrNull {
-            getString("value")
+            getString("data")
         }
         if (string == null) return null else {
             return jsonUtils.decodeFromString<User>(string)
@@ -140,11 +123,11 @@ public open class SQLDataBase {
     public fun getUserInDatabase(id: Long?): User? {
         if (id == null) return null
         val string = userTable.select(dataSource) {
-            rows("value")
+            rows("data")
             where("long_id" eq id)
             limit(1)
         }.firstOrNull {
-            getString("value")
+            getString("data")
         }
         if (string == null) return null else {
             val parsed = jsonUtils.decodeFromString<User?>(string)
@@ -157,11 +140,11 @@ public open class SQLDataBase {
     public fun getGroupInDatabase(id: Long?): Group? {
         if (id == null) return null
         val string = groupTable.select(dataSource) {
-            rows("value")
+            rows("data")
             where("long_id" eq id)
             limit(1)
         }.firstOrNull {
-            getString("value")
+            getString("data")
         }
         if (string == null) return null else {
             val parsed = jsonUtils.decodeFromString<Group?>(string)
