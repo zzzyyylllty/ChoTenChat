@@ -10,27 +10,31 @@ import main.kotlin.io.github.zzzyyylllty.chotenchat.ChoTenChat.placeHolderConfig
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
+import taboolib.common.platform.function.submitAsync
 import java.util.UUID
 
 /**
  * 本动作适用且只适用于玩家当前所在和发送到的后端服务器。
  * */
 fun Message.call() {
-    val mm = MiniMessage.miniMessage()
-    (Bukkit.getConsoleSender() as Audience).sendMessage(mm.deserialize("<light_purple>[ChoTenChat] <white>$sender</white> <gray>$content <dark_gray>($this)"))
-    val compStr = this.buildCompString()
+    submitAsync {
+        val mm = MiniMessage.miniMessage()
+        (Bukkit.getConsoleSender() as Audience).sendMessage(mm.deserialize("<light_purple>[ChoTenChat] <white>$sender</white> <gray>$content <dark_gray>($this)"))
+        val compStr = this@call.buildCompString()
 
-    val receiveUsers = mutableListOf<User>()
+        val receiveUsers = mutableListOf<User>()
 
-    receiveContacts.forEach {
-        if (it is User) receiveUsers.add(it) else if (it is Group) it.members.forEach {
-            UUID.fromString(it.value.playerUUID).asUserWithoutDB()?.let { element -> receiveUsers.add(element) } // TODO Redis
+        receiveContacts.forEach {
+            if (it is User) receiveUsers.add(it) else if (it is Group) it.members.forEach {
+                UUID.fromString(it.value.playerUUID).asUserWithoutDB()
+                    ?.let { element -> receiveUsers.add(element) } // TODO Redis
+            }
         }
-    }
 
-    receiveUsers.forEach {
-        val comp = this@call.buildMessage(compStr, it)
-        it.sendMessage(mm.deserialize(comp))
+        receiveUsers.forEach {
+            val comp = this@call.buildMessage(compStr, it)
+            it.sendMessage(mm.deserialize(comp))
+        }
     }
 }
 
